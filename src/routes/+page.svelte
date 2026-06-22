@@ -1,0 +1,183 @@
+<script lang="ts">
+	import intro from '$lib/assets/images/intro.png?enhanced';
+	import scene1 from '$lib/assets/images/scene-1.png?enhanced';
+	import scene2 from '$lib/assets/images/scene-2-a.png?enhanced';
+	import scene3 from '$lib/assets/images/scene-3.png?enhanced';
+	import scene4 from '$lib/assets/images/scene-4.png?enhanced';
+</script>
+
+<div class="container">
+	<header class="scene">
+		<div class="scene-content">
+			<h1 class="story-heading">The Patron Saint of the Squirrels</h1>
+
+			<div class="story-image-wrapper">
+				<enhanced:img src={intro} alt="Introduction Scene" />
+			</div>
+		</div>
+	</header>
+
+	<section class="scene">
+		<div class="scene-content">
+			<div class="story-text-group">
+				<h2 class="story-heading">Introduction</h2>
+				<p class="story-paragraph">
+					In the middle of a routine afternoon, an ordinary stop in a sprawling concrete parking lot
+					abruptly halts when Helen spots a tiny, injured squirrel dragging itself across the
+					sun-baked asphalt. Haunted by its terrified eyes but forced to briefly tend to urgent
+					responsibilities, she finds herself locked in a desperate mental race against the clock.
+					Returning to the menacing expanse, she can only hope she isn't too late to save a fragile
+					life stranded in a desert of indifference.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="scene-1" class="scene">
+		<div class="scene-content">
+			<h3 class="story-heading">Part 1: The Inciting Incident (The Gray Labyrinth)</h3>
+
+			<div class="story-image-wrapper">
+				<enhanced:img src={scene1} alt="Gray Labyrinth" />
+			</div>
+
+			<div class="story-text-group">
+				<p class="story-paragraph" data-number="1">
+					The world of Asphalt-Under-Grid was entirely gray, completely flat, and altogether too
+					loud. To the creatures who lived in the high branches of the border-pines, it was a
+					forbidden ocean of concrete where rumbling metal monsters roamed.
+				</p>
+
+				<p class="story-paragraph" data-number="2">
+					Helen did not look like a monster, but she did drive one. It was a Tuesday, an ordinary
+					afternoon filled with an ordinary list of mundane, human tasks: milk to buy, packages to
+					mail, clocks to chase.
+				</p>
+
+				<p class="story-paragraph" data-number="3">
+					She parked her metal machine on the edge of the gray expanse, her mind already halfway
+					down her shopping list. But as she stepped onto the pavement, a flicker of movement caught
+					her eye near a lonely concrete barrier.
+				</p>
+
+				<p class="story-paragraph" data-number="4">
+					It wasn't the frantic, joyful leap of a healthy squirrel. It was a slow, agonizing crawl.
+					A tiny tuft of gray fur was struggling against the heat of the sun-baked asphalt, dragging
+					a useless, broken back leg behind it.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="scene-2" class="scene">
+		<div class="scene-content">
+			<h3 class="story-heading">Part 2: The Compassion (The Kneeling Saint)</h3>
+
+			<div class="story-image-wrapper">
+				<enhanced:img src={scene2} alt="Kneeling Saint" />
+			</div>
+
+			<div class="story-text-group">
+				<p class="story-paragraph" data-number="5">
+					Helen stopped. The bustling world around her seemed to lose its audio, fading into a
+					quiet, heavy stillness. She knelt, her shadow falling over the tiny creature like a
+					cooling canopy.
+				</p>
+
+				<p class="story-paragraph" data-number="6">
+					The squirrel looked up with wide, obsidian eyes, its chest heaving with exhaustion. It was
+					terrified, hurt, and entirely stranded in a desert of human indifference.
+				</p>
+
+				<p class="story-paragraph" data-number="7">
+					"Hold on, little one," Helen whispered. But the ticking clock of the day pulled at her
+					sleeve. She had responsibilities that could not wait, groceries that would spoil, and no
+					safe way to carry a frightened, fragile patient just yet.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="scene-3" class="scene">
+		<div class="scene-content">
+			<h3 class="story-heading">Part 3: The Rescue (The Velvety Sanctuary)</h3>
+
+			<div class="story-image-wrapper">
+				<enhanced:img src={scene3} alt="Velvety Sanctuary" />
+			</div>
+
+			<div class="story-text-group">
+				<p class="story-paragraph" data-number="8">
+					With a heavy heart, she had to leave. For the next hour, as she walked through bright
+					supermarket aisles and stood in long lines, she didn't see the items on the shelves. She
+					only saw those two dark, frightened eyes on the hot pavement.
+				</p>
+
+				<p class="story-paragraph" data-number="9">
+					The moment her errands were complete, Helen raced back. The parking lot felt larger now,
+					more menacing. Fear tightened in her chest—what if she was too late? What if the metal
+					monsters had returned?
+				</p>
+
+				<p class="story-paragraph" data-number="10">
+					She scrambled to the concrete barrier. There, tucked into a sliver of shade, the tiny
+					squirrel remained, its strength nearly spent. It hadn't given up, because it was waiting
+					for her.
+				</p>
+
+				<p class="story-paragraph" data-number="11">
+					Gentle as a summer breeze, Helen wrapped the little traveler in a soft cloth and nestled
+					him into a makeshift sanctuary. She drove with absolute precision, treating every turn
+					like a promise, straight to the doors of the animal hospital.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="scene-4" class="scene">
+		<div class="scene-content">
+			<h3 class="story-heading">Part 4: The Epilogue (The Acorn Crown)</h3>
+
+			<div class="story-image-wrapper">
+				<enhanced:img src={scene4} alt="The Epilogue" />
+			</div>
+
+			<div class="story-text-group">
+				<p class="story-paragraph" data-number="12">
+					The healers took him in, promising that his branch-leaping days were far from over. And as
+					Helen walked back out into the evening air, the trees seemed to lean down, their leaves
+					rustling a new title into the wind: The Patron Saint of Squirrels.
+				</p>
+			</div>
+		</div>
+	</section>
+</div>
+
+<style>
+	/* Local layout adjustments to bind the architectural fixes together cleanly */
+	.scene-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		max-width: var(--fluid-max-width);
+	}
+
+	.story-text-group {
+		width: 100%;
+		margin-top: var(--gap-md);
+	}
+
+	/* Targets the enhanced-img compiled picture element wrapper safely */
+	.story-image-wrapper :global(picture) {
+		display: block;
+		max-height: 60svh;
+		margin: var(--gap-sm) auto;
+	}
+
+	.story-image-wrapper :global(img) {
+		width: auto;
+		max-height: 60svh;
+		border-radius: 8px; /* Adds a clean, subtle edge treatment fit for dark mode */
+	}
+</style>
