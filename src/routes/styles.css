@@ -359,6 +359,7 @@
 		display: block;
 		font-family: var(--font-story);
 		font-weight: 400;
+		text-align: justify;
 		font-size: var(--text-base);
 		line-height: 1.7;
 		color: var(--color-text-primary);
