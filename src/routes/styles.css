@@ -375,6 +375,7 @@
 		display: grid;
 		place-content: center;
 		justify-items: center;
+		overflow: hidden;
 
 		/* TEMP */
 		border: 2px solid red;
