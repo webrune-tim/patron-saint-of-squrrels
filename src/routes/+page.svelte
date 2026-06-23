@@ -151,6 +151,10 @@
 			</div>
 		</div>
 	</section>
+Music: Simplicity by Scott Buckley https://www.scottbuckley.com.au/
+License: Creative Commons — Attribution 4.0 International — CC BY 4.0
+Free Download / Stream: https://links.al/BfM
+Music promoted by Audio Library: https://links.al/youtube
 </div>
 
 <style>
