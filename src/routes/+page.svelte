@@ -220,6 +220,7 @@
 
     /* --- New Styles for Bouncing Button Assembly --- */
     .start-btn {
+        display: grid;
         align-items: center;
         gap: 0.5rem;
         text-decoration: none;
