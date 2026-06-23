@@ -1,35 +1,58 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { scrollStory } from '$lib/actions/scrollStory';
+    import { onMount } from 'svelte';
+    import { scrollStory } from '$lib/actions/scrollStory';
 
-	import intro from '$lib/assets/images/intro.png?enhanced';
-	import scene1 from '$lib/assets/images/scene-1.png?enhanced';
-	import scene2 from '$lib/assets/images/scene-2-a.png?enhanced';
-	import scene3 from '$lib/assets/images/scene-3.png?enhanced';
-	import scene4 from '$lib/assets/images/scene-4.png?enhanced';
-	import music from '$lib/assets/audio/music.mp3';
+    import intro from '$lib/assets/images/intro.png?enhanced';
+    import scene1 from '$lib/assets/images/scene-1.png?enhanced';
+    import scene2 from '$lib/assets/images/scene-2-a.png?enhanced';
+    import scene3 from '$lib/assets/images/scene-3.png?enhanced';
+    import scene4 from '$lib/assets/images/scene-4.png?enhanced';
+    import music from '$lib/assets/audio/music.mp3';
 
-	let audioComponent: HTMLAudioElement;
-	let isAutoplayBlocked = false;
+    let audioComponent: HTMLAudioElement;
+    let isAutoplayBlocked = false;
+    let isScrolling = false;
+    let scrollTimeout: number;
 
-	onMount(() => {
-		if (audioComponent) {
-			audioComponent.volume = 0.5;
-		}
-	});
+    onMount(() => {
+        if (audioComponent) {
+            audioComponent.volume = 0.5;
+        }
 
-	const handleStart = () => {
-		if (audioComponent) {
-			audioComponent.play().catch(() => {
-				isAutoplayBlocked = true;
-			});
-		}
-	};
+        const handleScrollState = () => {
+            isScrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = window.setTimeout(() => {
+                isScrolling = false;
+            }, 1200); // Re-appear 1.2s after they stop scrolling
+        };
+
+        window.addEventListener('scroll', handleScrollState, { passive: true });
+        return () => {
+            window.removeEventListener('scroll', handleScrollState);
+            clearTimeout(scrollTimeout);
+        };
+    });
+
+    const handleStart = () => {
+        if (audioComponent) {
+            audioComponent.play().catch(() => {
+                isAutoplayBlocked = true;
+            });
+        }
+    };
 </script>
 
 <audio autoplay bind:this={audioComponent}>
     <source src={music} type="audio/mpeg">
 </audio>
+
+<div class="global-scroll-prompt ui-element" class:hidden={isScrolling}>
+    <span>Scroll to progress</span>
+    <svg class="bounce-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+    </svg>
+</div>
 
 <div class="container">
     <header class="scene">
@@ -41,7 +64,7 @@
             </div>
         </div>
 
-        <a class="story-paragraph start-btn" href="#intro" onclick={handleStart}>
+        <a class="story-paragraph start-btn" href="#intro" on:click={handleStart}>
             <span>Start</span>
             <svg class="bounce-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 5v14M19 12l-7 7-7-7"/>
@@ -62,130 +85,132 @@
                     life stranded in a desert of indifference.
                 </p>
             </div>
-            <div class="story-paragraph start-btn">
-                <span>Scroll</span>
-                <svg class="bounce-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 5v14M19 12l-7 7-7-7"/>
-                </svg>
-            </div>
         </div>
     </section>
 
     <section id="scene-1" class="scene" use:scrollStory>
-		<div class="sticky-content">
-			<div class="step">
-				<h3 class="story-heading">
-					The Inciting Incident:<br />
-					The Gray Labyrinth
-				</h3>
-			</div>
+        <div class="sticky-content">
+            <div class="scene-progress-bar"></div>
+            
+            <div class="step">
+                <h3 class="story-heading">
+                    The Inciting Incident:<br />
+                    The Gray Labyrinth
+                </h3>
+            </div>
 
-			<div class="step">
-				<div class="story-image-wrapper">
-					<enhanced:img src={scene1} alt="The Gray Labyrinth" />
-				</div>
-			</div>
+            <div class="step">
+                <div class="story-image-wrapper">
+                    <enhanced:img src={scene1} alt="The Gray Labyrinth" />
+                </div>
+            </div>
 
-			<div class="step">
-				<p class="story-paragraph">
-					The world of Asphalt-Under-Grid was entirely defined by structural constraints, a brutal monolith of high-contrast stone and calculation.
-				</p>
-			</div>
+            <div class="step">
+                <p class="story-paragraph">
+                    The world of Asphalt-Under-Grid was entirely defined by structural constraints, a brutal monolith of high-contrast stone and calculation.
+                </p>
+            </div>
 
-			<div class="step">
-				<p class="story-paragraph">
-					Helen did not look like a monster, but the machine she operated hummed with a terrifying architectural intent.
-				</p>
-			</div>
-		</div>
-	</section>
+            <div class="step">
+                <p class="story-paragraph">
+                    Helen did not look like a monster, but the machine she operated hummed with a terrifying architectural intent.
+                </p>
+            </div>
+        </div>
+    </section>
 
-	<section id="scene-2" class="scene" use:scrollStory>
-		<div class="sticky-content">
-			<div class="step">
-				<h3 class="story-heading">
-					The Fracture Line:<br />
-					Neon and Stone
-				</h3>
-			</div>
+    <section id="scene-2" class="scene" use:scrollStory>
+        <div class="sticky-content">
+            <div class="scene-progress-bar"></div>
 
-			<div class="step">
-				<div class="story-image-wrapper">
-					<enhanced:img src={scene2} alt="Neon and Stone" />
-				</div>
-			</div>
+            <div class="step">
+                <h3 class="story-heading">
+                    The Fracture Line:<br />
+                    Neon and Stone
+                </h3>
+            </div>
 
-			<div class="step">
-				<p class="story-paragraph">
-					The neon grid flickered in precise intervals, casting sharp, synthetic green hues onto the wet concrete blocks below.
-				</p>
-			</div>
+            <div class="step">
+                <div class="story-image-wrapper">
+                    <enhanced:img src={scene2} alt="Neon and Stone" />
+                </div>
+            </div>
 
-			<div class="step">
-				<p class="story-paragraph">
-					Every citizen walked with calculated paces. To step outside the design system was to invite immediate computational parsing.
-				</p>
-			</div>
-		</div>
-	</section>
+            <div class="step">
+                <p class="story-paragraph">
+                    The neon grid flickered in precise intervals, casting sharp, synthetic green hues onto the wet concrete blocks below.
+                </p>
+            </div>
 
-	<section id="scene-3" class="scene" use:scrollStory>
-		<div class="sticky-content">
-			<div class="step">
-				<h3 class="story-heading">
-					The Descent:<br />
-					Below the Sub-Basement
-				</h3>
-			</div>
+            <div class="step">
+                <p class="story-paragraph">
+                    Every citizen walked with calculated paces. To step outside the design system was to invite immediate computational parsing.
+                </p>
+            </div>
+        </div>
+    </section>
 
-			<div class="step">
-				<div class="story-image-wrapper">
-					<enhanced:img src={scene3} alt="Below the Sub-Basement" />
-				</div>
-			</div>
+    <section id="scene-3" class="scene" use:scrollStory>
+        <div class="sticky-content">
+            <div class="scene-progress-bar"></div>
 
-			<div class="step">
-				<p class="story-paragraph">
-					She found the missing arrays deep inside the forgotten system layers. Old code, written before the strict layout mechanics were put in place.
-				</p>
-			</div>
+            <div class="step">
+                <h3 class="story-heading">
+                    The Descent:<br />
+                    Below the Sub-Basement
+                </h3>
+            </div>
 
-			<div class="step">
-				<p class="story-paragraph">
-					It wasn't the frantic, joyful leap of raw chaos; it was a legacy architecture waiting patiently to be executed once more.
-				</p>
-			</div>
-		</div>
-	</section>
+            <div class="step">
+                <div class="story-image-wrapper">
+                    <enhanced:img src={scene3} alt="Below the Sub-Basement" />
+                </div>
+            </div>
 
-	<section id="scene-4" class="scene" use:scrollStory>
-		<div class="sticky-content">
-			<div class="step">
-				<h3 class="story-heading">
-					The Resolution:<br />
-					Recompiling the World
-				</h3>
-			</div>
+            <div class="step">
+                <p class="story-paragraph">
+                    She found the missing arrays deep inside the forgotten system layers. Old code, written before the strict layout mechanics were put in place.
+                </p>
+            </div>
 
-			<div class="step">
-				<div class="story-image-wrapper">
-					<enhanced:img src={scene4} alt="Recompiling the World" />
-				</div>
-			</div>
+            <div class="step">
+                <p class="story-paragraph">
+                    It wasn't the frantic, joyful leap of raw chaos; it was a legacy architecture waiting patiently to be executed once more.
+                </p>
+            </div>
+        </div>
+    </section>
 
-			<div class="step">
-				<p class="story-paragraph">
-					As the final block initialized, the boundaries shifted. The hard limits of the grid dissolved into soft, manageable layers.
-				</p>
-			</div>
+    <section id="scene-4" class="scene" use:scrollStory>
+        <div class="sticky-content">
+            <div class="scene-progress-bar"></div>
 
-			<div class="step">
-				<p class="story-paragraph">
-					The story didn't end. It simply evolved past its initial layout parameters, fully integrated, and gracefully complete.
-				</p>
-			</div>
-		</div>
-	</section>
+            <div class="step">
+                <h3 class="story-heading">
+                    The Resolution:<br />
+                    Recompiling the World
+                </h3>
+            </div>
+
+            <div class="step">
+                <div class="story-image-wrapper">
+                    <enhanced:img src={scene4} alt="Recompiling the World" />
+                </div>
+            </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                    As the final block initialized, the boundaries shifted. The hard limits of the grid dissolved into soft, manageable layers.
+                </p>
+            </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                    The story didn't end. It simply evolved past its initial layout parameters, fully integrated, and gracefully complete.
+                </p>
+            </div>
+        </div>
+    </section>
 
     <footer class="attribution">
         <small>
@@ -198,15 +223,6 @@
 </div>
 
 <style>
-    .scene-number {
-        font-size: var(--text-xxxl);
-        font-family: var(--font-story);
-        position: absolute;
-        top: -2rem;
-        left: 0;
-        color: rgb(from var(--color-text-primary) r g b /0.75);
-    }
-
     .scene-content {
         display: flex;
         flex-direction: column;
@@ -230,7 +246,6 @@
         max-height: 60vh;
     }
 
-    /* --- New Styles for Bouncing Button Assembly --- */
     .start-btn {
         display: flex;
         place-content: center;
@@ -255,6 +270,53 @@
         60% {
             transform: translateY(-4px);
         }
+    }
+
+    /* --- Dynamic Chapter Progress Bar Indicator --- */
+    .scene-progress-bar {
+        position: absolute;
+        top: 8px;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: rgb(from var(--color-text-secondary) r g b / 0.25);
+    }
+
+    .scene-progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: calc((var(--active-step-index, 0) + 1) / var(--step-count, 1) * 100%);
+        background: var(--color-text-primary);
+        transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* --- Global Ambient Scrolling Cue --- */
+    .global-scroll-prompt {
+        position: fixed;
+        bottom: var(--gap-md);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        opacity: 0.8;
+        pointer-events: none;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .global-scroll-prompt.hidden {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    .global-scroll-prompt .bounce-arrow {
+        width: 16px;
+        height: 16px;
     }
 
     footer {
