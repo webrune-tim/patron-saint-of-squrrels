@@ -200,7 +200,7 @@
     .scene-number {
         font-size: clamp(3rem, 6vw, 5rem);
         position: absolute;
-        top: -0.5rem;
+        top: -2rem;
         left: -0.5rem;
         color: rgb(from var(--color-text-primary) r g b /0.75);
     }
