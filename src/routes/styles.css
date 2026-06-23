@@ -376,6 +376,7 @@
 		place-content: center;
 		justify-items: center;
 		overflow: hidden;
+		position: relative;
 
 		/* TEMP */
 		border: 2px solid red;
