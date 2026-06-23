@@ -5,8 +5,9 @@
 	import scene3 from '$lib/assets/images/scene-3.png?enhanced';
 	import scene4 from '$lib/assets/images/scene-4.png?enhanced';
 
-    const audio = document.getElementById("myaudio");
-    audio.volume = 0.5;
+    import music from '$lib/assets/audio/simplicity-by-scott-buckley.mp3'
+    const audio = document.getElementById("myaudio")
+    audio.volume = 0.5
 </script>
 
 <!--
@@ -16,7 +17,7 @@ Retrieved 2026-06-23, License - CC BY-SA 3.0
 -->
 
 <audio autoplay id="myaudio">
-  <source src="http://lel.com/link/to/stream.m3u">
+  <source src={music}>
 </audio>
 
 
