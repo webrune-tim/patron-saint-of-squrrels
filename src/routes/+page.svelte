@@ -64,6 +64,7 @@
     </section>
 
     <section id="scene-1" class="scene">
+        <div class="scene-number">1</div>
         <div class="scene-content">
             <h3 class="story-heading">Part 1: The Inciting Incident (The Gray Labyrinth)</h3>
 
@@ -100,6 +101,7 @@
     </section>
 
     <section id="scene-2" class="scene">
+        <div class="scene-number">2</div>
         <div class="scene-content">
             <h3 class="story-heading">Part 2: The Compassion (The Kneeling Saint)</h3>
 
@@ -129,6 +131,7 @@
     </section>
 
     <section id="scene-3" class="scene">
+        <div class="scene-number">3</div>
         <div class="scene-content">
             <h3 class="story-heading">Part 3: The Rescue (The Velvety Sanctuary)</h3>
 
@@ -165,6 +168,7 @@
     </section>
 
     <section id="scene-4" class="scene">
+        <div class="scene-number">4</div>
         <div class="scene-content">
             <h3 class="story-heading">Part 4: The Epilogue (The Acorn Crown)</h3>
 
