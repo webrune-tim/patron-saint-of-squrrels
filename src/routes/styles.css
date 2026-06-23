@@ -284,14 +284,6 @@
 		max-width: var(--fluid-max-width);
 		margin: 0 auto 1.5em;
 	}
-
-	/* Expanded selector optimization to cleanly support native responsive picture element trees */
-	img,
-	picture {
-		max-height: 60vh;
-		width: auto;
-		margin: var(--gap-sm) auto;
-	}
 }
 
 @layer typography {
