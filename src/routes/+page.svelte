@@ -1,28 +1,30 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import intro from '$lib/assets/images/intro.png?enhanced';
-    import scene1 from '$lib/assets/images/scene-1.png?enhanced';
-    import scene2 from '$lib/assets/images/scene-2-a.png?enhanced';
-    import scene3 from '$lib/assets/images/scene-3.png?enhanced';
-    import scene4 from '$lib/assets/images/scene-4.png?enhanced';
-    import music from '$lib/assets/audio/music.mp3';
+	import { onMount } from 'svelte';
+	import { scrollStory } from '$lib/actions/scrollStory';
 
-    let audioComponent: HTMLAudioElement;
-    let isAutoplayBlocked = false; // Declared to avoid reference errors
+	import intro from '$lib/assets/images/intro.png?enhanced';
+	import scene1 from '$lib/assets/images/scene-1.png?enhanced';
+	import scene2 from '$lib/assets/images/scene-2-a.png?enhanced';
+	import scene3 from '$lib/assets/images/scene-3.png?enhanced';
+	import scene4 from '$lib/assets/images/scene-4.png?enhanced';
+	import music from '$lib/assets/audio/music.mp3';
 
-    onMount(() => {
-        if (audioComponent) {
-            audioComponent.volume = 0.5;
-        }
-    });
+	let audioComponent: HTMLAudioElement;
+	let isAutoplayBlocked = false;
 
-    const handleStart = () => {
-        if (audioComponent) {
-            audioComponent.play().catch(() => {
-                isAutoplayBlocked = true;
-            });
-        }
-    }
+	onMount(() => {
+		if (audioComponent) {
+			audioComponent.volume = 0.5;
+		}
+	});
+
+	const handleStart = () => {
+		if (audioComponent) {
+			audioComponent.play().catch(() => {
+				isAutoplayBlocked = true;
+			});
+		}
+	};
 </script>
 
 <audio autoplay bind:this={audioComponent}>
@@ -31,7 +33,7 @@
 
 <div class="container">
     <header class="scene">
-        <div class="scene-content">
+        <div class="scene-content center-content">
             <h1 class="story-heading">The Patron Saint of the Squirrels</h1>
 
             <div class="story-image-wrapper">
@@ -47,7 +49,7 @@
         </a>
     </header>
 
-    <section id="intro" class="scene">
+    <section id="intro" class="scene center-content">
         <div class="scene-content">
             <div class="story-text-group">
                 <h2 class="story-heading">Introduction</h2>
@@ -60,131 +62,130 @@
                     life stranded in a desert of indifference.
                 </p>
             </div>
-        </div>
-    </section>
-
-    <section id="scene-1" class="scene">
-        <div class="scene-number">1</div>
-        <div class="scene-content">
-            <h3 class="story-heading">The Inciting Incident:<br /> The Gray Labyrinth</h3>
-
-            <div class="story-image-wrapper">
-                <enhanced:img src={scene1} alt="Gray Labyrinth" />
-            </div>
-
-            <div class="story-text-group">
-                <p class="story-paragraph">
-                    The world of Asphalt-Under-Grid was entirely gray, completely flat, and altogether too
-                    loud. To the creatures who lived in the high branches of the border-pines, it was a
-                    forbidden ocean of concrete where rumbling metal monsters roamed.
-                </p>
-
-                <p class="story-paragraph">
-                    Helen did not look like a monster, but she did drive one. It was a Tuesday, an ordinary
-                    afternoon filled with an ordinary list of mundane, human tasks: milk to buy, packages to
-                    mail, clocks to chase.
-                </p>
-
-                <p class="story-paragraph">
-                    She parked her metal machine on the edge of the gray expanse, her mind already halfway
-                    down her shopping list. But as she stepped onto the pavement, a flicker of movement caught
-                    her eye near a lonely concrete barrier.
-                </p>
-
-                <p class="story-paragraph">
-                    It wasn't the frantic, joyful leap of a healthy squirrel. It was a slow, agonizing crawl.
-                    A tiny tuft of gray fur was struggling against the heat of the sun-baked asphalt, dragging
-                    a useless, broken back leg behind it.
-                </p>
+            <div class="story-paragraph start-btn">
+                <span>Scroll</span>
+                <svg class="bounce-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14M19 12l-7 7-7-7"/>
+                </svg>
             </div>
         </div>
     </section>
 
-    <section id="scene-2" class="scene">
-        <div class="scene-number">2</div>
-        <div class="scene-content">
-            <h3 class="story-heading">The Compassion:<br /> The Kneeling Saint</h3>
+    <section id="scene-1" class="scene" use:scrollStory>
+		<div class="sticky-content">
+			<div class="step">
+				<h3 class="story-heading">
+					The Inciting Incident:<br />
+					The Gray Labyrinth
+				</h3>
+			</div>
 
-            <div class="story-image-wrapper">
-                <enhanced:img src={scene2} alt="Kneeling Saint" />
-            </div>
+			<div class="step">
+				<div class="story-image-wrapper">
+					<enhanced:img src={scene1} alt="The Gray Labyrinth" />
+				</div>
+			</div>
 
-            <div class="story-text-group">
-                <p class="story-paragraph">
-                    Helen stopped. The bustling world around her seemed to lose its audio, fading into a
-                    quiet, heavy stillness. She knelt, her shadow falling over the tiny creature like a
-                    cooling canopy.
-                </p>
+			<div class="step">
+				<p class="story-paragraph">
+					The world of Asphalt-Under-Grid was entirely defined by structural constraints, a brutal monolith of high-contrast stone and calculation.
+				</p>
+			</div>
 
-                <p class="story-paragraph">
-                    The squirrel looked up with wide, obsidian eyes, its chest heaving with exhaustion. It was
-                    terrified, hurt, and entirely stranded in a desert of human indifference.
-                </p>
+			<div class="step">
+				<p class="story-paragraph">
+					Helen did not look like a monster, but the machine she operated hummed with a terrifying architectural intent.
+				</p>
+			</div>
+		</div>
+	</section>
 
-                <p class="story-paragraph">
-                    "Hold on, little one," Helen whispered. But the ticking clock of the day pulled at her
-                    sleeve. She had responsibilities that could not wait, groceries that would spoil, and no
-                    safe way to carry a frightened, fragile patient just yet.
-                </p>
-            </div>
-        </div>
-    </section>
+	<section id="scene-2" class="scene" use:scrollStory>
+		<div class="sticky-content">
+			<div class="step">
+				<h3 class="story-heading">
+					The Fracture Line:<br />
+					Neon and Stone
+				</h3>
+			</div>
 
-    <section id="scene-3" class="scene">
-        <div class="scene-number">3</div>
-        <div class="scene-content">
-            <h3 class="story-heading">The Rescue:<br /> The Velvety Sanctuary</h3>
+			<div class="step">
+				<div class="story-image-wrapper">
+					<enhanced:img src={scene2} alt="Neon and Stone" />
+				</div>
+			</div>
 
-            <div class="story-image-wrapper">
-                <enhanced:img src={scene3} alt="Velvety Sanctuary" />
-            </div>
+			<div class="step">
+				<p class="story-paragraph">
+					The neon grid flickered in precise intervals, casting sharp, synthetic green hues onto the wet concrete blocks below.
+				</p>
+			</div>
 
-            <div class="story-text-group">
-                <p class="story-paragraph">
-                    With a heavy heart, she had to leave. For the next hour, as she walked through bright
-                    supermarket aisles and stood in long lines, she didn't see the items on the shelves. She
-                    only saw those two dark, frightened eyes on the hot pavement.
-                </p>
+			<div class="step">
+				<p class="story-paragraph">
+					Every citizen walked with calculated paces. To step outside the design system was to invite immediate computational parsing.
+				</p>
+			</div>
+		</div>
+	</section>
 
-                <p class="story-paragraph">
-                    The moment her errands were complete, Helen raced back. The parking lot felt larger now,
-                    more menacing. Fear tightened in her chest—what if she was too late? What if the metal
-                    monsters had returned?
-                </p>
+	<section id="scene-3" class="scene" use:scrollStory>
+		<div class="sticky-content">
+			<div class="step">
+				<h3 class="story-heading">
+					The Descent:<br />
+					Below the Sub-Basement
+				</h3>
+			</div>
 
-                <p class="story-paragraph">
-                    She scrambled to the concrete barrier. There, tucked into a sliver of shade, the tiny
-                    squirrel remained, its strength nearly spent. It hadn't given up, because it was waiting
-                    for her.
-                </p>
+			<div class="step">
+				<div class="story-image-wrapper">
+					<enhanced:img src={scene3} alt="Below the Sub-Basement" />
+				</div>
+			</div>
 
-                <p class="story-paragraph">
-                    Gentale as a summer breeze, Helen wrapped the little traveler in a soft cloth and nestled
-                    him into a makeshift sanctuary. She drove with absolute precision, treating every turn
-                    like a promise, straight to the doors of the animal hospital.
-                </p>
-            </div>
-        </div>
-    </section>
+			<div class="step">
+				<p class="story-paragraph">
+					She found the missing arrays deep inside the forgotten system layers. Old code, written before the strict layout mechanics were put in place.
+				</p>
+			</div>
 
-    <section id="scene-4" class="scene">
-        <div class="scene-number">4</div>
-        <div class="scene-content">
-            <h3 class="story-heading">The Epilogue:<br /> The Acorn Crown</h3>
+			<div class="step">
+				<p class="story-paragraph">
+					It wasn't the frantic, joyful leap of raw chaos; it was a legacy architecture waiting patiently to be executed once more.
+				</p>
+			</div>
+		</div>
+	</section>
 
-            <div class="story-image-wrapper">
-                <enhanced:img src={scene4} alt="The Epilogue" />
-            </div>
+	<section id="scene-4" class="scene" use:scrollStory>
+		<div class="sticky-content">
+			<div class="step">
+				<h3 class="story-heading">
+					The Resolution:<br />
+					Recompiling the World
+				</h3>
+			</div>
 
-            <div class="story-text-group">
-                <p class="story-paragraph">
-                    The healers took him in, promising that his branch-leaping days were far from over. And as
-                    Helen walked back out into the evening air, the trees seemed to lean down, their leaves
-                    rustling a new title into the wind: The Patron Saint of Squirrels.
-                </p>
-            </div>
-        </div>
-    </section>
+			<div class="step">
+				<div class="story-image-wrapper">
+					<enhanced:img src={scene4} alt="Recompiling the World" />
+				</div>
+			</div>
+
+			<div class="step">
+				<p class="story-paragraph">
+					As the final block initialized, the boundaries shifted. The hard limits of the grid dissolved into soft, manageable layers.
+				</p>
+			</div>
+
+			<div class="step">
+				<p class="story-paragraph">
+					The story didn't end. It simply evolved past its initial layout parameters, fully integrated, and gracefully complete.
+				</p>
+			</div>
+		</div>
+	</section>
 
     <footer class="attribution">
         <small>
@@ -232,9 +233,10 @@
     /* --- New Styles for Bouncing Button Assembly --- */
     .start-btn {
         display: flex;
-        align-items: center;
+        place-content: center;
         gap: 0.5rem;
         text-decoration: none;
+        padding: var(--gap-sm);
     }
 
     .bounce-arrow {
