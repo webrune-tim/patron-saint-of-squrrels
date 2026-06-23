@@ -288,7 +288,7 @@
 	/* Expanded selector optimization to cleanly support native responsive picture element trees */
 	img,
 	picture {
-		max-height: 60svh;
+		max-height: 60vh;
 		width: auto;
 		margin: var(--gap-sm) auto;
 	}
