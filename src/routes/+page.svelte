@@ -4,7 +4,21 @@
 	import scene2 from '$lib/assets/images/scene-2-a.png?enhanced';
 	import scene3 from '$lib/assets/images/scene-3.png?enhanced';
 	import scene4 from '$lib/assets/images/scene-4.png?enhanced';
+
+    const audio = document.getElementById("myaudio");
+    audio.volume = 0.5;
 </script>
+
+<!--
+Source - https://stackoverflow.com/a/33747466
+Posted by sjm, modified by community. See post 'Timeline' for change history
+Retrieved 2026-06-23, License - CC BY-SA 3.0
+-->
+
+<audio autoplay id="myaudio">
+  <source src="http://lel.com/link/to/stream.m3u">
+</audio>
+
 
 <div class="container">
 	<header class="scene">
