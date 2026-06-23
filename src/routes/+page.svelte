@@ -202,7 +202,7 @@
         potition: absolute;
         top: -0.5rem;
         left: -0.5rem;
-        color: 
+        color: rgb(from var(--color-text-primary) r g b /0.75);
     }
     .scene-content {
         display: flex;
