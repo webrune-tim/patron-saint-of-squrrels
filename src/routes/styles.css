@@ -269,14 +269,14 @@
 		--fluid-min-width: 20rem;
 		--fluid-max-width: 60rem;
 
-		--gap-sm: 1.5rem;
-		--gap-md: 2rem;
-		--gap-lg: 3rem;
+		--gap-sm: clamp(0.5rem, 2vw, 1.5rem);
+		--gap-md: clamp(1rem, 3vw, 2rem);
+		--gap-lg: clamp(2rem, 4vw, 3rem)
 	}
 
 	body {
 		min-height: 100svh;
-		padding: 2rem;
+		padding: var(--gap-sm);
 		background-color: var(--color-background);
 	}
 
