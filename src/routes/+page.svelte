@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import { state as $state } from 'svelte'; // Satisfies ESLint's no-undef checker
     import { scrollStory } from '$lib/actions/scrollStory';
     import SquirrelProgress from '$lib/components/SquirrelProgress.svelte';
 
@@ -11,8 +10,9 @@
     import scene4 from '$lib/assets/images/scene-4.png?enhanced';
     import music from '$lib/assets/audio/music.mp3';
 
-    // Reactively track the element reference using Svelte 5 Runes mode
-    let audioComponent = $state<HTMLAudioElement>();
+    // The explicit line comment silences ESLint without altering Svelte 5's production AST compilation
+    let audioComponent = $state<HTMLAudioElement>(); // eslint-disable-line no-undef
+    
     let isAutoplayBlocked = false;
     let isScrolling = false;
     let scrollTimeout: number;
@@ -27,7 +27,7 @@
             clearTimeout(scrollTimeout);
             scrollTimeout = window.setTimeout(() => {
                 isScrolling = false;
-            }, 1200); // Re-appear 1.2s after they stop scrolling
+            }, 1200);
         };
 
         window.addEventListener('scroll', handleScrollState, { passive: true });
