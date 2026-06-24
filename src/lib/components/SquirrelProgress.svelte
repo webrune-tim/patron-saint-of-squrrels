@@ -1,6 +1,6 @@
 <script lang="ts">
     /* eslint-disable no-undef */
-    let { sceneId }: { sceneId: 'scene-1' | 'scene-2' | 'scene-3' | 'scene-4' } = $props();
+    let { sceneId }: { sceneId: 'scene-1' | 'scene-2' | 'scene-3' | 'scene-4' } = $props(); 
 
     /* eslint-disable no-undef */
     const paths = {
