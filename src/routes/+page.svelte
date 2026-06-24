@@ -210,8 +210,7 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
 
             <div class="step">
                 <h3 class="story-heading">
-                    The Resolution:<br />
-                    Recompiling the World
+                    The Acorn Crown
                 </h3>
             </div>
 
@@ -223,13 +222,14 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
 
             <div class="step">
                 <p class="story-paragraph">
-                    As the final block initialized, the boundaries shifted. The hard limits of the grid dissolved into soft, manageable layers.
+                    Bright and early the next morning, Helen gently prepared the tiny patient for a journey to Sacramento, where the nearest animal hospital was located. Once again driving with care yet urgent speed, Helen called back to the squirrel, "Hang on, little man! Your misery is nearly at an end." 
+In the parking lot of the animal hospital, Helen held the injured animal like a small child as she recounted the journey they had been through. "We made it, little man. You are going to be all right. I promise. Thank you for waiting for me." 
                 </p>
             </div>
 
             <div class="step">
                 <p class="story-paragraph">
-                    The story didn't end. It simply evolved past its initial layout parameters, fully integrated, and gracefully complete.
+                    The healers took him in, promising that his branch-leaping days were far from over. And as Helen walked back out into the morning air, the trees seemed to lean down, their leaves rustling a new title into the wind: Helen, <em>The Patron Saint of Squirrels</em>.
                 </p>
             </div>
         </div>
