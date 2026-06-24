@@ -126,8 +126,7 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
 
             <div class="step">
                 <h3 class="story-heading">
-                    The Fracture Line:<br />
-                    Neon and Stone
+                    The Kneeling Saint
                 </h3>
             </div>
 
@@ -139,13 +138,19 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
 
             <div class="step">
                 <p class="story-paragraph">
-                    The neon grid flickered in precise intervals, casting sharp, synthetic green hues onto the wet concrete blocks below.
+                    Helen stopped. The bustling world around her seemed to lose its audio, fading into a quiet, heavy stillness. She knelt, her shadow falling over the tiny creature like a cooling canopy.
                 </p>
             </div>
 
             <div class="step">
                 <p class="story-paragraph">
-                    Every citizen walked with calculated paces. To step outside the design system was to invite immediate computational parsing.
+                    The squirrel looked up with wide, obsidian eyes, its chest heaving with exhaustion. It was terrified, hurt, and entirely stranded in a desert of human indifference.
+                </p>
+            </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                   "Hold on, little one," Helen whispered. But the ticking clock of the day pulled at her sleeve. She had responsibilities that could not wait, groceries that would spoil, and no safe way to carry a frightened, fragile patient just yet.
                 </p>
             </div>
         </div>
