@@ -360,6 +360,8 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
             display: flex;
             flex-direction: column;
             gap: var(--gap-sm);
+            font-size: var(--text-md);
+            text-align: center;
         }
     }
 
