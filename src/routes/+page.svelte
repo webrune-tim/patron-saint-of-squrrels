@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { scrollStory } from '$lib/actions/scrollStory';
+    import SquirrelProgress from '$lib/components/SquirrelProgress.svelte';
 
     import intro from '$lib/assets/images/intro.png?enhanced';
     import scene1 from '$lib/assets/images/scene-1-b.png?enhanced';
@@ -82,7 +83,7 @@
 
     <section id="scene-1" class="scene" use:scrollStory>
         <div class="sticky-content">
-            <div class="scene-progress-bar"></div>
+            <SquirrelProgress sceneId="scene-1" />
             
             <div class="step">
                 <h3 class="story-heading">
@@ -119,7 +120,7 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
 
     <section id="scene-2" class="scene" use:scrollStory>
         <div class="sticky-content">
-            <div class="scene-progress-bar"></div>
+            <SquirrelProgress sceneId="scene-2" />
 
             <div class="step">
                 <h3 class="story-heading">
@@ -155,7 +156,7 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
 
     <section id="scene-3" class="scene" use:scrollStory>
         <div class="sticky-content">
-            <div class="scene-progress-bar"></div>
+            <SquirrelProgress sceneId="scene-3" />
 
             <div class="step">
                 <h3 class="story-heading">
@@ -203,7 +204,7 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
 
     <section id="scene-4" class="scene" use:scrollStory>
         <div class="sticky-content">
-            <div class="scene-progress-bar"></div>
+            <SquirrelProgress sceneId="scene-4" />
 
             <div class="step">
                 <h3 class="story-heading">
@@ -311,27 +312,6 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
         60% {
             transform: translateY(-4px);
         }
-    }
-
-    /* --- Dynamic Chapter Progress Bar Indicator --- */
-    .scene-progress-bar {
-        position: absolute;
-        top: 8px;
-        left: 0;
-        width: 100%;
-        height: 6px;
-        background: rgb(from var(--color-text-secondary) r g b / 0.25);
-    }
-
-    .scene-progress-bar::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: calc((var(--active-step-index, 0) + 1) / var(--step-count, 1) * 100%);
-        background: var(--color-text-primary);
-        transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     /* --- Global Ambient Scrolling Cue --- */
