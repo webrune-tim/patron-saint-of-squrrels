@@ -1,50 +1,99 @@
 <script lang="ts">
-    /* eslint-disable no-undef */
-    let { sceneId }: { sceneId: 'scene-1' | 'scene-2' | 'scene-3' | 'scene-4' } = $props(); 
+    interface Props {
+        sceneId: 'scene-1' | 'scene-2' | 'scene-3' | 'scene-4';
+        stepCount?: number; 
+    }
 
-    /* eslint-disable no-undef */
-    const paths = {
-        'scene-1': "M 0 50 L 1000 50", 
-        'scene-2': "M 0 50 Q 125 10, 250 50 Q 375 10, 500 50 Q 625 10, 750 50 Q 875 10, 1000 50", 
-        'scene-3': "M 0 50 Q 125 -20, 250 50 Q 375 -20, 500 50 Q 625 -20, 750 50 Q 875 -20, 1000 50", 
-        'scene-4': "M 0 50 Q 125 -80, 250 50 Q 375 -80, 500 50 Q 625 -80, 750 50 Q 875 -80, 1000 50" 
+    let { sceneId, stepCount = 5 }: Props = $props();
+
+    let containerWidth = $state(0);
+    const BASELINE_Y = 120;
+
+    const bounceHeights = {
+        'scene-1': 0,    
+        'scene-2': 30,   
+        'scene-3': 65,   
+        'scene-4': 110   
     };
+
+    const generatedPathString = $derived.by(() => {
+        if (!containerWidth) return `path('M 0 ${BASELINE_Y} L 100 ${BASELINE_Y}')`;
+
+        const peakHeight = bounceHeights[sceneId];
+        
+        if (peakHeight === 0) {
+            return `path('M 0 ${BASELINE_Y} L ${containerWidth} ${BASELINE_Y}')`;
+        }
+
+        let pathStr = `M 0 ${BASELINE_Y}`;
+        const stepWidth = containerWidth / stepCount;
+
+        for (let i = 0; i < stepCount; i++) {
+            const startX = i * stepWidth;
+            const endX = (i + 1) * stepWidth;
+            const controlX = startX + stepWidth / 2;
+            const controlY = BASELINE_Y - peakHeight;
+
+            pathStr += ` Q ${controlX} ${controlY}, ${endX} ${BASELINE_Y}`;
+        }
+
+        return `path('${pathStr}')`;
+    });
 </script>
 
-<div class="squirrel-track-wrapper">
+<div class="squirrel-track-wrapper" bind:clientWidth={containerWidth}>
     <div 
-        class="squirrel-avatar" 
-        style="offset-path: path('{paths[sceneId]}');"
+        class="squirrel-mover" 
+        style="--dynamic-path: {generatedPathString};"
     >
-        🐿️
+        <div class="squirrel-flipper">
+            🐿️
+        </div>
     </div>
 </div>
 
 <style>
     .squirrel-track-wrapper {
         position: absolute;
-        top: var(--gap-lg);
+        top: 0;
         left: 0;
-        width: var(--fluid-max-width);
-        height: 120px; 
+        width: 100%;
+        height: 150px;
         pointer-events: none;
         overflow: visible;
         z-index: 5;
     }
 
-    .squirrel-avatar {
+    .squirrel-mover {
         position: absolute;
-        font-size: 2.2rem;
-        width: max-content;
-        height: max-content;
+        top: 0;
+        left: 0;
         
-        transform: scaleX(-1); 
-        transform-origin: center center;
+        /* Aggressive WebKit prefixes pointing to the inline variable */
+        -webkit-offset-path: var(--dynamic-path);
+        offset-path: var(--dynamic-path);
 
-        /* Pulls active values directly from your scroll action state */
+        -webkit-offset-distance: calc((var(--active-step-index, 0) + 1) / var(--step-count, 1) * 100%);
         offset-distance: calc((var(--active-step-index, 0) + 1) / var(--step-count, 1) * 100%);
+        
+        -webkit-offset-rotate: 0deg;
         offset-rotate: 0deg; 
         
-        transition: offset-distance 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        transition: 
+            -webkit-offset-distance 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+            offset-distance 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .squirrel-flipper {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        
+        /* Isolated hardware transform matrix */
+        transform: scaleX(-1); 
+        transform-origin: center center;
     }
 </style>
