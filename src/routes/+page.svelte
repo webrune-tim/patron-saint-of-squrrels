@@ -77,12 +77,7 @@
             <div class="story-text-group">
                 <h2 class="story-heading">Introduction</h2>
                 <p class="story-paragraph">
-                    In the middle of a routine afternoon, an ordinary stop in a sprawling concrete parking lot
-                    abruptly halts when Helen spots a tiny, injured squirrel dragging itself across the
-                    sun-baked asphalt. Haunted by its terrified eyes but forced to briefly tend to urgent
-                    responsibilities, she finds herself locked in a desperate mental race against the clock.
-                    Returning to the menacing expanse, she can only hope she isn't too late to save a fragile
-                    life stranded in a desert of indifference.
+                    In the middle of a routine afternoon, an ordinary stop in a sprawling concrete parking lot abruptly halts when Helen spots a tiny, injured squirrel dragging itself across the sun-baked asphalt. Haunted by its terrified eyes but forced to briefly tend to urgent responsibilities, she finds herself locked in a desperate mental race against the clock. Returning to the menacing expanse, she can only hope she isn't too late to save a fragile life stranded in a desert of indifference.
                 </p>
             </div>
         </div>
@@ -94,7 +89,6 @@
             
             <div class="step">
                 <h3 class="story-heading">
-                    The Inciting Incident:<br />
                     The Gray Labyrinth
                 </h3>
             </div>
@@ -107,13 +101,20 @@
 
             <div class="step">
                 <p class="story-paragraph">
-                    The world of Asphalt-Under-Grid was entirely defined by structural constraints, a brutal monolith of high-contrast stone and calculation.
+                    The world of Asphalt-Under-Grid was entirely gray, completely flat, and altogether too loud. To the creatures who lived in the high branches of the border-pines, it was a forbidden ocean of concrete where rumbling metal monkers roamed.
                 </p>
             </div>
 
             <div class="step">
                 <p class="story-paragraph">
-                    Helen did not look like a monster, but the machine she operated hummed with a terrifying architectural intent.
+                    Helen was not a monker, but she did drive one. It was a Tuesday, an ordinary afternoon filled with an ordinary list of mundane, human tasks: milk to buy, packages to mail, clocks to chase. 
+She parked her metal machine on the edge of the gray expanse, her mind already halfway down her shopping list. But as she stepped onto the pavement, a flicker of movement caught her eye near a lonely concrete barrier.
+                </p>
+            </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                    It wasn't the frantic, joyful leap of a healthy squirrel. It was a slow, agonizing crawl. A tiny tuft of gray fur was struggling against the heat of the sun-baked asphalt, dragging a useless, broken back leg behind it.
                 </p>
             </div>
         </div>
