@@ -256,22 +256,38 @@
 		/* Enforces dark theme aesthetic natively across scrollbars and system components */
 		color-scheme: light dark;
 
-		--dark-green: oklch(0.2191 0.0814 146.65);
-		--dark-green-fallback: oklch(0.221941 0.075521 142.495339);
-		--light-tan: oklch(0.9515 0.0493 96.88);
-		--brown: oklch(0.3691 0.0839 83.12);
-		--brown-fallback: oklch(0.369872 0.076764 79.31684);
+		/* 1. Core Palette Design Tokens */
+		--dg-raw: 0.2191 0.0814 146.65;
+		--lt-raw: 0.9515 0.0493 96.88;
+		--br-raw: 0.3691 0.0839 83.12;
 
-		--color-background: light-dark(var(--light-tan), var(--dark-green, var(--dark-green-fallback)));
-		--color-text-primary: light-dark(var(--dark-green, var(--dark-green-fallback)), var(--light-tan));
-		--color-text-secondary: light-dark(var(--brown, var(--brown-fallback)), #eee);
+		/* Safe cross-browser OKLCH rendering using Relative Color Syntax */
+		--dark-green: oklch(from oklch(var(--dg-raw)) l c h);
+		--light-tan: oklch(from oklch(var(--lt-raw)) l c h);
+		--brown: oklch(from oklch(var(--br-raw)) l c h);
 
+		/* 2. Default Semantic Assignments (Light Mode) */
+		--color-background: var(--light-tan);
+		--color-text-primary: var(--dark-green);
+		--color-text-secondary: var(--brown);
+
+		/* Layout & Typography */
 		--fluid-min-width: 20rem;
 		--fluid-max-width: 60rem;
-
 		--gap-sm: clamp(0.5rem, 2vw, 1.5rem);
 		--gap-md: clamp(1rem, 3vw, 2rem);
-		--gap-lg: clamp(2rem, 4vw, 3rem)
+		--gap-lg: clamp(2rem, 4vw, 3rem);
+	}
+
+	/* 3. Single Dark Mode Context Shift */
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--color-background: var(--dark-green);
+			--color-text-primary: var(--light-tan);
+			--color-text-secondary: oklch(
+				from var(--light-tan) 0.9 c h
+			); /* Smooth fallback tint */
+		}
 	}
 
 	body {
@@ -370,7 +386,7 @@
 		position: relative;
 		/* Generates explicit scroll canvas per structural step */
 		min-height: calc(var(--step-count, 1) * 100svh);
-		overflow: visible; 
+		overflow: visible;
 	}
 
 	.sticky-content {
@@ -387,12 +403,12 @@
 		width: 100%;
 		max-width: var(--fluid-max-width);
 		padding: var(--gap-md);
-		
+
 		/* Base hidden state */
 		opacity: 0;
 		transform: scale(0.98);
 		pointer-events: none;
-		
+
 		transition:
 			opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
 			transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
@@ -404,14 +420,14 @@
 		transform: scale(1);
 		pointer-events: auto;
 	}
-	
+
 	.story-image-wrapper {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		max-height: 70svh;
 	}
-	
+
 	.story-image-wrapper :global(img) {
 		object-fit: contain;
 		max-height: 70svh;
@@ -426,7 +442,7 @@
 	}
 
 	.center-content {
-        display: flex;
-        place-content: center;
+		display: flex;
+		place-content: center;
 	}
 }

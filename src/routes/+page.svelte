@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { state as $state } from 'svelte'; // Satisfies ESLint's no-undef checker
     import { scrollStory } from '$lib/actions/scrollStory';
     import SquirrelProgress from '$lib/components/SquirrelProgress.svelte';
 
@@ -10,7 +11,8 @@
     import scene4 from '$lib/assets/images/scene-4.png?enhanced';
     import music from '$lib/assets/audio/music.mp3';
 
-    let audioComponent: HTMLAudioElement;
+    // Reactively track the element reference using Svelte 5 Runes mode
+    let audioComponent = $state<HTMLAudioElement>();
     let isAutoplayBlocked = false;
     let isScrolling = false;
     let scrollTimeout: number;
@@ -240,8 +242,12 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
 
     <section class="scene closing">
         <div class="closing-content">
-            <span>Happy Birthday Helen!!<br />
-            😘🎉🎂</span>
+            <span>
+                Happy Birthday Helen!!<br />
+                <span class="spinX">😘</span>
+                <span class="spinX">🎉</span>
+                <span class="spinX">🎂</span>
+            </span>
 
             <span>I pray this year bring you<br />
             all the happiness you deserve.</span>
@@ -311,6 +317,22 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
         }
         60% {
             transform: translateY(-4px);
+        }
+    }
+
+    .spinX {
+        /* 1. Allows the transform calculation matrix to target the container */
+        display: inline-block; 
+        /* 2. Uses an alternate direction or a 3-way keyframe loop for smoothness */
+        animation: spinX 2s ease-in-out infinite; 
+    }
+
+    @keyframes spinX {
+        0%, 100% {
+            transform: scaleX(1);
+        }
+        50% {
+            transform: scaleX(-1);
         }
     }
 

@@ -25,7 +25,7 @@
         position: absolute;
         top: var(--gap-lg);
         left: 0;
-        width: 100%;
+        width: var(--fluid-max-width);
         height: 120px; 
         pointer-events: none;
         overflow: visible;
