@@ -3,7 +3,7 @@
     import { scrollStory } from '$lib/actions/scrollStory';
 
     import intro from '$lib/assets/images/intro.png?enhanced';
-    import scene1 from '$lib/assets/images/scene-1.png?enhanced';
+    import scene1 from '$lib/assets/images/scene-1-b.png?enhanced';
     import scene2 from '$lib/assets/images/scene-2-a.png?enhanced';
     import scene3 from '$lib/assets/images/scene-3.png?enhanced';
     import scene4 from '$lib/assets/images/scene-4.png?enhanced';
@@ -65,10 +65,7 @@
         </div>
 
         <a class="story-paragraph start-btn" href="#intro" on:click={handleStart}>
-            <span>Start</span>
-            <svg class="bounce-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-            </svg>
+            Start
         </a>
     </header>
 
@@ -77,12 +74,7 @@
             <div class="story-text-group">
                 <h2 class="story-heading">Introduction</h2>
                 <p class="story-paragraph">
-                    In the middle of a routine afternoon, an ordinary stop in a sprawling concrete parking lot
-                    abruptly halts when Helen spots a tiny, injured squirrel dragging itself across the
-                    sun-baked asphalt. Haunted by its terrified eyes but forced to briefly tend to urgent
-                    responsibilities, she finds herself locked in a desperate mental race against the clock.
-                    Returning to the menacing expanse, she can only hope she isn't too late to save a fragile
-                    life stranded in a desert of indifference.
+                    In the middle of a routine afternoon, an ordinary stop in a sprawling concrete parking lot abruptly halts when Helen spots a tiny, injured squirrel dragging itself across the sun-baked asphalt. Haunted by its terrified eyes but forced to briefly tend to urgent responsibilities, she finds herself locked in a desperate mental race against the clock. Returning to the menacing expanse, she can only hope she isn't too late to save a fragile life stranded in a desert of indifference.
                 </p>
             </div>
         </div>
@@ -94,7 +86,6 @@
             
             <div class="step">
                 <h3 class="story-heading">
-                    The Inciting Incident:<br />
                     The Gray Labyrinth
                 </h3>
             </div>
@@ -107,13 +98,20 @@
 
             <div class="step">
                 <p class="story-paragraph">
-                    The world of Asphalt-Under-Grid was entirely defined by structural constraints, a brutal monolith of high-contrast stone and calculation.
+                    The world of Asphalt-Under-Grid was entirely gray, completely flat, and altogether too loud. To the creatures who lived in the high branches of the border-pines, it was a forbidden ocean of concrete where rumbling metal monkers roamed.
                 </p>
             </div>
 
             <div class="step">
                 <p class="story-paragraph">
-                    Helen did not look like a monster, but the machine she operated hummed with a terrifying architectural intent.
+                    Helen was not a monker, but she did drive one. It was a Tuesday, an ordinary afternoon filled with an ordinary list of mundane, human tasks: milk to buy, packages to mail, clocks to chase. 
+She parked her metal machine on the edge of the gray expanse, her mind already halfway down her shopping list. But as she stepped onto the pavement, a flicker of movement caught her eye near a lonely concrete barrier.
+                </p>
+            </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                    It wasn't the frantic, joyful leap of a healthy squirrel. It was a slow, agonizing crawl. A tiny tuft of gray fur was struggling against the heat of the sun-baked asphalt, dragging a useless, broken back leg behind it.
                 </p>
             </div>
         </div>
@@ -125,8 +123,7 @@
 
             <div class="step">
                 <h3 class="story-heading">
-                    The Fracture Line:<br />
-                    Neon and Stone
+                    The Kneeling Saint
                 </h3>
             </div>
 
@@ -138,13 +135,19 @@
 
             <div class="step">
                 <p class="story-paragraph">
-                    The neon grid flickered in precise intervals, casting sharp, synthetic green hues onto the wet concrete blocks below.
+                    Helen stopped. The bustling world around her seemed to lose its audio, fading into a quiet, heavy stillness. She knelt, her shadow falling over the tiny creature like a cooling canopy.
                 </p>
             </div>
 
             <div class="step">
                 <p class="story-paragraph">
-                    Every citizen walked with calculated paces. To step outside the design system was to invite immediate computational parsing.
+                    The squirrel looked up with wide, obsidian eyes, its chest heaving with exhaustion. It was terrified, hurt, and entirely stranded in a desert of human indifference.
+                </p>
+            </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                   "Hold on, little one," Helen whispered. But the ticking clock of the day pulled at her sleeve. She had responsibilities that could not wait, groceries that would spoil, and no safe way to carry a frightened, fragile patient just yet.
                 </p>
             </div>
         </div>
@@ -156,8 +159,7 @@
 
             <div class="step">
                 <h3 class="story-heading">
-                    The Descent:<br />
-                    Below the Sub-Basement
+                    The Velvety Sanctuary
                 </h3>
             </div>
 
@@ -169,16 +171,34 @@
 
             <div class="step">
                 <p class="story-paragraph">
-                    She found the missing arrays deep inside the forgotten system layers. Old code, written before the strict layout mechanics were put in place.
+                    With a heavy heart, she had to leave. For the next hour, as she walked through bright supermarket aisles and stood in long lines, she didn't see the items on the shelves. She only saw those two dark, frightened eyes on the hot pavement.
                 </p>
             </div>
 
             <div class="step">
                 <p class="story-paragraph">
-                    It wasn't the frantic, joyful leap of raw chaos; it was a legacy architecture waiting patiently to be executed once more.
+                    The moment her errands were complete, Helen raced back. The parking lot felt larger now, more menacing. Fear tightened in her chest—what if she was too late? What if the metal monkers had returned?!
                 </p>
             </div>
-        </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                    She scrambled to the concrete barrier. There, tucked into a sliver of shade, the tiny squirrel remained, its strength nearly spent. It hadn't given up, because it was waiting for her.
+                </p>
+            </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                    Gentle as a summer breeze, Helen wrapped the little traveler in a soft cloth and nestled him into a makeshift sanctuary. She drove with absolute precision, treating every turn like a promise, straight to the relative safety of her home.
+                </p>
+            </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                    Once home safe on Ellinwood Drive, Helen began searching for a secure place to keep the little soldier for the night, away from a menacing cat. A spot under her backyard deck, with a dog gate to separate the squirrel from the cat and other outdoor dangers, would do nicely until the morning.
+                </p>
+            </div>
+        </div>   
     </section>
 
     <section id="scene-4" class="scene" use:scrollStory>
@@ -187,8 +207,7 @@
 
             <div class="step">
                 <h3 class="story-heading">
-                    The Resolution:<br />
-                    Recompiling the World
+                    The Acorn Crown
                 </h3>
             </div>
 
@@ -200,15 +219,32 @@
 
             <div class="step">
                 <p class="story-paragraph">
-                    As the final block initialized, the boundaries shifted. The hard limits of the grid dissolved into soft, manageable layers.
+                    Bright and early the next morning, Helen gently prepared the tiny patient for a journey to Sacramento, where the nearest animal hospital was located. Once again driving with care yet urgent speed, Helen called back to the squirrel, "Hang on, little man! Your misery is nearly at an end."  
                 </p>
             </div>
 
             <div class="step">
                 <p class="story-paragraph">
-                    The story didn't end. It simply evolved past its initial layout parameters, fully integrated, and gracefully complete.
+                    In the parking lot of the animal hospital, Helen held the injured animal like a small child as she recounted the journey they had been through. "We made it, little man. You are going to be all right. I promise. Thank you for waiting for me."
                 </p>
             </div>
+
+            <div class="step">
+                <p class="story-paragraph">
+                    The healers took him in, promising that his branch-leaping days were far from over. And as Helen walked back out into the morning air, the trees seemed to lean down, their leaves rustling a new title into the wind: Helen, <em>The Patron Saint of Squirrels</em>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scene closing">
+        <div class="closing-content">
+            <span>Happy Birthday Helen!!</span>
+            <span>😘🎉🎂</span>
+            <span>I pray this year bring you</span>
+            <span>all the happiness you deserve.</span>
+            <span>I love you,</span>
+            <span>Timmy One Sock</span>
         </div>
     </section>
 
@@ -247,9 +283,6 @@
     }
 
     .start-btn {
-        display: flex;
-        place-content: center;
-        gap: 0.5rem;
         text-decoration: none;
         padding: var(--gap-sm);
     }
@@ -317,6 +350,19 @@
     .global-scroll-prompt .bounce-arrow {
         width: 16px;
         height: 16px;
+    }
+
+    .closing {
+        display: grid;
+        place-content: center;
+
+        .closing-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-sm);
+            font-size: var(--text-md);
+            text-align: center;
+        }
     }
 
     footer {
