@@ -237,12 +237,14 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
         </div>
     </section>
 
-    <section class="scene">
-        <span>Happy Birthday Helen!!</span>
-        <span>😘🎉🎂</span>
-        <span>I pray this year bring you all the happiness you deserve.</span>
-        <span>I love you,</span>
-        <span>Timmy One Sock</span>
+    <section class="scene closing">
+        <div class="closing-content">
+            <span>Happy Birthday Helen!!</span>
+            <span>😘🎉🎂</span>
+            <span>I pray this year bring you all the happiness you deserve.</span>
+            <span>I love you,</span>
+            <span>Timmy One Sock</span>
+        </div>
     </section>
 
     <footer class="attribution">
@@ -347,6 +349,17 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
     .global-scroll-prompt .bounce-arrow {
         width: 16px;
         height: 16px;
+    }
+
+    .closing {
+        display: grid;
+        place-content: center;
+
+        .closing-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-sm);
+        }
     }
 
     footer {
