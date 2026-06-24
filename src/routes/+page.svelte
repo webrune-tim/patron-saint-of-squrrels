@@ -65,10 +65,7 @@
         </div>
 
         <a class="story-paragraph start-btn" href="#intro" on:click={handleStart}>
-            <span>Start</span>
-            <svg class="bounce-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-            </svg>
+            Start
         </a>
     </header>
 
@@ -240,6 +237,14 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
         </div>
     </section>
 
+    <section class="scene">
+        <span>Happy Birthday Helen!!</span>
+        <span>😘🎉🎂</span>
+        <span>I pray this year bring you all the happiness you deserve.</span>
+        <span>I love you,</span>
+        <span>Timmy One Sock</span>
+    </section>
+
     <footer class="attribution">
         <small>
             Music: <a href="https://www.scottbuckley.com.au/" target="_blank" rel="noopener noreferrer">Simplicity by Scott Buckley</a><br>
@@ -275,9 +280,6 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
     }
 
     .start-btn {
-        display: flex;
-        place-content: center;
-        gap: 0.5rem;
         text-decoration: none;
         padding: var(--gap-sm);
     }
