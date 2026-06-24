@@ -1,6 +1,8 @@
 <script lang="ts">
+    /* eslint-disable no-undef */
     let { sceneId }: { sceneId: 'scene-1' | 'scene-2' | 'scene-3' | 'scene-4' } = $props();
 
+    /* eslint-disable no-undef */
     const paths = {
         'scene-1': "M 0 50 L 1000 50", 
         'scene-2': "M 0 50 Q 125 10, 250 50 Q 375 10, 500 50 Q 625 10, 750 50 Q 875 10, 1000 50", 
@@ -21,7 +23,7 @@
 <style>
     .squirrel-track-wrapper {
         position: absolute;
-        top: 24px;
+        top: var(--gap-lg);
         left: 0;
         width: 100%;
         height: 120px; 
