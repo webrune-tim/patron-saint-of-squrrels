@@ -242,7 +242,7 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
             <span>Happy Birthday Helen!!</span>
             <span>😘🎉🎂</span>
             <span>I pray this year bring you</span>
-            <span/>all the happiness you deserve.</span>
+            <span>all the happiness you deserve.</span>
             <span>I love you,</span>
             <span>Timmy One Sock</span>
         </div>
