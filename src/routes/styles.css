@@ -254,7 +254,7 @@
 @layer base {
 	:root {
 		/* Enforces dark theme aesthetic natively across scrollbars and system components */
-		color-scheme: dark;
+		color-scheme: light dark;
 
 		--dark-green: oklch(0.2191 0.0814 146.65);
 		--dark-green-fallback: oklch(0.221941 0.075521 142.495339);
@@ -262,9 +262,9 @@
 		--brown: oklch(0.3691 0.0839 83.12);
 		--brown-fallback: oklch(0.369872 0.076764 79.31684);
 
-		--color-background: var(--dark-green, var(--dark-green-fallback));
-		--color-text-primary: var(--light-tan);
-		--color-text-secondary: var(--brown, var(--brown-fallback));
+		--color-background: light-dark(var(--light-tan), var(--dark-green, var(--dark-green-fallback)));
+		--color-text-primary: light-dark(var(--dark-green, var(--dark-green-fallback)), var(--light-tan));
+		--color-text-secondary: light-dark(var(--brown, var(--brown-fallback)), #eee);
 
 		--fluid-min-width: 20rem;
 		--fluid-max-width: 60rem;
@@ -310,6 +310,7 @@
 	h2,
 	h3 {
 		text-align: center;
+		color: var(--color-text-secondary);
 	}
 
 	h1 {

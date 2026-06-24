@@ -91,12 +91,6 @@
             </div>
 
             <div class="step">
-                <div class="story-image-wrapper">
-                    <enhanced:img src={scene1} alt="The Gray Labyrinth" />
-                </div>
-            </div>
-
-            <div class="step">
                 <p class="story-paragraph">
                     The world of Asphalt-Under-Grid was entirely gray, completely flat, and altogether too loud. To the creatures who lived in the high branches of the border-pines, it was a forbidden ocean of concrete where rumbling metal monkers roamed.
                 </p>
@@ -114,6 +108,12 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
                     It wasn't the frantic, joyful leap of a healthy squirrel. It was a slow, agonizing crawl. A tiny tuft of gray fur was struggling against the heat of the sun-baked asphalt, dragging a useless, broken back leg behind it.
                 </p>
             </div>
+
+            <div class="step">
+                <div class="story-image-wrapper">
+                    <enhanced:img src={scene1} alt="The Gray Labyrinth" />
+                </div>
+            </div>
         </div>
     </section>
 
@@ -125,12 +125,6 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
                 <h3 class="story-heading">
                     The Kneeling Saint
                 </h3>
-            </div>
-
-            <div class="step">
-                <div class="story-image-wrapper">
-                    <enhanced:img src={scene2} alt="Neon and Stone" />
-                </div>
             </div>
 
             <div class="step">
@@ -150,6 +144,12 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
                    "Hold on, little one," Helen whispered. But the ticking clock of the day pulled at her sleeve. She had responsibilities that could not wait, groceries that would spoil, and no safe way to carry a frightened, fragile patient just yet.
                 </p>
             </div>
+
+            <div class="step">
+                <div class="story-image-wrapper">
+                    <enhanced:img src={scene2} alt="Neon and Stone" />
+                </div>
+            </div>
         </div>
     </section>
 
@@ -161,12 +161,6 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
                 <h3 class="story-heading">
                     The Velvety Sanctuary
                 </h3>
-            </div>
-
-            <div class="step">
-                <div class="story-image-wrapper">
-                    <enhanced:img src={scene3} alt="Below the Sub-Basement" />
-                </div>
             </div>
 
             <div class="step">
@@ -198,6 +192,12 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
                     Once home safe on Ellinwood Drive, Helen began searching for a secure place to keep the little soldier for the night, away from a menacing cat. A spot under her backyard deck, with a dog gate to separate the squirrel from the cat and other outdoor dangers, would do nicely until the morning.
                 </p>
             </div>
+
+            <div class="step">
+                <div class="story-image-wrapper">
+                    <enhanced:img src={scene3} alt="Below the Sub-Basement" />
+                </div>
+            </div>
         </div>   
     </section>
 
@@ -209,12 +209,6 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
                 <h3 class="story-heading">
                     The Acorn Crown
                 </h3>
-            </div>
-
-            <div class="step">
-                <div class="story-image-wrapper">
-                    <enhanced:img src={scene4} alt="Recompiling the World" />
-                </div>
             </div>
 
             <div class="step">
@@ -234,17 +228,25 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
                     The healers took him in, promising that his branch-leaping days were far from over. And as Helen walked back out into the morning air, the trees seemed to lean down, their leaves rustling a new title into the wind: Helen, <em>The Patron Saint of Squirrels</em>.
                 </p>
             </div>
+
+            <div class="step">
+                <div class="story-image-wrapper">
+                    <enhanced:img src={scene4} alt="Recompiling the World" />
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="scene closing">
         <div class="closing-content">
-            <span>Happy Birthday Helen!!</span>
-            <span>😘🎉🎂</span>
-            <span>I pray this year bring you</span>
-            <span>all the happiness you deserve.</span>
-            <span>I love you,</span>
-            <span>Timmy One Sock</span>
+            <span>Happy Birthday Helen!!<br />
+            😘🎉🎂</span>
+
+            <span>I pray this year bring you<br />
+            all the happiness you deserve.</span>
+
+            <span>I love you,<br />
+            Timmy One Sock</span>
         </div>
     </section>
 
@@ -283,8 +285,14 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
     }
 
     .start-btn {
+        display: block;
+        width:fit-content;
+        text-align: center;
         text-decoration: none;
-        padding: var(--gap-sm);
+        padding: var(--gap-sm) var(--gap-md);
+        margin: var(--gap-md) auto;
+        border: 2px solid var(--color-text-primary);
+        background-color: rgb(from var(--color-text-primary) r g b / 0.1);
     }
 
     .bounce-arrow {
@@ -337,7 +345,7 @@ She parked her metal machine on the edge of the gray expanse, her mind already h
         flex-direction: column;
         align-items: center;
         gap: 0.25rem;
-        opacity: 0.8;
+        opacity: 0.9;
         pointer-events: none;
         transition: opacity 0.5s ease, transform 0.5s ease;
     }
