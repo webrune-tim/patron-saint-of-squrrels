@@ -61,7 +61,7 @@
 
 	.squirrel-mover {
 		position: absolute;
-		top: -45px;
+		top: -55px;
 		left: 0;
 
 		/* Aggressive WebKit prefixes pointing to the inline variable */
