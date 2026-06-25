@@ -1,6 +1,6 @@
 allowBuilds:
   esbuild: true
-  sharp: set this to true or false
+  sharp: false
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@latest
   vitest: 4.1.9
