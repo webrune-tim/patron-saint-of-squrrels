@@ -253,20 +253,20 @@
 
 @layer base {
 	:root {
-		/* Enforces theme aesthetic natively across scrollbars and system components */
+		/* Enforces dark theme aesthetic natively across scrollbars and system components */
 		color-scheme: light dark;
 
-		/* 1. Core Palette Design Tokens (Raw channel values only) */
+		/* 1. Core Palette Design Tokens */
 		--dg-raw: 0.2191 0.0814 146.65;
 		--lt-raw: 0.9515 0.0493 96.88;
 		--br-raw: 0.3691 0.0839 83.12;
 
-		/* Direct OKLCH declarations for cross-browser stability */
-		--dark-green: oklch(var(--dg-raw));
-		--light-tan: oklch(var(--lt-raw));
-		--brown: oklch(var(--br-raw));
+		/* Safe cross-browser OKLCH rendering using Relative Color Syntax */
+		--dark-green: oklch(from oklch(var(--dg-raw)) l c h);
+		--light-tan: oklch(from oklch(var(--lt-raw)) l c h);
+		--brown: oklch(from oklch(var(--br-raw)) l c h);
 
-		/* 2. Default Semantic Assignments (Light Mode fallback) */
+		/* 2. Default Semantic Assignments (Light Mode) */
 		--color-background: var(--light-tan);
 		--color-text-primary: var(--dark-green);
 		--color-text-secondary: var(--brown);
@@ -286,17 +286,9 @@
 		:root {
 			--color-background: var(--dark-green);
 			--color-text-primary: var(--light-tan);
-			/* Correct relative color syntax usage */
-			--color-text-secondary: oklch(from var(--light-tan) 0.9 c h);
-		}
-	}
-
-	@media (prefers-color-scheme: light) {
-		:root {
-			--color-background: var(--light-tan);
-			--color-text-primary: var(--dark-green);
-			/* Correct relative color syntax usage */
-			--color-text-secondary: oklch(from var(--brown) 0.9 c h);
+			--color-text-secondary: oklch(
+				from var(--light-tan) 0.9 c h
+			); /* Smooth fallback tint */
 		}
 	}
 
