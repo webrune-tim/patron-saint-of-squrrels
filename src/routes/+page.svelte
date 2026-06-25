@@ -302,7 +302,7 @@
 		</section>
 	</section>
 
-	<section class="scene closing">
+	<footer class="scene closing">
 		<div class="closing-content">
 			<span>
 				Happy Birthday Helen!!<br />
@@ -321,26 +321,6 @@
 				Timmy One Sock</span
 			>
 		</div>
-	</section>
-
-	<footer class="attribution">
-		<small>
-			Music: <a href="https://www.scottbuckley.com.au/" target="_blank" rel="noopener noreferrer"
-				>Simplicity by Scott Buckley</a
-			><br />
-			License:
-			<a
-				href="https://creativecommons.org/licenses/by/4.0/"
-				target="_blank"
-				rel="noopener noreferrer">Creative Commons — Attribution 4.0 International — CC BY 4.0</a
-			><br />
-			Free Download / Stream:
-			<a href="https://links.al/BfM" target="_blank" rel="noopener noreferrer"
-				>https://links.al/BfM</a
-			><br />
-			Music promoted by
-			<a href="https://links.al/youtube" target="_blank" rel="noopener noreferrer">Audio Library</a>
-		</small>
 	</footer>
 </div>
 
