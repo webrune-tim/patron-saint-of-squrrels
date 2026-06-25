@@ -292,6 +292,16 @@
 		}
 	}
 
+	@media (prefers-color-scheme: light) {
+		:root {
+			--color-background: var(--light-tan);
+			--color-text-primary: var(--dark-green);
+			--color-text-secondary: oklch(
+				from var(--brown) 0.9 c h
+			); /* Smooth fallback tint */
+		}
+	}
+
 	body {
 		min-height: 100svh;
 		padding: var(--gap-sm);
