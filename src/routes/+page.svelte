@@ -423,8 +423,6 @@
 
 	/* --- Global Ambient Scrolling Cue --- */
 	.global-scroll-prompt {
-		--isVisible: var(--live-visible);
-
 		position: fixed;
 		bottom: var(--gap-md);
 		left: 50%;
