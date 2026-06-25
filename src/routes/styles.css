@@ -274,6 +274,8 @@
 		/* Layout & Typography */
 		--fluid-min-width: 20rem;
 		--fluid-max-width: 60rem;
+
+		--gap-xs: clamp(0.25rem, 1vw, 0.75rem);
 		--gap-sm: clamp(0.5rem, 2vw, 1.5rem);
 		--gap-md: clamp(1rem, 3vw, 2rem);
 		--gap-lg: clamp(2rem, 4vw, 3rem);
