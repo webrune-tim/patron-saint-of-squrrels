@@ -24,61 +24,61 @@ The following example demonstrates a custom select styled with a monospace font 
 /* Enable customization for the select and its picker */
 .brand-select,
 .brand-select::picker(select) {
-  appearance: base-select;
+	appearance: base-select;
 }
 
 /* Style the visible trigger button */
 .brand-select {
-  font-family: 'Courier New', monospace;
-  background-color: #fffaf0;
-  color: #8b4513;
-  border: 2px dashed #8b4513;
-  border-radius: 4px;
-  padding: 0.75rem;
-  font-size: 1rem;
-  cursor: pointer;
+	font-family: 'Courier New', monospace;
+	background-color: #fffaf0;
+	color: #8b4513;
+	border: 2px dashed #8b4513;
+	border-radius: 4px;
+	padding: 0.75rem;
+	font-size: 1rem;
+	cursor: pointer;
 }
 
 /* Style the dropdown options list */
 .brand-select::picker(select) {
-  font-family: 'Courier New', monospace;
-  background-color: #fffaf0;
-  border: 2px dashed #8b4513;
-  border-radius: 4px;
-  padding: 0.5rem;
+	font-family: 'Courier New', monospace;
+	background-color: #fffaf0;
+	border: 2px dashed #8b4513;
+	border-radius: 4px;
+	padding: 0.5rem;
 }
 
 /* Customize internal part colors to match text */
 .brand-select::picker-icon {
-  color: #8b4513;
+	color: #8b4513;
 }
 
 .brand-select option::checkmark {
-  color: #8b4513;
+	color: #8b4513;
 }
 
 /* Style individual options and hover effects */
 .brand-select option {
-  padding: 0.5rem;
-  border-radius: 4px;
-  color: #8b4513;
-  cursor: pointer;
+	padding: 0.5rem;
+	border-radius: 4px;
+	color: #8b4513;
+	cursor: pointer;
 }
 
 .brand-select option:hover {
-  background-color: #fdf5e6;
+	background-color: #fdf5e6;
 }
 ```
 
 ```html
 <label for="preferences">Select shipping preference</label>
 <select class="brand-select" id="preferences" name="preferences">
-  <button>
-    <selectedcontent></selectedcontent>
-  </button>
-  <option value="standard">Standard Shipping</option>
-  <option value="express" selected>Express Shipping</option>
-  <option value="overnight">Overnight Delivery</option>
+	<button>
+		<selectedcontent></selectedcontent>
+	</button>
+	<option value="standard">Standard Shipping</option>
+	<option value="express" selected>Express Shipping</option>
+	<option value="overnight">Overnight Delivery</option>
 </select>
 ```
 
@@ -103,12 +103,11 @@ For browsers that do not yet support `appearance: base-select`, the `<select>` e
 - **Non-Text Content Ignored**: Older browsers strip HTML tags (like `<svg>` or `<div>`) inside `<option>` tags and render only the text nodes. Ensure the text content of the `<option>` is readable and meaningful on its own.
 - **HTML Structure Handling**: Standard parsers may ignore the `<button>` and `<selectedcontent>` tags inside `<select>` or treat them as invalid. No heavy JavaScript polyfills are strictly required for progressive enhancement if you view standard text as a readable fallback.
 
-
 ```javascript
-document.addEventListener("DOMContentLoaded", () => {
-  // Check if browser supports base-select value
-  if (!CSS.supports("appearance", "base-select")) {
-    // Custom select overrides are not supported natively.
-  }
+document.addEventListener('DOMContentLoaded', () => {
+	// Check if browser supports base-select value
+	if (!CSS.supports('appearance', 'base-select')) {
+		// Custom select overrides are not supported natively.
+	}
 });
 ```

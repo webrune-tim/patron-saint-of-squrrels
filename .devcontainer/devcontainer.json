@@ -1,16 +1,14 @@
 {
-  "name": "Patron Saint of Squirrels",
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "workbench.colorTheme": "Default Dark Modern",
-        "editor.fontSize": 18,
-        "editor.wordWrap": "on",
-        "terminal.integrated.fontSize": 14
-      },
-      "extensions": [
-        "dbaeumer.vscode-eslint"
-      ]
-    }
-  }
+	"name": "Patron Saint of Squirrels",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"workbench.colorTheme": "Default Dark Modern",
+				"editor.fontSize": 18,
+				"editor.wordWrap": "on",
+				"terminal.integrated.fontSize": 14
+			},
+			"extensions": ["dbaeumer.vscode-eslint"]
+		}
+	}
 }
