@@ -427,32 +427,33 @@
     pointer-events: auto;
   }
 
-  .story-image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-height: 70svh;
-    position: relative;
-  }
+	.story-image-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		max-height: 70svh;
+		position: relative;
+	}
 
-  .story-image-wrapper :global(img) {
-    object-fit: contain;
-    max-height: 70svh;
-    border-radius: 4px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 1;
-  }
+	.story-image-wrapper :global(img) {
+		object-fit: contain;
+		max-height: 70svh;
+		border-radius: 4px;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+		position: relative;
+		z-index: 1;
+	}
 
-  .story-image-wrapper::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-    box-shadow: inset 0 0 60px 20px var(--color-background);
-    border-radius: 4px;
-  }
+	.story-image-wrapper::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 2;
+		background: radial-gradient(circle, transparent 60%, var(--color-background) 100%);
+		border-radius: 4px;
+	}
+
 }
 
 @layer utilities {
