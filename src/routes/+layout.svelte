@@ -28,7 +28,7 @@
   <link rel="icon" type="image/svg+xml" href={favicon} />
   <link rel="shortcut icon" href={faviconIco} />
   <link rel="apple-touch-icon" sizes="180x180" href={favicon180} />
-  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="manifest" href="manifest.json" />
 </svelte:head>
 
 {@render children()}
