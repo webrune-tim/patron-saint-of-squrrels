@@ -10,21 +10,21 @@ First, define a named `view-timeline` on the elements you want to track. These w
 
 ```css
 #tracked {
-	section:nth-child(1) {
-		view-timeline: --tl-1 block;
-	}
-	section:nth-child(2) {
-		view-timeline: --tl-2 block;
-	}
-	section:nth-child(3) {
-		view-timeline: --tl-3 block;
-	}
-	section:nth-child(4) {
-		view-timeline: --tl-4 block;
-	}
-	section:nth-child(5) {
-		view-timeline: --tl-5 block;
-	}
+  section:nth-child(1) {
+    view-timeline: --tl-1 block;
+  }
+  section:nth-child(2) {
+    view-timeline: --tl-2 block;
+  }
+  section:nth-child(3) {
+    view-timeline: --tl-3 block;
+  }
+  section:nth-child(4) {
+    view-timeline: --tl-4 block;
+  }
+  section:nth-child(5) {
+    view-timeline: --tl-5 block;
+  }
 }
 ```
 
@@ -32,30 +32,30 @@ Next, apply animations to the elements you want to animate and link them to the 
 
 ```css
 #animated {
-	section {
-		animation:
-			animate-in auto linear both,
-			animate-out auto linear forwards;
-		animation-range:
-			entry 25% cover 50%,
-			exit 50% exit 75%;
-	}
+  section {
+    animation:
+      animate-in auto linear both,
+      animate-out auto linear forwards;
+    animation-range:
+      entry 25% cover 50%,
+      exit 50% exit 75%;
+  }
 
-	section:nth-child(1) {
-		animation-timeline: --tl-1;
-	}
-	section:nth-child(2) {
-		animation-timeline: --tl-2;
-	}
-	section:nth-child(3) {
-		animation-timeline: --tl-3;
-	}
-	section:nth-child(4) {
-		animation-timeline: --tl-4;
-	}
-	section:nth-child(5) {
-		animation-timeline: --tl-5;
-	}
+  section:nth-child(1) {
+    animation-timeline: --tl-1;
+  }
+  section:nth-child(2) {
+    animation-timeline: --tl-2;
+  }
+  section:nth-child(3) {
+    animation-timeline: --tl-3;
+  }
+  section:nth-child(4) {
+    animation-timeline: --tl-4;
+  }
+  section:nth-child(5) {
+    animation-timeline: --tl-5;
+  }
 }
 ```
 
@@ -63,7 +63,7 @@ For the `animation-timeline` to be able to reference the named timelines, they n
 
 ```css
 html {
-	timeline-scope: --tl-1, --tl-2, --tl-3, --tl-4, --tl-5;
+  timeline-scope: --tl-1, --tl-2, --tl-3, --tl-4, --tl-5;
 }
 ```
 
@@ -71,9 +71,9 @@ Finally, you can use the `animation-range` property to specify the exact range o
 
 ```css
 #animated section {
-	animation-range:
-		entry 25% cover 50%,
-		exit 50% exit 75%;
+  animation-range:
+    entry 25% cover 50%,
+    exit 50% exit 75%;
 }
 ```
 
@@ -81,79 +81,79 @@ Finally, you can use the `animation-range` property to specify the exact range o
 
 ```css
 html {
-	timeline-scope: --tl-1, --tl-2, --tl-3, --tl-4, --tl-5;
+  timeline-scope: --tl-1, --tl-2, --tl-3, --tl-4, --tl-5;
 }
 
 #tracked {
-	section:nth-child(1) {
-		view-timeline: --tl-1 block;
-	}
-	section:nth-child(2) {
-		view-timeline: --tl-2 block;
-	}
-	section:nth-child(3) {
-		view-timeline: --tl-3 block;
-	}
-	section:nth-child(4) {
-		view-timeline: --tl-4 block;
-	}
-	section:nth-child(5) {
-		view-timeline: --tl-5 block;
-	}
+  section:nth-child(1) {
+    view-timeline: --tl-1 block;
+  }
+  section:nth-child(2) {
+    view-timeline: --tl-2 block;
+  }
+  section:nth-child(3) {
+    view-timeline: --tl-3 block;
+  }
+  section:nth-child(4) {
+    view-timeline: --tl-4 block;
+  }
+  section:nth-child(5) {
+    view-timeline: --tl-5 block;
+  }
 }
 
 @keyframes animate-in {
-	from {
-		scale: 0.5;
-		opacity: 0;
-		transform: rotateY(-180deg);
-	}
-	to {
-		transform: rotateY(0deg);
-	}
+  from {
+    scale: 0.5;
+    opacity: 0;
+    transform: rotateY(-180deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
 }
 @keyframes animate-out {
-	to {
-		translate: 100% 0;
-		opacity: 0;
-	}
+  to {
+    translate: 100% 0;
+    opacity: 0;
+  }
 }
 
 #animated {
-	section {
-		animation:
-			animate-in auto linear both,
-			animate-out auto linear forwards;
-		animation-range:
-			entry 25% cover 50%,
-			exit 50% exit 75%;
-		backface-visibility: hidden;
-	}
+  section {
+    animation:
+      animate-in auto linear both,
+      animate-out auto linear forwards;
+    animation-range:
+      entry 25% cover 50%,
+      exit 50% exit 75%;
+    backface-visibility: hidden;
+  }
 
-	section:nth-child(1) {
-		animation-timeline: --tl-1;
-	}
-	section:nth-child(2) {
-		animation-timeline: --tl-2;
-	}
-	section:nth-child(3) {
-		animation-timeline: --tl-3;
-	}
-	section:nth-child(4) {
-		animation-timeline: --tl-4;
-	}
-	section:nth-child(5) {
-		animation-timeline: --tl-5;
-	}
+  section:nth-child(1) {
+    animation-timeline: --tl-1;
+  }
+  section:nth-child(2) {
+    animation-timeline: --tl-2;
+  }
+  section:nth-child(3) {
+    animation-timeline: --tl-3;
+  }
+  section:nth-child(4) {
+    animation-timeline: --tl-4;
+  }
+  section:nth-child(5) {
+    animation-timeline: --tl-5;
+  }
 }
 
 /* MANDATORY Copy-Paste Safety: Disable continuous storytelling motion for sensitive users */
 @media (prefers-reduced-motion: reduce) {
-	#animated section {
-		animation: none !important;
-		opacity: 1 !important;
-		transform: none !important;
-	}
+  #animated section {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 ```
 
@@ -190,36 +190,36 @@ Note that not every effect can be recreated using the fallbacks approach.
 For this use-case specifically, the following script applies the fallback for browsers that do not support scroll-driven animations. It uses an `IntersectionObserver` to track the visibility of each `#tracked section` element and updates the `transform` property of the corresponding `#animated section` accordingly.
 
 ```js
-const animatedSections = document.querySelectorAll('#animated section');
+const animatedSections = document.querySelectorAll("#animated section");
 
 const observer = new IntersectionObserver(
-	(entries) => {
-		entries.forEach((entry) => {
-			const sectionIndex = Array.from(
-				document.querySelectorAll('#tracked section')
-			).indexOf(entry.target);
-			if (sectionIndex !== -1) {
-				const animatedSection = animatedSections[sectionIndex];
-				const ratio = entry.intersectionRatio;
+  (entries) => {
+    entries.forEach((entry) => {
+      const sectionIndex = Array.from(
+        document.querySelectorAll("#tracked section"),
+      ).indexOf(entry.target);
+      if (sectionIndex !== -1) {
+        const animatedSection = animatedSections[sectionIndex];
+        const ratio = entry.intersectionRatio;
 
-				// Animate-in
-				animatedSection.style.opacity = ratio;
-				animatedSection.style.transform = `scale(${0.5 + ratio * 0.5}) rotateY(${-180 + ratio * 180}deg)`;
+        // Animate-in
+        animatedSection.style.opacity = ratio;
+        animatedSection.style.transform = `scale(${0.5 + ratio * 0.5}) rotateY(${-180 + ratio * 180}deg)`;
 
-				// Animate-out
-				if (ratio < 0.5) {
-					animatedSection.style.translate = `${(0.5 - ratio) * 2 * 100}% 0`;
-				} else {
-					animatedSection.style.translate = '0 0';
-				}
-			}
-		});
-	},
-	{ threshold: Array.from({ length: 101 }, (_, i) => i / 100) }
+        // Animate-out
+        if (ratio < 0.5) {
+          animatedSection.style.translate = `${(0.5 - ratio) * 2 * 100}% 0`;
+        } else {
+          animatedSection.style.translate = "0 0";
+        }
+      }
+    });
+  },
+  { threshold: Array.from({ length: 101 }, (_, i) => i / 100) },
 );
 
-document.querySelectorAll('#tracked section').forEach((section) => {
-	observer.observe(section);
+document.querySelectorAll("#tracked section").forEach((section) => {
+  observer.observe(section);
 });
 ```
 
@@ -227,18 +227,18 @@ And the accompanying CSS:
 
 ```css
 #animated section {
-	opacity: 0;
-	transform: scale(0.5) rotateY(-180deg);
-	backface-visibility: hidden;
+  opacity: 0;
+  transform: scale(0.5) rotateY(-180deg);
+  backface-visibility: hidden;
 }
 
 /* MANDATORY Copy-Paste Safety: Ensure content remains fully visible and legible for assistive technologies or users with motion sensitivities */
 @media (prefers-reduced-motion: reduce) {
-	#animated section {
-		opacity: 1 !important;
-		transform: none !important;
-		translate: 0 0 !important;
-	}
+  #animated section {
+    opacity: 1 !important;
+    transform: none !important;
+    translate: 0 0 !important;
+  }
 }
 ```
 

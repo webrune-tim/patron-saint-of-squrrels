@@ -10,16 +10,16 @@ Here’s how to create carousel slide effects:
 
     ```html
     <ul class="scroller">
-    	<li class="entry">1</li>
-    	<li class="entry">2</li>
-    	<li class="entry">3</li>
-    	…
+      <li class="entry">1</li>
+      <li class="entry">2</li>
+      <li class="entry">3</li>
+      …
     </ul>
     ```
 
     ```css
     .scroller {
-    	overflow-x: scroll;
+      overflow-x: scroll;
     }
     ```
 
@@ -27,15 +27,15 @@ Here’s how to create carousel slide effects:
 
     ```css
     @keyframes animate {
-    	0% {
-    		scale: 0.5;
-    	}
-    	50% {
-    		scale: 1;
-    	}
-    	100% {
-    		scale: 0.5;
-    	}
+      0% {
+        scale: 0.5;
+      }
+      50% {
+        scale: 1;
+      }
+      100% {
+        scale: 0.5;
+      }
     }
     ```
 
@@ -43,8 +43,8 @@ Here’s how to create carousel slide effects:
 
     ```css
     .scroller > * {
-    	animation: animate auto linear both;
-    	animation-timeline: view(inline);
+      animation: animate auto linear both;
+      animation-timeline: view(inline);
     }
     ```
 
@@ -56,24 +56,24 @@ This code animates the carousel items of a horizontal scroller on scroll using a
 
 ```css
 @keyframes animate {
-	0% {
-		scale: 0.5;
-	}
+  0% {
+    scale: 0.5;
+  }
 
-	50% {
-		scale: 1;
-	}
+  50% {
+    scale: 1;
+  }
 
-	100% {
-		scale: 0.5;
-	}
+  100% {
+    scale: 0.5;
+  }
 }
 
 .scroller > * {
-	/* Applies the animation using an `auto` duration */
-	animation: animate auto linear both;
-	/* Sets the animation timeline to use an anonymous view progress timeline, tracking the element's progress through the scroller on the inline axis */
-	animation-timeline: view(inline);
+  /* Applies the animation using an `auto` duration */
+  animation: animate auto linear both;
+  /* Sets the animation timeline to use an anonymous view progress timeline, tracking the element's progress through the scroller on the inline axis */
+  animation-timeline: view(inline);
 }
 ```
 
@@ -81,27 +81,27 @@ This code animates the carousel items of a horizontal scroller on scroll using a
 
 ```css
 @keyframes animate {
-	0% {
-		scale: 0.5;
-	}
+  0% {
+    scale: 0.5;
+  }
 
-	50% {
-		scale: 1;
-	}
+  50% {
+    scale: 1;
+  }
 
-	100% {
-		scale: 0.5;
-	}
+  100% {
+    scale: 0.5;
+  }
 }
 
 /* This creates a named view-timeline on each carousel item. The timeline is used to drive the animation that is applied on the same element. */
 .scroller > * {
-	/* Applies the animation using an `auto` duration */
-	animation: animate auto linear both;
-	/* Defines a named view progress timeline, tracking the element's progress through the scroller on the inline axis */
-	view-timeline: --item inline;
-	/* Sets the animation timeline to use the named view progress timeline defined above */
-	animation-timeline: --item;
+  /* Applies the animation using an `auto` duration */
+  animation: animate auto linear both;
+  /* Defines a named view progress timeline, tracking the element's progress through the scroller on the inline axis */
+  view-timeline: --item inline;
+  /* Sets the animation timeline to use the named view progress timeline defined above */
+  animation-timeline: --item;
 }
 ```
 
@@ -146,46 +146,46 @@ For this use-case specifically, the following script applies the fallback for br
 ```js
 // Fallback for browsers that don't support scroll-driven animations
 if (
-	!CSS.supports('(animation-timeline: view()) and (animation-range: entry)')
+  !CSS.supports("(animation-timeline: view()) and (animation-range: entry)")
 ) {
-	const scroller = document.querySelector('.scroller');
-	const entries = document.querySelectorAll('.entry');
+  const scroller = document.querySelector(".scroller");
+  const entries = document.querySelectorAll(".entry");
 
-	// Create a map to store animations
-	const animations = new Map();
+  // Create a map to store animations
+  const animations = new Map();
 
-	entries.forEach((entry) => {
-		const animation = entry.animate(
-			{
-				scale: ['0.5', '1', '0.5']
-			},
-			{
-				duration: 1, // We'll control the time ourselves
-				fill: 'both'
-			}
-		);
-		animation.pause();
-		animations.set(entry, animation);
-	});
+  entries.forEach((entry) => {
+    const animation = entry.animate(
+      {
+        scale: ["0.5", "1", "0.5"],
+      },
+      {
+        duration: 1, // We'll control the time ourselves
+        fill: "both",
+      },
+    );
+    animation.pause();
+    animations.set(entry, animation);
+  });
 
-	// Update animations on scroll
-	const tick = () => {
-		const scrollerRect = scroller.getBoundingClientRect();
+  // Update animations on scroll
+  const tick = () => {
+    const scrollerRect = scroller.getBoundingClientRect();
 
-		entries.forEach((entry) => {
-			const animation = animations.get(entry);
-			if (!animation) return;
+    entries.forEach((entry) => {
+      const animation = animations.get(entry);
+      if (!animation) return;
 
-			const entryRect = entry.getBoundingClientRect();
-			const progress =
-				(entryRect.left + entryRect.width / 2 - scrollerRect.left) /
-				scrollerRect.width;
+      const entryRect = entry.getBoundingClientRect();
+      const progress =
+        (entryRect.left + entryRect.width / 2 - scrollerRect.left) /
+        scrollerRect.width;
 
-			animation.currentTime = progress;
-		});
-	};
+      animation.currentTime = progress;
+    });
+  };
 
-	scroller.addEventListener('scroll', tick);
-	tick();
+  scroller.addEventListener("scroll", tick);
+  tick();
 }
 ```

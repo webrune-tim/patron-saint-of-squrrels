@@ -43,22 +43,22 @@ npx -y modern-web-guidance@latest search "<query>" --skill-version 2026_05_16-c5
 
 ```json
 [
-	{
-		"id": "optimize-image-priority",
-		"description": "Optimize the loading priority of Largest Contentful Paint (LCP) candidate images.",
-		"category": "performance",
-		"featuresUsed": ["Fetch priority"],
-		"tokenCount": 985,
-		"similarity": 0.7289
-	},
-	{
-		"id": "defer-rendering-heavy-content",
-		"description": "Reduce rendering times in content-heavy web pages by deferring rendering for offscreen content.",
-		"category": "performance",
-		"featuresUsed": ["content-visibility", "hidden=\"until-found\""],
-		"tokenCount": 1250,
-		"similarity": 0.6961
-	}
+  {
+    "id": "optimize-image-priority",
+    "description": "Optimize the loading priority of Largest Contentful Paint (LCP) candidate images.",
+    "category": "performance",
+    "featuresUsed": ["Fetch priority"],
+    "tokenCount": 985,
+    "similarity": 0.7289
+  },
+  {
+    "id": "defer-rendering-heavy-content",
+    "description": "Reduce rendering times in content-heavy web pages by deferring rendering for offscreen content.",
+    "category": "performance",
+    "featuresUsed": ["content-visibility", "hidden=\"until-found\""],
+    "tokenCount": 1250,
+    "similarity": 0.6961
+  }
 ]
 ```
 

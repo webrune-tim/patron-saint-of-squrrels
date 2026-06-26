@@ -26,13 +26,13 @@ Link your input to its error message using `aria-errormessage` (or `aria-describ
 
 ```html
 <form>
-	<div class="field">
-		<label for="email">Email</label>
-		<input type="email" id="email" required aria-errormessage="email-error" />
-		<span id="email-error" class="error-msg">
-			Please enter a valid email address.
-		</span>
-	</div>
+  <div class="field">
+    <label for="email">Email</label>
+    <input type="email" id="email" required aria-errormessage="email-error" />
+    <span id="email-error" class="error-msg">
+      Please enter a valid email address.
+    </span>
+  </div>
 </form>
 ```
 
@@ -42,18 +42,18 @@ Control the visibility of the error message using the native pseudo-class `:user
 
 ```css
 .error-msg {
-	display: none;
-	color: #d93025;
+  display: none;
+  color: #d93025;
 }
 
 /* Show error message when input is user-invalid */
 input:user-invalid ~ .error-msg {
-	display: block;
+  display: block;
 }
 
 /* Optional: Visual cues on the input itself */
 input:user-invalid {
-	border-color: #d93025;
+  border-color: #d93025;
 }
 ```
 
@@ -63,35 +63,35 @@ Since there is no "UserInvalidChanged" event, hook into standard form events to 
 
 ```javascript
 const updateAriaState = (event) => {
-	const input = event.target;
-	if (!input.matches?.('input, textarea, select')) return;
+  const input = event.target;
+  if (!input.matches?.("input, textarea, select")) return;
 
-	// Check if the browser currently considers this input "user-invalid"
-	const isUserInvalid = input.matches(':user-invalid');
+  // Check if the browser currently considers this input "user-invalid"
+  const isUserInvalid = input.matches(":user-invalid");
 
-	if (isUserInvalid) {
-		input.setAttribute('aria-invalid', 'true');
-	} else {
-		input.removeAttribute('aria-invalid');
-	}
+  if (isUserInvalid) {
+    input.setAttribute("aria-invalid", "true");
+  } else {
+    input.removeAttribute("aria-invalid");
+  }
 };
 
 // Listen on the document to handle dynamically added fields.
 // 'blur' and 'focus' do not bubble, so we must use the capture phase (true).
-document.addEventListener('blur', updateAriaState, true);
-document.addEventListener('focus', updateAriaState, true);
+document.addEventListener("blur", updateAriaState, true);
+document.addEventListener("focus", updateAriaState, true);
 
 // Also update on input if we've already shown the error,
 // so the error clears immediately when fixed.
-document.addEventListener('input', (event) => {
-	const input = event.target;
-	if (!input.matches?.('input, textarea, select')) return;
+document.addEventListener("input", (event) => {
+  const input = event.target;
+  if (!input.matches?.("input, textarea, select")) return;
 
-	const hasAriaInvalid = input.hasAttribute('aria-invalid');
-	const ariaInvalid = input.getAttribute('aria-invalid');
-	if (hasAriaInvalid && ariaInvalid === 'true') {
-		updateAriaState(event);
-	}
+  const hasAriaInvalid = input.hasAttribute("aria-invalid");
+  const ariaInvalid = input.getAttribute("aria-invalid");
+  if (hasAriaInvalid && ariaInvalid === "true") {
+    updateAriaState(event);
+  }
 });
 ```
 
@@ -106,8 +106,8 @@ You can check for support in CSS and JavaScript.
 **JavaScript Check:**
 
 ```javascript
-if (!CSS.supports('selector(:user-invalid)')) {
-	// Fallback logic here
+if (!CSS.supports("selector(:user-invalid)")) {
+  // Fallback logic here
 }
 ```
 
@@ -119,14 +119,14 @@ To ensure your fallback logic is visually indistinguishable from the native beha
 /* Apply error styles to both native selector and fallback class */
 input:user-invalid,
 input.user-invalid-fallback {
-	border-color: #d93025;
-	background-color: #fce8e6;
+  border-color: #d93025;
+  background-color: #fce8e6;
 }
 
 /* Show error message for both cases */
 input:user-invalid ~ .error-msg,
 input.user-invalid-fallback ~ .error-msg {
-	display: block;
+  display: block;
 }
 ```
 
@@ -136,71 +136,71 @@ If `:user-invalid` is missing manually track the interaction state using a `Weak
 
 ```javascript
 const UserInvalidFallback = (() => {
-	const dirtyState = new WeakMap();
+  const dirtyState = new WeakMap();
 
-	const updateState = (input) => {
-		const isValid = input.checkValidity();
+  const updateState = (input) => {
+    const isValid = input.checkValidity();
 
-		// Update both visual and ARIA state
-		input.classList.toggle('user-invalid-fallback', !isValid);
-		input.classList.toggle('user-valid-fallback', isValid);
+    // Update both visual and ARIA state
+    input.classList.toggle("user-invalid-fallback", !isValid);
+    input.classList.toggle("user-valid-fallback", isValid);
 
-		if (!isValid) {
-			input.setAttribute('aria-invalid', 'true');
-		} else {
-			input.removeAttribute('aria-invalid');
-		}
-	};
+    if (!isValid) {
+      input.setAttribute("aria-invalid", "true");
+    } else {
+      input.removeAttribute("aria-invalid");
+    }
+  };
 
-	const handleEvent = (event) => {
-		const input = event.target;
+  const handleEvent = (event) => {
+    const input = event.target;
 
-		if (event.type === 'reset' && input.matches?.('form')) {
-			const controls = input.elements || [];
-			for (const control of controls) {
-				dirtyState.delete(control);
-				control.classList.remove('user-invalid-fallback');
-				control.classList.remove('user-valid-fallback');
-				control.removeAttribute('aria-invalid');
-			}
-			return;
-		}
+    if (event.type === "reset" && input.matches?.("form")) {
+      const controls = input.elements || [];
+      for (const control of controls) {
+        dirtyState.delete(control);
+        control.classList.remove("user-invalid-fallback");
+        control.classList.remove("user-valid-fallback");
+        control.removeAttribute("aria-invalid");
+      }
+      return;
+    }
 
-		if (!input.matches?.('input, textarea, select')) return;
+    if (!input.matches?.("input, textarea, select")) return;
 
-		if (event.type === 'input' || event.type === 'change') {
-			const state = dirtyState.get(input) || {
-				hasInteracted: false,
-				hasBlurred: false
-			};
-			state.hasInteracted = true;
-			dirtyState.set(input, state);
-			if (state.hasBlurred) {
-				updateState(input);
-			}
-		} else if (event.type === 'blur') {
-			const state = dirtyState.get(input) || {
-				hasInteracted: false,
-				hasBlurred: false
-			};
-			state.hasBlurred = true;
-			dirtyState.set(input, state);
-			if (state.hasInteracted) {
-				updateState(input);
-			}
-		}
-	};
+    if (event.type === "input" || event.type === "change") {
+      const state = dirtyState.get(input) || {
+        hasInteracted: false,
+        hasBlurred: false,
+      };
+      state.hasInteracted = true;
+      dirtyState.set(input, state);
+      if (state.hasBlurred) {
+        updateState(input);
+      }
+    } else if (event.type === "blur") {
+      const state = dirtyState.get(input) || {
+        hasInteracted: false,
+        hasBlurred: false,
+      };
+      state.hasBlurred = true;
+      dirtyState.set(input, state);
+      if (state.hasInteracted) {
+        updateState(input);
+      }
+    }
+  };
 
-	const init = () => {
-		if (CSS.supports('selector(:user-invalid)')) return;
+  const init = () => {
+    if (CSS.supports("selector(:user-invalid)")) return;
 
-		document.addEventListener('blur', handleEvent, true); // Capture phase required
-		document.addEventListener('input', handleEvent, true);
-		document.addEventListener('change', handleEvent, true);
-		document.addEventListener('reset', handleEvent, true); // Capture resets
-	};
+    document.addEventListener("blur", handleEvent, true); // Capture phase required
+    document.addEventListener("input", handleEvent, true);
+    document.addEventListener("change", handleEvent, true);
+    document.addEventListener("reset", handleEvent, true); // Capture resets
+  };
 
-	return { init };
+  return { init };
 })();
 
 // Initialize globally

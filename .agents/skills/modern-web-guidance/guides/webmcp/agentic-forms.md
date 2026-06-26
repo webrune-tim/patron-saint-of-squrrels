@@ -13,23 +13,23 @@ The Declarative API transforms standard HTML `<form>` elements into WebMCP tools
 
 ```html
 <form
-	toolname="search-cars"
-	tooldescription="Perform a car make/model search"
-	toolautosubmit
+  toolname="search-cars"
+  tooldescription="Perform a car make/model search"
+  toolautosubmit
 >
-	<label for="make">Vehicle Make</label>
-	<input type="text" id="make" name="make" required />
+  <label for="make">Vehicle Make</label>
+  <input type="text" id="make" name="make" required />
 
-	<label for="model">Vehicle Model</label>
-	<input
-		type="text"
-		id="model"
-		name="model"
-		toolparamdescription="e.g., 330i, F-150"
-		required
-	/>
+  <label for="model">Vehicle Model</label>
+  <input
+    type="text"
+    id="model"
+    name="model"
+    toolparamdescription="e.g., 330i, F-150"
+    required
+  />
 
-	<button type="submit">Search</button>
+  <button type="submit">Search</button>
 </form>
 ```
 
@@ -38,31 +38,31 @@ The Declarative API transforms standard HTML `<form>` elements into WebMCP tools
 When an agent submits the form, the `SubmitEvent` includes `agentInvoked` (boolean) and `respondWith(promise)`.
 
 ```javascript
-document.querySelector('form').addEventListener('submit', (event) => {
-	event.preventDefault();
+document.querySelector("form").addEventListener("submit", (event) => {
+  event.preventDefault();
 
-	// Validate the form
-	const formValidationErrors = myFormIsValid();
+  // Validate the form
+  const formValidationErrors = myFormIsValid();
 
-	if (formValidationErrors.length > 0) {
-		if (event.agentInvoked) {
-			const errorString =
-				'Validation failed: ' +
-				formValidationErrors
-					.map((err) => `${err.field} (${err.message})`)
-					.join(', ');
+  if (formValidationErrors.length > 0) {
+    if (event.agentInvoked) {
+      const errorString =
+        "Validation failed: " +
+        formValidationErrors
+          .map((err) => `${err.field} (${err.message})`)
+          .join(", ");
 
-			event.respondWith(Promise.resolve(errorString));
-		}
-		return;
-	}
+      event.respondWith(Promise.resolve(errorString));
+    }
+    return;
+  }
 
-	const resultPromise = performAsyncSearch(new FormData(event.target));
+  const resultPromise = performAsyncSearch(new FormData(event.target));
 
-	// Return the result directly to the agent without navigation
-	if (event.agentInvoked) {
-		event.respondWith(resultPromise);
-	}
+  // Return the result directly to the agent without navigation
+  if (event.agentInvoked) {
+    event.respondWith(resultPromise);
+  }
 });
 ```
 
@@ -71,12 +71,12 @@ document.querySelector('form').addEventListener('submit', (event) => {
 The window emits events when agents start or stop interacting with a tool:
 
 ```javascript
-window.addEventListener('toolactivated', ({ toolName }) => {
-	console.log(`Tool "${toolName}" was activated by the agent.`);
+window.addEventListener("toolactivated", ({ toolName }) => {
+  console.log(`Tool "${toolName}" was activated by the agent.`);
 });
 
-window.addEventListener('toolcancel', ({ toolName }) => {
-	console.log(`Tool "${toolName}" interaction was cancelled.`);
+window.addEventListener("toolcancel", ({ toolName }) => {
+  console.log(`Tool "${toolName}" interaction was cancelled.`);
 });
 ```
 
@@ -89,13 +89,13 @@ Use pseudo-classes to highlight forms when an agent interacts with them:
 
 ```css
 form:tool-form-active {
-	outline: 2px dashed blue;
-	background-color: rgba(0, 0, 255, 0.05);
+  outline: 2px dashed blue;
+  background-color: rgba(0, 0, 255, 0.05);
 }
 
 button:tool-submit-active {
-	outline: 2px dashed red;
-	animation: pulse 2s infinite;
+  outline: 2px dashed red;
+  animation: pulse 2s infinite;
 }
 ```
 

@@ -14,8 +14,8 @@ Here’s how to create a basic parallax effect:
 
     ```css
     .wrapper {
-    	overflow: clip;
-    	height: 100vh; /* Height of one of the layers of the parallax */
+      overflow: clip;
+      height: 100vh; /* Height of one of the layers of the parallax */
     }
     ```
 
@@ -23,10 +23,10 @@ Here’s how to create a basic parallax effect:
 
     ```html
     <div class="wrapper">
-    	<div class="layer">LAYER 0</div>
-    	<div class="layer">LAYER 1</div>
-    	<div class="layer">LAYER 2</div>
-    	…
+      <div class="layer">LAYER 0</div>
+      <div class="layer">LAYER 1</div>
+      <div class="layer">LAYER 2</div>
+      …
     </div>
     ```
 
@@ -34,9 +34,9 @@ Here’s how to create a basic parallax effect:
 
     ```css
     @keyframes parallax {
-    	from {
-    		transform: translateY(700px);
-    	}
+      from {
+        transform: translateY(700px);
+      }
     }
     ```
 
@@ -44,12 +44,12 @@ Here’s how to create a basic parallax effect:
 
     ```css
     .wrapper {
-    	view-timeline: --wrapper;
+      view-timeline: --wrapper;
     }
 
     .layer {
-    	animation: parallax linear both;
-    	animation-timeline: --wrapper;
+      animation: parallax linear both;
+      animation-timeline: --wrapper;
     }
     ```
 
@@ -63,19 +63,19 @@ Here’s how to create a basic parallax effect:
 
       ```css
       .layer:nth-child(1) {
-      	--offset: 100px;
+        --offset: 100px;
       }
       .layer:nth-child(2) {
-      	--offset: 200px;
+        --offset: 200px;
       }
       .layer:nth-child(3) {
-      	--offset: 300px;
+        --offset: 300px;
       }
 
       @keyframes parallax {
-      	from {
-      		transform: translateY(var(--offset));
-      	}
+        from {
+          transform: translateY(var(--offset));
+        }
       }
       ```
 
@@ -83,9 +83,9 @@ Here’s how to create a basic parallax effect:
 
       ```css
       @keyframes parallax {
-      	from {
-      		transform: translateY(calc(100px * sibling-index()));
-      	}
+        from {
+          transform: translateY(calc(100px * sibling-index()));
+        }
       }
       ```
 
@@ -95,13 +95,13 @@ Here’s how to create a basic parallax effect:
 
       ```css
       .layer:nth-child(1) {
-      	animation-range: entry 25% exit 50%;
+        animation-range: entry 25% exit 50%;
       }
       .layer:nth-child(2) {
-      	animation-range: entry 25% exit 75%;
+        animation-range: entry 25% exit 75%;
       }
       .layer:nth-child(3) {
-      	animation-range: entry 25% exit 100%;
+        animation-range: entry 25% exit 100%;
       }
       ```
 
@@ -109,8 +109,8 @@ Here’s how to create a basic parallax effect:
 
       ```css
       .layer {
-      	animation-range: entry 25% exit
-      		calc(100% / sibling-count() * sibling-index());
+        animation-range: entry 25% exit
+          calc(100% / sibling-count() * sibling-index());
       }
       ```
 
@@ -118,24 +118,24 @@ Here’s how to create a basic parallax effect:
 
 ```css
 @keyframes parallax {
-	from {
-		transform: translateY(calc(100px * sibling-index()));
-	}
+  from {
+    transform: translateY(calc(100px * sibling-index()));
+  }
 }
 
 .wrapper {
-	view-timeline: --wrapper;
+  view-timeline: --wrapper;
 }
 
 .layer {
-	animation: parallax linear both;
-	animation-timeline: --wrapper;
+  animation: parallax linear both;
+  animation-timeline: --wrapper;
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.layer {
-		animation: none;
-	}
+  .layer {
+    animation: none;
+  }
 }
 ```
 
@@ -143,25 +143,25 @@ Alternatively, you can use the `animation-range` property to achieve a similar e
 
 ```css
 @keyframes parallax {
-	from {
-		transform: translateY(700px);
-	}
+  from {
+    transform: translateY(700px);
+  }
 }
 
 .wrapper {
-	view-timeline: --wrapper;
+  view-timeline: --wrapper;
 }
 
 .layer {
-	animation: parallax linear both;
-	animation-timeline: --wrapper;
-	animation-range: entry 25% exit calc(100% / sibling-count() * sibling-index());
+  animation: parallax linear both;
+  animation-timeline: --wrapper;
+  animation-range: entry 25% exit calc(100% / sibling-count() * sibling-index());
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.layer {
-		animation: none;
-	}
+  .layer {
+    animation: none;
+  }
 }
 ```
 
@@ -199,52 +199,52 @@ For this use-case specifically, the following script applies the fallback for br
 ```js
 // Fallback for browsers that don't support scroll-driven animations
 if (
-	!CSS.supports('(animation-timeline: view()) and (animation-range: entry)')
+  !CSS.supports("(animation-timeline: view()) and (animation-range: entry)")
 ) {
-	const wrapper = document.querySelector('.wrapper');
-	const layers = document.querySelectorAll('.layer');
+  const wrapper = document.querySelector(".wrapper");
+  const layers = document.querySelectorAll(".layer");
 
-	const observer = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					window.addEventListener('scroll', onScroll);
-				} else {
-					window.removeEventListener('scroll', onScroll);
-				}
-			});
-		},
-		{ threshold: 0 }
-	);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          window.addEventListener("scroll", onScroll);
+        } else {
+          window.removeEventListener("scroll", onScroll);
+        }
+      });
+    },
+    { threshold: 0 },
+  );
 
-	observer.observe(wrapper);
+  observer.observe(wrapper);
 
-	function onScroll() {
-		const scrollY = window.scrollY;
-		const wrapperRect = wrapper.getBoundingClientRect();
-		const wrapperTop = wrapperRect.top + scrollY;
-		const wrapperHeight = wrapperRect.height;
-		const windowHeight = window.innerHeight;
+  function onScroll() {
+    const scrollY = window.scrollY;
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const wrapperTop = wrapperRect.top + scrollY;
+    const wrapperHeight = wrapperRect.height;
+    const windowHeight = window.innerHeight;
 
-		if (
-			scrollY >= wrapperTop - windowHeight &&
-			scrollY <= wrapperTop + wrapperHeight
-		) {
-			const scrollPercent =
-				(scrollY - (wrapperTop - windowHeight)) /
-				(wrapperHeight + windowHeight);
+    if (
+      scrollY >= wrapperTop - windowHeight &&
+      scrollY <= wrapperTop + wrapperHeight
+    ) {
+      const scrollPercent =
+        (scrollY - (wrapperTop - windowHeight)) /
+        (wrapperHeight + windowHeight);
 
-			layers.forEach((layer, index) => {
-				// This matches the effect as defined in the CSS example above.
-				// Customize this further if needed.
-				const initialTranslateY = 100 * index;
-				const translateY = initialTranslateY * (1 - scrollPercent);
-				layer.style.transform = `translateY(${translateY}px)`;
-			});
-		}
-	}
+      layers.forEach((layer, index) => {
+        // This matches the effect as defined in the CSS example above.
+        // Customize this further if needed.
+        const initialTranslateY = 100 * index;
+        const translateY = initialTranslateY * (1 - scrollPercent);
+        layer.style.transform = `translateY(${translateY}px)`;
+      });
+    }
+  }
 
-	// Trigger onScroll once to set initial positions
-	onScroll();
+  // Trigger onScroll once to set initial positions
+  onScroll();
 }
 ```

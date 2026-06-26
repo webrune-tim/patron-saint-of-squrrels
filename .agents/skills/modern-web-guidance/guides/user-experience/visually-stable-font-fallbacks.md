@@ -17,14 +17,14 @@ Apply the property to the element or a parent container. This ensures that if th
 
 ```css
 .text-content {
-	/* Define your font stack as usual */
-	font-family: 'MyWebFont', 'Arial', sans-serif;
-	font-size: 1rem;
+  /* Define your font stack as usual */
+  font-family: "MyWebFont", "Arial", sans-serif;
+  font-size: 1rem;
 
-	/* MANDATORY: Normalize the font size based on the primary font's x-height.
+  /* MANDATORY: Normalize the font size based on the primary font's x-height.
      This ensures that if 'Arial' is used as a fallback, it is scaled 
      to match the x-height of 'MyWebFont'. */
-	font-size-adjust: from-font;
+  font-size-adjust: from-font;
 }
 ```
 
@@ -34,8 +34,8 @@ While x-height is the default and most common, you can normalize by other metric
 
 ```css
 h1 {
-	/* Normalize based on the height of capital letters */
-	font-size-adjust: cap-height from-font;
+  /* Normalize based on the height of capital letters */
+  font-size-adjust: cap-height from-font;
 }
 ```
 

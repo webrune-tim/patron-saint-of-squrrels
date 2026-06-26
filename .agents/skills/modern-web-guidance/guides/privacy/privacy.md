@@ -40,9 +40,9 @@ Instead of asking for exact age:
 ```html
 <label for="age-bracket">Age Bracket:</label>
 <select id="age-bracket" name="age-bracket">
-	<option value="18-34">18-34</option>
-	<option value="35-49">35-49</option>
-	<option value="50+">50+</option>
+  <option value="18-34">18-34</option>
+  <option value="35-49">35-49</option>
+  <option value="50+">50+</option>
 </select>
 ```
 
@@ -69,13 +69,13 @@ Build trust by being open about your data practices and providing easy ways for 
 
 ```html
 <div>
-	<label for="phone">Phone Number (Optional)</label>
-	<input id="phone" type="tel" name="phone" />
-	<a href="#phone-help">Why do we ask for this?</a>
-	<aside id="phone-help">
-		We only use your phone number to send two-factor authentication codes for
-		account security.
-	</aside>
+  <label for="phone">Phone Number (Optional)</label>
+  <input id="phone" type="tel" name="phone" />
+  <a href="#phone-help">Why do we ask for this?</a>
+  <aside id="phone-help">
+    We only use your phone number to send two-factor authentication codes for
+    account security.
+  </aside>
 </div>
 ```
 
@@ -93,10 +93,10 @@ _Note: If clearing the cache, avoid sending this on the main navigation page to 
 ```html
 <!-- Declarative permission element with fallback -->
 <permission type="geolocation" onpromptdismiss="updateMap()">
-	<!-- Fallback for unsupported browsers -->
-	<button onclick="navigator.geolocation.getCurrentPosition(updateMap)">
-		Use my location
-	</button>
+  <!-- Fallback for unsupported browsers -->
+  <button onclick="navigator.geolocation.getCurrentPosition(updateMap)">
+    Use my location
+  </button>
 </permission>
 ```
 
@@ -154,11 +154,11 @@ Third-party scripts and resources are a common source of privacy leaks. You are 
 ```html
 <!-- No JS SDK required -->
 <a
-	href="https://x.com/intent/tweet?text=Check%20this%20out&url=https%3A%2F%2Fexample.com"
-	rel="noopener"
-	target="_blank"
+  href="https://x.com/intent/tweet?text=Check%20this%20out&url=https%3A%2F%2Fexample.com"
+  rel="noopener"
+  target="_blank"
 >
-	Share on X
+  Share on X
 </a>
 ```
 
@@ -166,19 +166,19 @@ Third-party scripts and resources are a common source of privacy leaks. You are 
 
 ```html
 <div id="video-container" data-video-id="abc123">
-	<img
-		src="https://img.youtube.com/vi/abc123/maxresdefault.jpg"
-		alt="Play Video"
-		id="play-btn"
-	/>
+  <img
+    src="https://img.youtube.com/vi/abc123/maxresdefault.jpg"
+    alt="Play Video"
+    id="play-btn"
+  />
 </div>
 
 <script>
-	document.getElementById('play-btn').addEventListener('click', function () {
-		const container = document.getElementById('video-container');
-		const videoId = container.dataset.videoId;
-		container.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" allowfullscreen></iframe>`;
-	});
+  document.getElementById("play-btn").addEventListener("click", function () {
+    const container = document.getElementById("video-container");
+    const videoId = container.dataset.videoId;
+    container.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" allowfullscreen></iframe>`;
+  });
 </script>
 ```
 
@@ -186,20 +186,20 @@ Third-party scripts and resources are a common source of privacy leaks. You are 
 
 ```javascript
 try {
-	const credential = await navigator.credentials.get({
-		identity: {
-			providers: [
-				{
-					configURL: 'https://idp.example/fedcm.json',
-					clientId: 'rp-client-id-123',
-					nonce: 'a_secure_random_nonce_value'
-				}
-			]
-		}
-	});
-	authenticateWithBackend(credential.token);
+  const credential = await navigator.credentials.get({
+    identity: {
+      providers: [
+        {
+          configURL: "https://idp.example/fedcm.json",
+          clientId: "rp-client-id-123",
+          nonce: "a_secure_random_nonce_value",
+        },
+      ],
+    },
+  });
+  authenticateWithBackend(credential.token);
 } catch (error) {
-	// Handle FedCM login failure
+  // Handle FedCM login failure
 }
 ```
 
@@ -261,11 +261,11 @@ if ('IntersectionObserver' in window) {
 
 ```javascript
 if (navigator.userAgentData) {
-	navigator.userAgentData
-		.getHighEntropyValues(['platformVersion', 'architecture'])
-		.then((ua) => {
-			console.log(ua.platformVersion);
-		});
+  navigator.userAgentData
+    .getHighEntropyValues(["platformVersion", "architecture"])
+    .then((ua) => {
+      console.log(ua.platformVersion);
+    });
 }
 ```
 

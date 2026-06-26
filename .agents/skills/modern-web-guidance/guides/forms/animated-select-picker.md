@@ -22,50 +22,50 @@ The following example demonstrates a custom select styled with standard page ani
 <!-- Always use a <label> linked via 'for' to the select for accessibility -->
 <label for="theme-select">Visual Theme</label>
 <select id="theme-select" class="animated-select" name="theme">
-	<!-- The <button> inside <select> becomes the visible trigger when appearance: base-select is used -->
-	<button>
-		<!-- <selectedcontent> automatically displays the content of the chosen <option> -->
-		<selectedcontent></selectedcontent>
-	</button>
-	<option value="system">
-		<!-- MANDATORY: Decorative inline SVGs MUST set aria-hidden="true" to prevent redundant screen reader announcement -->
-		<svg
-			aria-hidden="true"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		>
-			<rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-			<line x1="8" y1="21" x2="16" y2="21"></line>
-			<line x1="12" y1="17" x2="12" y2="21"></line>
-		</svg>
-		System Default
-	</option>
-	<option value="light">
-		<svg
-			aria-hidden="true"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		>
-			<circle cx="12" cy="12" r="5"></circle>
-			<line x1="12" y1="1" x2="12" y2="3"></line>
-			<line x1="12" y1="21" x2="12" y2="23"></line>
-			<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-			<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-			<line x1="1" y1="12" x2="3" y2="12"></line>
-			<line x1="21" y1="12" x2="23" y2="12"></line>
-			<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-			<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-		</svg>
-		Light UI
-	</option>
+  <!-- The <button> inside <select> becomes the visible trigger when appearance: base-select is used -->
+  <button>
+    <!-- <selectedcontent> automatically displays the content of the chosen <option> -->
+    <selectedcontent></selectedcontent>
+  </button>
+  <option value="system">
+    <!-- MANDATORY: Decorative inline SVGs MUST set aria-hidden="true" to prevent redundant screen reader announcement -->
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+      <line x1="8" y1="21" x2="16" y2="21"></line>
+      <line x1="12" y1="17" x2="12" y2="21"></line>
+    </svg>
+    System Default
+  </option>
+  <option value="light">
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+    Light UI
+  </option>
 </select>
 ```
 
@@ -73,33 +73,33 @@ The following example demonstrates a custom select styled with standard page ani
 /* Opt-in to customizable select */
 .animated-select,
 .animated-select::picker(select) {
-	appearance: base-select;
+  appearance: base-select;
 }
 
 /* Enable auto-keyword transitions (usually set globally at :root) */
 :root {
-	interpolate-size: allow-keywords;
+  interpolate-size: allow-keywords;
 }
 
 /* Style the visible trigger and icon rotation */
 .animated-select {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-	padding: 0.875rem 1rem;
-	font-size: 1rem;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: border-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
 }
 
 .animated-select::picker-icon {
-	transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .animated-select:open::picker-icon {
-	transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 /*
@@ -107,58 +107,58 @@ The following example demonstrates a custom select styled with standard page ani
  * Uses top-layer animations with `allow-discrete` visibility hooks
  */
 .animated-select::picker(select) {
-	background: white;
-	border-radius: 12px;
-	box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
-	padding: 0.5rem;
-	margin-top: 0.25rem;
-	width: anchor-size(width);
-	overflow: hidden;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  width: anchor-size(width);
+  overflow: hidden;
 
-	/* The crucial transition setting for popover animations */
-	transition:
-		display 0.4s allow-discrete,
-		overlay 0.4s allow-discrete,
-		opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-		height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-	opacity: 0;
-	height: 0;
+  /* The crucial transition setting for popover animations */
+  transition:
+    display 0.4s allow-discrete,
+    overlay 0.4s allow-discrete,
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  height: 0;
 }
 
 /* Open State */
 .animated-select:open::picker(select) {
-	opacity: 1;
-	height: auto;
+  opacity: 1;
+  height: auto;
 }
 
 /* @starting-style to hook the transition on initial popover open */
 @starting-style {
-	.animated-select:open::picker(select) {
-		opacity: 0;
-		height: 0;
-	}
+  .animated-select:open::picker(select) {
+    opacity: 0;
+    height: 0;
+  }
 }
 
 /* Support for SVG inside Options and Selected Content */
 .animated-select option svg,
 .animated-select selectedcontent svg {
-	flex-shrink: 0; /* Prevent icons from shrinking */
-	width: 1.25rem;
-	height: 1.25rem;
+  flex-shrink: 0; /* Prevent icons from shrinking */
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 /* MANDATORY: Provide multiple indicators (e.g. bold font and distinct background) for the checked state to avoid color-only state communication */
 .animated-select option:checked {
-	font-weight: 700;
-	background-color: #f1f5f9;
+  font-weight: 700;
+  background-color: #f1f5f9;
 }
 
 /* Ensure copy-paste safety for users with motion sensitivities */
 @media (prefers-reduced-motion: reduce) {
-	.animated-select::picker(select),
-	.animated-select::picker-icon {
-		transition: none !important;
-	}
+  .animated-select::picker(select),
+  .animated-select::picker-icon {
+    transition: none !important;
+  }
 }
 ```
 
@@ -184,10 +184,10 @@ For browsers that do not yet support `appearance: base-select`, the `<select>` e
 - **HTML Structure Handling**: Standard parsers may ignore the `<button>` and `<selectedcontent>` tags inside `<select>` or treat them as invalid. No heavy JavaScript polyfills are strictly required for progressive enhancement if you view standard text as a readable fallback.
 
 ```javascript
-document.addEventListener('DOMContentLoaded', () => {
-	// Check if browser supports base-select value
-	if (!CSS.supports('appearance', 'base-select')) {
-		// Custom select overrides are not supported natively.
-	}
+document.addEventListener("DOMContentLoaded", () => {
+  // Check if browser supports base-select value
+  if (!CSS.supports("appearance", "base-select")) {
+    // Custom select overrides are not supported natively.
+  }
 });
 ```

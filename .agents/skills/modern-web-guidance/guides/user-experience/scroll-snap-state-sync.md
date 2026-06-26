@@ -8,14 +8,14 @@ The container must have `scroll-snap-type` defined, and have children with `scro
 
 ```css
 main {
-	/* Enable scroll snapping on the container */
-	scroll-snap-type: y proximity;
-	overflow-y: auto;
+  /* Enable scroll snapping on the container */
+  scroll-snap-type: y proximity;
+  overflow-y: auto;
 }
 
 h2 {
-	/* Define how headers align when snapped */
-	scroll-snap-align: start;
+  /* Define how headers align when snapped */
+  scroll-snap-align: start;
 }
 ```
 
@@ -26,25 +26,25 @@ Use the `scrollsnapchange` event on the scroll container to react when the user 
 ```html
 <!-- MANDATORY: Wrap table of contents links inside a proper navigation landmark -->
 <nav aria-label="Table of contents">
-	<ul>
-		<li><a href="#section-1" aria-current="location">Section 1</a></li>
-		<li><a href="#section-2">Section 2</a></li>
-	</ul>
+  <ul>
+    <li><a href="#section-1" aria-current="location">Section 1</a></li>
+    <li><a href="#section-2">Section 2</a></li>
+  </ul>
 </nav>
 ```
 
 ```javascript
-const main = document.getElementById('main');
-const links = document.querySelectorAll('nav a');
+const main = document.getElementById("main");
+const links = document.querySelectorAll("nav a");
 
 // The event fires when the scroller settles on a new snap target
-main.addEventListener('scrollsnapchange', (event) => {
-	// Use snapTargetBlock for vertical or snapTargetInline for horizontal
-	const snappedHeader = event.snapTargetBlock;
+main.addEventListener("scrollsnapchange", (event) => {
+  // Use snapTargetBlock for vertical or snapTargetInline for horizontal
+  const snappedHeader = event.snapTargetBlock;
 
-	if (snappedHeader) {
-		setSelectedParagraph(snappedHeader.id);
-	}
+  if (snappedHeader) {
+    setSelectedParagraph(snappedHeader.id);
+  }
 });
 ```
 

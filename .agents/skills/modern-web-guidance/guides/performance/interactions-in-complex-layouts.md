@@ -24,10 +24,10 @@ Apply `content-visibility: auto` to large, self-contained containers that repres
 
 ```css
 .board-column {
-	/* Apply containment boundaries */
-	content-visibility: auto;
+  /* Apply containment boundaries */
+  content-visibility: auto;
 
-	/* Mandatory: Provide a placeholder size to prevent layouts shifts.
+  /* Mandatory: Provide a placeholder size to prevent layouts shifts.
      For a vertical column, define a reasonable width and height. 
      - 'auto' is optional and enables the browser to remember the actual size
        once rendered. It must be paired with a <length> value to be used for
@@ -39,7 +39,7 @@ Apply `content-visibility: auto` to large, self-contained containers that repres
       CSS <length> value. Replace it with the expected height of your
       component.
    */
-	contain-intrinsic-size: auto 300px auto 800px;
+  contain-intrinsic-size: auto 300px auto 800px;
 }
 ```
 
@@ -50,12 +50,12 @@ Ensure that interactions occurring inside the column benefit from the containmen
 ```javascript
 // Example: Drag and drop item movement
 function moveItemToColumn(itemId, columnId) {
-	const item = document.getElementById(itemId);
-	const column = document.getElementById(columnId);
+  const item = document.getElementById(itemId);
+  const column = document.getElementById(columnId);
 
-	// The browser will only reflow this specific column,
-	// not the entire board layout!
-	column.appendChild(item);
+  // The browser will only reflow this specific column,
+  // not the entire board layout!
+  column.appendChild(item);
 }
 ```
 
@@ -71,9 +71,9 @@ The property degrades gracefully. In unsupported browsers:
 
 ```css
 @supports not (content-visibility: auto) {
-	.board-column {
-		/* Manual fallback for containment */
-		contain: layout style paint;
-	}
+  .board-column {
+    /* Manual fallback for containment */
+    contain: layout style paint;
+  }
 }
 ```

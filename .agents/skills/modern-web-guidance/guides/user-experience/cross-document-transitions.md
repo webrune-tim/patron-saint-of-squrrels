@@ -9,11 +9,11 @@ Both the source and destination pages must opt-in to view transitions for the br
 ```css
 /* Respect user's preference for reduced motion */
 @media (prefers-reduced-motion: no-preference) {
-	/* Add to a global stylesheet shared by both pages */
-	@view-transition {
-		/* Enables transitions for same-origin navigations */
-		navigation: auto;
-	}
+  /* Add to a global stylesheet shared by both pages */
+  @view-transition {
+    /* Enables transitions for same-origin navigations */
+    navigation: auto;
+  }
 }
 ```
 
@@ -24,27 +24,27 @@ You can target the old and new states of the transition using pseudo-elements to
 ```css
 /* Customizing the outgoing page animation */
 ::view-transition-old(root) {
-	/* Move the old page out to the left */
-	animation: 0.4s ease-in both slide-out;
+  /* Move the old page out to the left */
+  animation: 0.4s ease-in both slide-out;
 }
 
 /* Customizing the incoming page animation */
 ::view-transition-new(root) {
-	/* Move the new page in from the right */
-	animation: 0.4s ease-out both slide-in;
+  /* Move the new page in from the right */
+  animation: 0.4s ease-out both slide-in;
 }
 
 @keyframes slide-out {
-	to {
-		transform: translateX(-20%);
-		opacity: 0;
-	}
+  to {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
 }
 
 @keyframes slide-in {
-	from {
-		transform: translateX(100%);
-	}
+  from {
+    transform: translateX(100%);
+  }
 }
 ```
 
@@ -56,26 +56,26 @@ If the page you are navigating to will always have the same transition type, reg
 
 ```css
 @media (prefers-reduced-motion: no-preference) {
-	@view-transition {
-		navigation: auto;
-		/* Specify the types of view transitions that will always be used on this page. */
-		types: previous;
-	}
+  @view-transition {
+    navigation: auto;
+    /* Specify the types of view transitions that will always be used on this page. */
+    types: previous;
+  }
 }
 ```
 
 You can also conditionally specify transition types inside of an event listener for `pagereveal`.
 
 ```js
-window.addEventListener('pagereveal', async (e) => {
-	if (e.viewTransition && window.navigation?.activation) {
-		// Use application-specific logic to compute a transition type
-		const transitionType = yourTransitionTypeLogic(
-			navigation.activation.from,
-			navigation.activation.entry
-		);
-		e.viewTransition.types.add(transitionType);
-	}
+window.addEventListener("pagereveal", async (e) => {
+  if (e.viewTransition && window.navigation?.activation) {
+    // Use application-specific logic to compute a transition type
+    const transitionType = yourTransitionTypeLogic(
+      navigation.activation.from,
+      navigation.activation.entry,
+    );
+    e.viewTransition.types.add(transitionType);
+  }
 });
 ```
 
@@ -83,22 +83,22 @@ Then, use the `:active-view-transition-type()` pseudo selector to apply the diff
 
 ```css
 :active-view-transition-type(next) {
-	&::view-transition-old(root) {
-		animation-name: slide-out-next;
-	}
+  &::view-transition-old(root) {
+    animation-name: slide-out-next;
+  }
 
-	&::view-transition-new(root) {
-		animation-name: slide-in-next;
-	}
+  &::view-transition-new(root) {
+    animation-name: slide-in-next;
+  }
 }
 :active-view-transition-type(previous) {
-	&::view-transition-old(root) {
-		animation-name: slide-out-previous;
-	}
+  &::view-transition-old(root) {
+    animation-name: slide-out-previous;
+  }
 
-	&::view-transition-new(root) {
-		animation-name: slide-in-previous;
-	}
+  &::view-transition-new(root) {
+    animation-name: slide-in-previous;
+  }
 }
 ```
 
@@ -116,8 +116,8 @@ If a browser does not support view transitions, or cross-document view transitio
 To check for support in JavaScript:
 
 ```javascript
-if ('onpagereveal' in window) {
-	// Browser supports cross-document view transitions
+if ("onpagereveal" in window) {
+  // Browser supports cross-document view transitions
 }
 ```
 
@@ -130,6 +130,6 @@ To check for support in JavaScript:
 
 ```javascript
 if (window.navigation?.activation) {
-	// Browser supports the Navigation API
+  // Browser supports the Navigation API
 }
 ```

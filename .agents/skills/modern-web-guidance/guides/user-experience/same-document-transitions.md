@@ -16,8 +16,8 @@ For Single-Page Applications (SPAs) or simple state changes, wrap the logic that
 
 ```javascript
 function navigate(view) {
-	// MANDATORY: Wrap the update in startViewTransition
-	document.startViewTransition(() => updateDOM(view));
+  // MANDATORY: Wrap the update in startViewTransition
+  document.startViewTransition(() => updateDOM(view));
 }
 ```
 
@@ -34,20 +34,20 @@ Because there are multiple items on the list view, you can not give the all of t
 ```css
 /* In the list view, give each */
 #product-1 {
-	view-transition-name: p1;
+  view-transition-name: p1;
 }
 #product-2 {
-	view-transition-name: p2;
+  view-transition-name: p2;
 }
 #product-3 {
-	view-transition-name: p3;
+  view-transition-name: p3;
 }
 ```
 
 ```js
 function updateDOM(clickedTransitionName) {
-	const hero = document.getElementById('hero');
-	hero.style.viewTransitionName = clickedTransitionName;
+  const hero = document.getElementById("hero");
+  hero.style.viewTransitionName = clickedTransitionName;
 }
 ```
 
@@ -57,10 +57,10 @@ The `#hero` element on the detail page and the selected `.thumbnail` element on 
 
 ```css
 #hero {
-	view-transition-name: hero;
+  view-transition-name: hero;
 }
 .thumbnail.selected {
-	view-transition-name: hero;
+  view-transition-name: hero;
 }
 ```
 
@@ -73,46 +73,46 @@ After navigating back to the list view, you must clean up the view transition cl
 ```javascript
 // Function called when a thumbnail is clicked
 function goFromListToDetail(e) {
-	e.currentTarget.classList.add('selected');
-	const hero = document.getElementById('hero');
-	const bgColor = getComputedStyle(e.currentTarget).backgroundColor;
-	hero.style.background = bgColor;
+  e.currentTarget.classList.add("selected");
+  const hero = document.getElementById("hero");
+  const bgColor = getComputedStyle(e.currentTarget).backgroundColor;
+  hero.style.background = bgColor;
 
-	// Trigger the transition, checking for support
-	if (!document.startViewTransition) {
-		document.body.classList.add('detail');
-		// MANDATORY Accessibility Routing: Route focus to the newly revealed heading to announce context and preserve logical tab flow
-		document.getElementById('detail-heading')?.focus();
-		return; // MANDATORY: End function execution if view transitions are not supported.
-	}
-	const transition = document.startViewTransition(() => {
-		document.body.classList.add('detail');
-	});
-	// MANDATORY Accessibility Routing: Route focus after the view transition resolves
-	transition.finished.finally(() => {
-		document.getElementById('detail-heading')?.focus();
-	});
+  // Trigger the transition, checking for support
+  if (!document.startViewTransition) {
+    document.body.classList.add("detail");
+    // MANDATORY Accessibility Routing: Route focus to the newly revealed heading to announce context and preserve logical tab flow
+    document.getElementById("detail-heading")?.focus();
+    return; // MANDATORY: End function execution if view transitions are not supported.
+  }
+  const transition = document.startViewTransition(() => {
+    document.body.classList.add("detail");
+  });
+  // MANDATORY Accessibility Routing: Route focus after the view transition resolves
+  transition.finished.finally(() => {
+    document.getElementById("detail-heading")?.focus();
+  });
 }
 
 // Function called when navigating from detail back to list view
 function goFromDetailToList() {
-	if (!document.startViewTransition) {
-		document.body.classList.remove('detail');
-		document.getElementById('list-heading')?.focus();
-		return;
-	}
-	const transition = document.startViewTransition(() => {
-		document.body.classList.remove('detail');
-	});
-	// Clean up the list view and route focus
-	transition.finished.finally(() => {
-		// Route focus back to list view
-		document.getElementById('list-heading')?.focus();
-		// Remove selected classList to remove view-transition-names
-		document.querySelectorAll('.selected').forEach((element) => {
-			element.classList.remove('selected');
-		});
-	});
+  if (!document.startViewTransition) {
+    document.body.classList.remove("detail");
+    document.getElementById("list-heading")?.focus();
+    return;
+  }
+  const transition = document.startViewTransition(() => {
+    document.body.classList.remove("detail");
+  });
+  // Clean up the list view and route focus
+  transition.finished.finally(() => {
+    // Route focus back to list view
+    document.getElementById("list-heading")?.focus();
+    // Remove selected classList to remove view-transition-names
+    document.querySelectorAll(".selected").forEach((element) => {
+      element.classList.remove("selected");
+    });
+  });
 }
 ```
 
@@ -124,11 +124,11 @@ By default, the browser cross-fades the old and new snapshots within a group tha
 
 ```css
 #list-page .title {
-	width: fit-content;
+  width: fit-content;
 }
 
 #detail-page #title {
-	width: fit-content;
+  width: fit-content;
 }
 ```
 
@@ -137,7 +137,7 @@ If you are transitioning elements that change aspect ratio, you may need to set 
 ```css
 ::view-transition-old(hero),
 ::view-transition-new(hero) {
-	height: 100%;
+  height: 100%;
 }
 ```
 
@@ -153,11 +153,11 @@ The pseudo-elements are snapshots of the live elements, so you can also use `obj
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-	::view-transition-group(*),
-	::view-transition-old(*),
-	::view-transition-new(*) {
-		animation: none !important;
-	}
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
 ```
 
@@ -170,11 +170,11 @@ The View Transitions API is designed for progressive enhancement. Browsers that 
 
 ```javascript
 function navigate() {
-	if (!document.startViewTransition) {
-		// Fallback: Just update the DOM
-		updateDOM();
-	} else {
-		document.startViewTransition(() => updateDOM());
-	}
+  if (!document.startViewTransition) {
+    // Fallback: Just update the DOM
+    updateDOM();
+  } else {
+    document.startViewTransition(() => updateDOM());
+  }
 }
 ```

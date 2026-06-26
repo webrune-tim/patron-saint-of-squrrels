@@ -23,20 +23,20 @@ The `:user-invalid` pseudo-class solves this perfectly. For a required field, it
 
 ```html
 <form id="feedback-form">
-	<div class="field">
-		<label for="full-name">Full Name</label>
-		<input
-			type="text"
-			id="full-name"
-			name="full-name"
-			required
-			aria-errormessage="name-error"
-		/>
-		<!-- MANDATORY: Include an icon or distinct non-color indicator alongside error text -->
-		<div id="name-error" class="error-msg">
-			<span aria-hidden="true">❌</span> This field is required.
-		</div>
-	</div>
+  <div class="field">
+    <label for="full-name">Full Name</label>
+    <input
+      type="text"
+      id="full-name"
+      name="full-name"
+      required
+      aria-errormessage="name-error"
+    />
+    <!-- MANDATORY: Include an icon or distinct non-color indicator alongside error text -->
+    <div id="name-error" class="error-msg">
+      <span aria-hidden="true">❌</span> This field is required.
+    </div>
+  </div>
 </form>
 ```
 
@@ -44,10 +44,10 @@ The `:user-invalid` pseudo-class solves this perfectly. For a required field, it
 
 ```css
 .error-msg {
-	display: none;
-	color: #d93025;
-	font-size: 0.875rem;
-	margin-top: 0.25rem;
+  display: none;
+  color: #d93025;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 
 /*
@@ -55,18 +55,18 @@ The `:user-invalid` pseudo-class solves this perfectly. For a required field, it
   MANDATORY: Provide multiple indicators (border shift + helper text/icon) to avoid color-only state communication.
 */
 input:user-invalid {
-	border-color: #d93025;
-	background-color: #fce8e6;
+  border-color: #d93025;
+  background-color: #fce8e6;
 }
 
 input:user-invalid + .error-msg {
-	display: block;
+  display: block;
 }
 
 /* Optional: Subtle indicator for required fields that are valid */
 input:required:user-valid {
-	border-color: #188038;
-	border-width: 2px;
+  border-color: #188038;
+  border-width: 2px;
 }
 ```
 
@@ -75,37 +75,37 @@ input:required:user-valid {
 MANDATORY: Because `:user-invalid` is a visual state, you MUST provide a JavaScript bridge to sync `aria-invalid="true"` dynamically for assistive technologies when a user blurs an invalid field or attempts submission.
 
 ```javascript
-const form = document.getElementById('feedback-form');
+const form = document.getElementById("feedback-form");
 
 const syncAriaInvalid = (input) => {
-	if (!input.checkValidity()) {
-		input.setAttribute('aria-invalid', 'true');
-	} else {
-		input.removeAttribute('aria-invalid');
-	}
+  if (!input.checkValidity()) {
+    input.setAttribute("aria-invalid", "true");
+  } else {
+    input.removeAttribute("aria-invalid");
+  }
 };
 
 // Sync on blur when a user finishes interacting
 form.addEventListener(
-	'blur',
-	(e) => {
-		if (e.target.matches('input[required]')) {
-			syncAriaInvalid(e.target);
-		}
-	},
-	true
+  "blur",
+  (e) => {
+    if (e.target.matches("input[required]")) {
+      syncAriaInvalid(e.target);
+    }
+  },
+  true,
 );
 
 // Sync all required fields when submission is attempted
-form.addEventListener('submit', () => {
-	form.querySelectorAll('input[required]').forEach(syncAriaInvalid);
+form.addEventListener("submit", () => {
+  form.querySelectorAll("input[required]").forEach(syncAriaInvalid);
 });
 
 // Remove error state immediately upon correction
-form.addEventListener('input', (e) => {
-	if (e.target.matches('input[required]') && e.target.checkValidity()) {
-		e.target.removeAttribute('aria-invalid');
-	}
+form.addEventListener("input", (e) => {
+  if (e.target.matches("input[required]") && e.target.checkValidity()) {
+    e.target.removeAttribute("aria-invalid");
+  }
 });
 ```
 
@@ -121,13 +121,13 @@ Supported by: Chrome 119 (Oct 2023), Edge 119 (Nov 2023), Firefox 88 (Apr 2021),
 ```css
 input:user-invalid,
 input.user-invalid-fallback {
-	border-color: #d93025;
-	background-color: #fce8e6;
+  border-color: #d93025;
+  background-color: #fce8e6;
 }
 
 input:user-invalid + .error-msg,
 input.user-invalid-fallback + .error-msg {
-	display: block;
+  display: block;
 }
 ```
 
@@ -137,75 +137,75 @@ Use a reusable utility that tracks interaction state using a `WeakMap`. This avo
 
 ```javascript
 const UserInvalidFallback = (() => {
-	const dirtyState = new WeakMap();
+  const dirtyState = new WeakMap();
 
-	const updateState = (input) => {
-		const isValid = input.checkValidity();
+  const updateState = (input) => {
+    const isValid = input.checkValidity();
 
-		// Update both visual and ARIA state
-		input.classList.toggle('user-invalid-fallback', !isValid);
-		input.classList.toggle('user-valid-fallback', isValid);
+    // Update both visual and ARIA state
+    input.classList.toggle("user-invalid-fallback", !isValid);
+    input.classList.toggle("user-valid-fallback", isValid);
 
-		if (!isValid) {
-			input.setAttribute('aria-invalid', 'true');
-		} else {
-			input.removeAttribute('aria-invalid');
-		}
-	};
+    if (!isValid) {
+      input.setAttribute("aria-invalid", "true");
+    } else {
+      input.removeAttribute("aria-invalid");
+    }
+  };
 
-	const handleEvent = (event) => {
-		const input = event.target;
+  const handleEvent = (event) => {
+    const input = event.target;
 
-		if (event.type === 'reset') {
-			const controls = input.elements || [];
-			for (const control of controls) {
-				dirtyState.delete(control);
-				control.classList.remove('user-invalid-fallback');
-				control.classList.remove('user-valid-fallback');
-				control.removeAttribute('aria-invalid');
-			}
-			return;
-		}
+    if (event.type === "reset") {
+      const controls = input.elements || [];
+      for (const control of controls) {
+        dirtyState.delete(control);
+        control.classList.remove("user-invalid-fallback");
+        control.classList.remove("user-valid-fallback");
+        control.removeAttribute("aria-invalid");
+      }
+      return;
+    }
 
-		if (!input.checkValidity) return;
+    if (!input.checkValidity) return;
 
-		if (event.type === 'input' || event.type === 'change') {
-			const state = dirtyState.get(input) || {
-				hasInteracted: false,
-				hasBlurred: false
-			};
-			state.hasInteracted = true;
-			dirtyState.set(input, state);
-			if (state.hasBlurred) {
-				updateState(input);
-			}
-		} else if (event.type === 'blur') {
-			const state = dirtyState.get(input) || {
-				hasInteracted: false,
-				hasBlurred: false
-			};
-			state.hasBlurred = true;
-			dirtyState.set(input, state);
-			if (state.hasInteracted) {
-				updateState(input);
-			}
-		}
-	};
+    if (event.type === "input" || event.type === "change") {
+      const state = dirtyState.get(input) || {
+        hasInteracted: false,
+        hasBlurred: false,
+      };
+      state.hasInteracted = true;
+      dirtyState.set(input, state);
+      if (state.hasBlurred) {
+        updateState(input);
+      }
+    } else if (event.type === "blur") {
+      const state = dirtyState.get(input) || {
+        hasInteracted: false,
+        hasBlurred: false,
+      };
+      state.hasBlurred = true;
+      dirtyState.set(input, state);
+      if (state.hasInteracted) {
+        updateState(input);
+      }
+    }
+  };
 
-	const init = (root = document) => {
-		if (CSS.supports('selector(:user-invalid)')) return;
+  const init = (root = document) => {
+    if (CSS.supports("selector(:user-invalid)")) return;
 
-		root.addEventListener('blur', handleEvent, true); // Capture phase
-		root.addEventListener('input', handleEvent);
-		root.addEventListener('change', handleEvent);
-		root.addEventListener('reset', handleEvent, true); // Capture resets
-	};
+    root.addEventListener("blur", handleEvent, true); // Capture phase
+    root.addEventListener("input", handleEvent);
+    root.addEventListener("change", handleEvent);
+    root.addEventListener("reset", handleEvent, true); // Capture resets
+  };
 
-	return { init };
+  return { init };
 })();
 
 // Initialize for a specific form
-const form = document.querySelector('#demo-form');
+const form = document.querySelector("#demo-form");
 UserInvalidFallback.init(form);
 ```
 
@@ -218,15 +218,15 @@ UserInvalidFallback.init(form);
 ```javascript
 // Sync aria-invalid with the CSS :user-invalid state
 const syncAria = (el) => {
-	el.setAttribute?.(
-		'aria-invalid',
-		el.matches(':user-invalid') ? 'true' : 'false'
-	);
+  el.setAttribute?.(
+    "aria-invalid",
+    el.matches(":user-invalid") ? "true" : "false",
+  );
 };
 
 // Update on blur (to show error) and input (to clear it)
-document.addEventListener('blur', (e) => syncAria(e.target), true);
-document.addEventListener('input', (e) => {
-	if (e.target.hasAttribute('aria-invalid')) syncAria(e.target);
+document.addEventListener("blur", (e) => syncAria(e.target), true);
+document.addEventListener("input", (e) => {
+  if (e.target.hasAttribute("aria-invalid")) syncAria(e.target);
 });
 ```

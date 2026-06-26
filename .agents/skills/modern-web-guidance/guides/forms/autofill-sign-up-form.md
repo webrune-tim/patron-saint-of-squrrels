@@ -101,11 +101,11 @@ MANDATORY: For a sign-up form, use `autocomplete="new-password"`.
 ```html
 <!-- new-password prevents password managers from auto-filling an existing password into this field -->
 <input
-	type="password"
-	id="new-password"
-	name="new-password"
-	autocomplete="new-password"
-	required
+  type="password"
+  id="new-password"
+  name="new-password"
+  autocomplete="new-password"
+  required
 />
 ```
 

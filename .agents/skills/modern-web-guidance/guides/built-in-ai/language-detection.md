@@ -26,16 +26,16 @@ Check model availability before attempting to instantiate the detector or trigge
 // Check if the model is available or downloadable
 const availability = await LanguageDetector.availability();
 
-if (availability !== 'unavailable') {
-	button.addEventListener('click', async () => {
-		const detector = await LanguageDetector.create({
-			monitor(m) {
-				m.addEventListener('downloadprogress', (e) => {
-					console.log(`Downloaded ${e.loaded * 100}%`);
-				});
-			}
-		});
-	});
+if (availability !== "unavailable") {
+  button.addEventListener("click", async () => {
+    const detector = await LanguageDetector.create({
+      monitor(m) {
+        m.addEventListener("downloadprogress", (e) => {
+          console.log(`Downloaded ${e.loaded * 100}%`);
+        });
+      },
+    });
+  });
 }
 ```
 
@@ -44,13 +44,13 @@ if (availability !== 'unavailable') {
 The API returns a ranked list of potential languages with a confidence score between `0.0` and `1.0`.
 
 ```javascript
-const someUserText = 'Hallo und herzlich willkommen!';
+const someUserText = "Hallo und herzlich willkommen!";
 const results = await detector.detect(someUserText);
 
 for (const result of results) {
-	// result.detectedLanguage (e.g., 'de')
-	// result.confidence (e.g., 0.999)
-	console.log(result.detectedLanguage, result.confidence);
+  // result.detectedLanguage (e.g., 'de')
+  // result.confidence (e.g., 0.999)
+  console.log(result.detectedLanguage, result.confidence);
 }
 ```
 
@@ -61,8 +61,8 @@ Avoid using the detector on very short phrases or single words, as accuracy drop
 - **Iframes:** Cross-origin iframes require an explicit Permissions Policy to access the API.
   ```html
   <iframe
-  	src="https://cross-origin.example.com/"
-  	allow="language-detector"
+    src="https://cross-origin.example.com/"
+    allow="language-detector"
   ></iframe>
   ```
 - **Web Workers:** The API is **not** currently available in Web Workers due to Permission Policy complexities.
@@ -77,10 +77,10 @@ Unsupported in: Edge, Firefox, and Safari.
 Before use, check if the `LanguageDetector` object is available in the global scope:
 
 ```javascript
-if ('LanguageDetector' in self) {
-	// The Language Detector API is supported.
+if ("LanguageDetector" in self) {
+  // The Language Detector API is supported.
 } else {
-	// Execute fallback strategy
+  // Execute fallback strategy
 }
 ```
 

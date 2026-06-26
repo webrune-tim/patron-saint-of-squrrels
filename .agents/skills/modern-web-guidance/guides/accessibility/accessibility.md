@@ -32,31 +32,31 @@ Keep these principles in mind throughout:
 ```html
 <!-- Good: Semantic landmarks, heading hierarchy, skip link -->
 <header>
-	<a href="#content" class="skip-link visually-hidden">Skip to content</a>
-	<nav aria-label="Primary">
-		<ul>
-			<li><a href="/">Home</a></li>
-		</ul>
-	</nav>
+  <a href="#content" class="skip-link visually-hidden">Skip to content</a>
+  <nav aria-label="Primary">
+    <ul>
+      <li><a href="/">Home</a></li>
+    </ul>
+  </nav>
 </header>
 <main id="content" tabindex="-1">
-	<h1>Platform Dashboard</h1>
-	<section>
-		<h2>User Statistics</h2>
-		<table>
-			<caption>
-				Monthly active users
-			</caption>
-			<tr>
-				<th scope="col">Month</th>
-				<th scope="col">Users</th>
-			</tr>
-			<tr>
-				<td>January</td>
-				<td>12,000</td>
-			</tr>
-		</table>
-	</section>
+  <h1>Platform Dashboard</h1>
+  <section>
+    <h2>User Statistics</h2>
+    <table>
+      <caption>
+        Monthly active users
+      </caption>
+      <tr>
+        <th scope="col">Month</th>
+        <th scope="col">Users</th>
+      </tr>
+      <tr>
+        <td>January</td>
+        <td>12,000</td>
+      </tr>
+    </table>
+  </section>
 </main>
 ```
 
@@ -111,15 +111,15 @@ A `.visually-hidden` utility lets you provide text for screen readers without re
    :focus-within / :active opt elements out — useful for skip links and
    any focusable content wrapped in this class. */
 .visually-hidden:where(:not(:focus-within, :active)) {
-	position: absolute !important;
-	clip-path: inset(50%) !important;
-	overflow: hidden !important;
-	width: 1px !important;
-	height: 1px !important;
-	margin: -1px !important;
-	padding: 0 !important;
-	border: 0 !important;
-	white-space: nowrap !important;
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
 }
 ```
 
@@ -146,13 +146,13 @@ When the hidden content is focusable (skip links, focus-receiving wrappers), the
 ```html
 <!-- Good: Distinct title and language declaration -->
 <html lang="en">
-	<head>
-		<title>Analytics Reports | Guidance Platform</title>
-	</head>
-	<body>
-		<p>The motto is <span lang="la">"Carpe diem"</span>.</p>
-		<iframe title="Interactive Sales Chart" src="/chart"></iframe>
-	</body>
+  <head>
+    <title>Analytics Reports | Guidance Platform</title>
+  </head>
+  <body>
+    <p>The motto is <span lang="la">"Carpe diem"</span>.</p>
+    <iframe title="Interactive Sales Chart" src="/chart"></iframe>
+  </body>
 </html>
 ```
 
@@ -179,8 +179,8 @@ When the hidden content is focusable (skip links, focus-receiving wrappers), the
 ```css
 /* Good: High contrast focus border */
 :where(a:any-link, button):focus-visible {
-	outline: 3px solid #ff0055;
-	outline-offset: 3px;
+  outline: 3px solid #ff0055;
+  outline-offset: 3px;
 }
 ```
 
@@ -195,25 +195,25 @@ When the hidden content is focusable (skip links, focus-receiving wrappers), the
 // NOTE: This pattern applies ONLY to non-standard UI where no native HTML tag exists.
 // Always prioritize native <button> or <input> elements for standard interactions.
 // Elements MUST have the appropriate ARIA role (e.g., role="treeitem" or role="tab").
-customWidget.addEventListener('keydown', (e) => {
-	if (e.key === 'Enter') {
-		toggleWidgetState();
-	}
-	if (e.key === ' ') {
-		e.preventDefault(); // Prevent page scrolling on Spacebar keydown
-	}
+customWidget.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    toggleWidgetState();
+  }
+  if (e.key === " ") {
+    e.preventDefault(); // Prevent page scrolling on Spacebar keydown
+  }
 });
 
-customWidget.addEventListener('keyup', (e) => {
-	if (e.key === ' ') {
-		toggleWidgetState();
-	}
+customWidget.addEventListener("keyup", (e) => {
+  if (e.key === " ") {
+    toggleWidgetState();
+  }
 });
 
 function toggleWidgetState() {
-	// E.g., Manage toggle/expanded states for custom controls
-	const isExpanded = customWidget.getAttribute('aria-expanded') === 'true';
-	customWidget.setAttribute('aria-expanded', !isExpanded);
+  // E.g., Manage toggle/expanded states for custom controls
+  const isExpanded = customWidget.getAttribute("aria-expanded") === "true";
+  customWidget.setAttribute("aria-expanded", !isExpanded);
 }
 ```
 
@@ -245,31 +245,31 @@ function toggleWidgetState() {
 
 <!-- Inline Decorative SVG (remove from tab flow) -->
 <svg aria-hidden="true" viewBox="0 0 24 24">
-	<path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
 </svg>
 
 <!-- Informative (Functional) -->
 <a href="/search">
-	<img src="glass.png" alt="Search the platform" />
+  <img src="glass.png" alt="Search the platform" />
 </a>
 
 <!-- Video with Captions tracks -->
 <video controls>
-	<source src="intro.mp4" type="video/mp4" />
-	<track src="caps.vtt" kind="captions" srclang="en" label="English" />
+  <source src="intro.mp4" type="video/mp4" />
+  <track src="caps.vtt" kind="captions" srclang="en" label="English" />
 </video>
 
 <!-- Complex graph with figcaption -->
 <figure>
-	<img src="chart.png" alt="Sales growth graph 2024." />
-	<figcaption>Sales grew 20% in Q3 due to new platform launch.</figcaption>
+  <img src="chart.png" alt="Sales growth graph 2024." />
+  <figcaption>Sales grew 20% in Q3 due to new platform launch.</figcaption>
 </figure>
 
 <!-- Audio with expandable transcript details -->
 <audio controls src="podcast.mp3" aria-details="podcast-transcript"></audio>
 <details id="podcast-transcript">
-	<summary>View Transcript</summary>
-	<div class="transcript-content">Welcome to the show...</div>
+  <summary>View Transcript</summary>
+  <div class="transcript-content">Welcome to the show...</div>
 </details>
 ```
 
@@ -306,15 +306,15 @@ function toggleWidgetState() {
 ```html
 <!-- Good: Semantic forms with hints for passwords -->
 <form>
-	<label for="pwd">Password:</label>
-	<span id="pwd-hint">Must contain at least 8 characters.</span>
-	<input
-		id="pwd"
-		type="password"
-		aria-describedby="pwd-hint"
-		autocomplete="current-password"
-		required
-	/>
+  <label for="pwd">Password:</label>
+  <span id="pwd-hint">Must contain at least 8 characters.</span>
+  <input
+    id="pwd"
+    type="password"
+    aria-describedby="pwd-hint"
+    autocomplete="current-password"
+    required
+  />
 </form>
 ```
 
@@ -350,8 +350,8 @@ Live regions let assistive tech announce content updates that aren't tied to nav
 ```html
 <!-- Session Timeout Warning with controls -->
 <div role="alert" class="timeout-warning">
-	Your session will expire in 2 minutes.
-	<button type="button" onclick="extendSession()">Extend Session</button>
+  Your session will expire in 2 minutes.
+  <button type="button" onclick="extendSession()">Extend Session</button>
 </div>
 ```
 
@@ -387,33 +387,33 @@ Live regions let assistive tech announce content updates that aren't tied to nav
 ```css
 /* Good: Relative sizing and line caps */
 body {
-	line-height: 1.5;
-	text-align: start; /* Supports LTR and RTL */
+  line-height: 1.5;
+  text-align: start; /* Supports LTR and RTL */
 }
 article {
-	max-width: 80ch; /* Caps line length to ~80 characters for readability */
+  max-width: 80ch; /* Caps line length to ~80 characters for readability */
 }
 ```
 
 ```html
 <!-- Good: Denotes state without colors alone -->
 <div class="error-msg">
-	<span aria-hidden="true">❌</span>
-	<span>The password entered was invalid.</span>
+  <span aria-hidden="true">❌</span>
+  <span>The password entered was invalid.</span>
 </div>
 ```
 
 ```css
 /* Dark Mode support variables */
 :root {
-	--bg-color: #ffffff;
-	--text-color: #212529;
+  --bg-color: #ffffff;
+  --text-color: #212529;
 }
 @media (prefers-color-scheme: dark) {
-	:root {
-		--bg-color: #121212;
-		--text-color: #f8f9fa;
-	}
+  :root {
+    --bg-color: #121212;
+    --text-color: #f8f9fa;
+  }
 }
 ```
 
@@ -436,10 +436,10 @@ article {
 ```css
 /* Good: Dampen spin states for reduced motion queries */
 @media (prefers-reduced-motion: reduce) {
-	.spinner {
-		animation: none;
-		opacity: 0.5;
-	}
+  .spinner {
+    animation: none;
+    opacity: 0.5;
+  }
 }
 ```
 
@@ -467,15 +467,15 @@ Modern browsers provide native solutions for creating modal dialogs which avoid 
 <button id="open-btn">Open Dialog</button>
 
 <dialog id="accessible-modal" aria-labelledby="title-id">
-	<h2 id="title-id">Account Settings</h2>
-	<p>Update your details here.</p>
-	<button onclick="this.closest('dialog').close()">Close Dialog</button>
+  <h2 id="title-id">Account Settings</h2>
+  <p>Update your details here.</p>
+  <button onclick="this.closest('dialog').close()">Close Dialog</button>
 </dialog>
 
 <script>
-	document.getElementById('open-btn').addEventListener('click', () => {
-		document.getElementById('accessible-modal').showModal();
-	});
+  document.getElementById("open-btn").addEventListener("click", () => {
+    document.getElementById("accessible-modal").showModal();
+  });
 </script>
 ```
 

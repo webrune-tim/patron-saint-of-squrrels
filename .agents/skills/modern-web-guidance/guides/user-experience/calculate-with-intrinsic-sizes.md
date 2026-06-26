@@ -13,11 +13,11 @@
 ```css
 /* calc-size(<calc-size-basis>, <calc-sum>) — mathematical operations on intrinsic sizing keywords */
 .element {
-	/* MANDATORY: Always provide a fallback for browsers that do not support calc-size() */
-	inline-size: min-content;
+  /* MANDATORY: Always provide a fallback for browsers that do not support calc-size() */
+  inline-size: min-content;
 
-	/* DO: Use calc-size to modify an intrinsic basis with a calculation or function */
-	inline-size: calc-size(min-content, size + 2rem);
+  /* DO: Use calc-size to modify an intrinsic basis with a calculation or function */
+  inline-size: calc-size(min-content, size + 2rem);
 }
 ```
 
@@ -63,18 +63,18 @@ By default, browsers cannot interpolate between a length (e.g., `0px`) and an in
 
   ```css
   :root {
-  	/* Best practice: Enable keyword interpolation globally */
-  	interpolate-size: allow-keywords;
+    /* Best practice: Enable keyword interpolation globally */
+    interpolate-size: allow-keywords;
   }
 
   .item {
-  	height: 0;
-  	transition: height 0.3s ease;
+    height: 0;
+    transition: height 0.3s ease;
   }
 
   .item.open {
-  	/* Simple interpolation from 0 to auto now works without calc-size() */
-  	height: auto;
+    /* Simple interpolation from 0 to auto now works without calc-size() */
+    height: auto;
   }
   ```
 
@@ -82,22 +82,22 @@ By default, browsers cannot interpolate between a length (e.g., `0px`) and an in
 
 ```css
 .accordion-content {
-	display: block;
-	overflow: hidden;
-	/* MANDATORY: Fallback value for closed state */
-	block-size: 0;
-	transition: block-size 0.3s ease-out;
+  display: block;
+  overflow: hidden;
+  /* MANDATORY: Fallback value for closed state */
+  block-size: 0;
+  transition: block-size 0.3s ease-out;
 }
 
 .accordion-content.open {
-	/* MANDATORY: Fallback value for open state */
-	block-size: auto;
+  /* MANDATORY: Fallback value for open state */
+  block-size: auto;
 
-	/* 
+  /* 
     DO: Use calc-size(auto, ...) to enable animation from 0 to the element's 
     intrinsic size while doing a calculation (in this case, adding a space of 2rem).
   */
-	block-size: calc-size(auto, size + 2rem);
+  block-size: calc-size(auto, size + 2rem);
 }
 ```
 
@@ -109,30 +109,30 @@ Animations that change the size of large layout areas can be particularly disrup
 
 ```css
 .accordion-content {
-	opacity: 0;
-	transition:
-		block-size 0.3s ease,
-		opacity 0.3s ease;
+  opacity: 0;
+  transition:
+    block-size 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .accordion-content.open {
-	opacity: 1;
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.accordion-content {
-		/* 
+  .accordion-content {
+    /* 
        EXAMPLE: Replacing disruptive layout animations with a subtle fade-in.
        Setting the block-size instantly and transitioning opacity 
        provides a clear state change without large-scale motion.
     */
-		transition: opacity 1.5s ease;
-	}
+    transition: opacity 1.5s ease;
+  }
 
-	.accordion-content.open {
-		/* Jump the size instantly */
-		block-size: auto;
-	}
+  .accordion-content.open {
+    /* Jump the size instantly */
+    block-size: auto;
+  }
 }
 ```
 
@@ -142,18 +142,18 @@ You can use `calc-size()` with any CSS math function—such as `min()`, `max()`,
 
 ```css
 .dynamic-container {
-	/* MANDATORY: Always provide a fallback for browsers that do not support calc-size() */
-	inline-size: fit-content;
+  /* MANDATORY: Always provide a fallback for browsers that do not support calc-size() */
+  inline-size: fit-content;
 
-	/* 
+  /* 
     DO: Establish a dynamic size based on content, while:
     1. Enforcing boundaries using CSS math functions (min, clamp, etc.)
     2. Modifying the intrinsic size with fixed or relative offsets
   */
-	inline-size: calc-size(
-		fit-content,
-		min(size + var(--extra-space), var(--max-allowed))
-	);
+  inline-size: calc-size(
+    fit-content,
+    min(size + var(--extra-space), var(--max-allowed))
+  );
 }
 ```
 
@@ -176,10 +176,10 @@ Unsupported in: Firefox and Safari.
 
 ```css
 .element {
-	/* Fallback for browsers that don't support calc-size() */
-	inline-size: fit-content;
-	/* Modern browsers will override the fallback */
-	inline-size: calc-size(fit-content, size + 2rem);
+  /* Fallback for browsers that don't support calc-size() */
+  inline-size: fit-content;
+  /* Modern browsers will override the fallback */
+  inline-size: calc-size(fit-content, size + 2rem);
 }
 ```
 
@@ -196,15 +196,15 @@ For animations, the fallback experience will be an instant jump to the final siz
 ```css
 /* CSS Feature Detection */
 @supports (inline-size: calc-size(auto, size + 0px)) {
-	.element {
-		/* Apply advanced logic only when supported */
-	}
+  .element {
+    /* Apply advanced logic only when supported */
+  }
 }
 ```
 
 ```javascript
 /* JavaScript Feature Detection */
-if (CSS.supports('inline-size', 'calc-size(auto, size + 0px)')) {
-	// Apply advanced sizing or animations
+if (CSS.supports("inline-size", "calc-size(auto, size + 0px)")) {
+  // Apply advanced sizing or animations
 }
 ```

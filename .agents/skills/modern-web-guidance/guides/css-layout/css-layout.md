@@ -40,20 +40,20 @@ Walk the decision tree top-to-bottom and stop at the first match. Note that layo
 
 ```css
 .sidebar {
-	inline-size: max-content;
+  inline-size: max-content;
 } /* Size to longest unbreakable token. */
 .main-content {
-	inline-size: fit-content;
+  inline-size: fit-content;
 } /* Grow to available space, no further. */
 .media {
-	aspect-ratio: 16 / 9;
-	inline-size: 100%;
-	block-size: auto;
+  aspect-ratio: 16 / 9;
+  inline-size: 100%;
+  block-size: auto;
 }
 body.centered {
-	display: grid;
-	place-content: center;
-	min-block-size: 100dvb;
+  display: grid;
+  place-content: center;
+  min-block-size: 100dvb;
 }
 ```
 
@@ -86,19 +86,19 @@ One-dimensional layout — items flow along a single **main** axis with alignmen
 
 ```css
 .card-grid {
-	display: flex;
-	flex-flow: row wrap;
-	gap: 1rem;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
 }
 .card-item {
-	flex: 1 1 250px;
+  flex: 1 1 250px;
 } /* grow, shrink, basis */
 .card-item-action {
-	margin-inline-start: auto;
+  margin-inline-start: auto;
 } /* Push to main-axis end. */
 .toolbar {
-	display: flex;
-	align-items: safe center;
+  display: flex;
+  align-items: safe center;
 }
 ```
 
@@ -152,39 +152,39 @@ Page shell: `<main class="page-layout">` contains `<header>`, `<aside>`, a `<sec
 ```css
 /* Align grid-template-areas in rows and columns for readability. */
 .page-layout {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-areas:
-		'header  header  header'
-		'sidebar main    main'
-		'footer  footer  footer';
-	gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "header  header  header"
+    "sidebar main    main"
+    "footer  footer  footer";
+  gap: 1.5rem;
 }
 
 header {
-	grid-area: header;
+  grid-area: header;
 }
 aside {
-	grid-area: sidebar;
+  grid-area: sidebar;
 }
 footer {
-	grid-area: footer;
+  grid-area: footer;
 }
 
 .card-grid {
-	grid-area: main;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-	grid-template-rows: auto 1fr; /* title block, body block */
-	gap: 1rem;
+  grid-area: main;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-rows: auto 1fr; /* title block, body block */
+  gap: 1rem;
 }
 
 .card {
-	grid-row: span 2;
-	display: grid;
-	/* Same-cascade fallback: ignored when subgrid is supported. */
-	grid-template-rows: auto 1fr;
-	grid-template-rows: subgrid;
+  grid-row: span 2;
+  display: grid;
+  /* Same-cascade fallback: ignored when subgrid is supported. */
+  grid-template-rows: auto 1fr;
+  grid-template-rows: subgrid;
 }
 ```
 
@@ -212,19 +212,19 @@ Query the size (or computed style) of an ancestor container rather than the view
 
 ```css
 .card-wrapper {
-	container: inline-size / card; /* shorthand for container-type + container-name */
+  container: inline-size / card; /* shorthand for container-type + container-name */
 }
 
 @container card (inline-size > 400px) {
-	.content {
-		display: flex;
-		gap: 2rem;
-	}
+  .content {
+    display: flex;
+    gap: 2rem;
+  }
 }
 
 .title {
-	/* Fluid type bound to the container width, not the viewport. */
-	font-size: clamp(1rem, 4cqi, 2rem);
+  /* Fluid type bound to the container width, not the viewport. */
+  font-size: clamp(1rem, 4cqi, 2rem);
 }
 ```
 
@@ -275,18 +275,18 @@ Manage layout shifts, scrollbars, and clipping predictably.
 
 ```css
 .scrollable-list {
-	max-block-size: 400px;
-	overflow-y: auto;
-	scrollbar-gutter: stable; /* Reserve scrollbar space. */
-	overscroll-behavior: contain; /* No scroll chaining into the page. */
+  max-block-size: 400px;
+  overflow-y: auto;
+  scrollbar-gutter: stable; /* Reserve scrollbar space. */
+  overscroll-behavior: contain; /* No scroll chaining into the page. */
 }
 
 .snippet {
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-	line-clamp: 3; /* Ignored where unsupported. */
-	overflow: clip;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3; /* Ignored where unsupported. */
+  overflow: clip;
 }
 ```
 
@@ -320,21 +320,21 @@ The spec is in development. The currently agreed-upon name is "grid lanes" (e.g.
 
 ```css
 .gallery {
-	columns: 3 200px;
-	column-gap: 1rem;
+  columns: 3 200px;
+  column-gap: 1rem;
 }
 .gallery > * {
-	break-inside: avoid;
-	margin-block-end: 1rem;
+  break-inside: avoid;
+  margin-block-end: 1rem;
 }
 
 @supports (grid-template-rows: masonry) {
-	.gallery {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-		grid-template-rows: masonry;
-		gap: 1rem;
-		columns: unset;
-	}
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: masonry;
+    gap: 1rem;
+    columns: unset;
+  }
 }
 ```

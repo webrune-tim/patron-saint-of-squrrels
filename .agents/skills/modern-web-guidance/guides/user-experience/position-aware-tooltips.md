@@ -16,7 +16,7 @@ Use the Popover API to create a tooltip. This creates an implicit anchor connect
 
 ```html
 <button popovertarget="tooltip" id="anchor" aria-describedby="tooltip">
-	anchor
+  anchor
 </button>
 <div id="tooltip" popover role="tooltip"></div>
 ```
@@ -25,10 +25,10 @@ Reset the popover inset and margin styles for use with anchor positioning, but o
 
 ```css
 @supports (anchor-name: --my-anchor) {
-	[popover] {
-		inset: auto;
-		margin: unset;
-	}
+  [popover] {
+    inset: auto;
+    margin: unset;
+  }
 }
 ```
 
@@ -38,12 +38,12 @@ Apply `container-type: anchored` to the element being positioned. This element m
 
 ```css
 #tooltip {
-	position: fixed;
-	position-area: block-start;
-	position-try-fallbacks: flip-block;
+  position: fixed;
+  position-area: block-start;
+  position-try-fallbacks: flip-block;
 
-	/* Enable anchored container queries */
-	container-type: anchored;
+  /* Enable anchored container queries */
+  container-type: anchored;
 }
 ```
 
@@ -55,26 +55,26 @@ Like all container queries, `@container` can only style **descendants** of the c
 
 ```html
 <div id="tooltip" popover role="tooltip">
-	<div class="tooltip-content">Tooltip</div>
+  <div class="tooltip-content">Tooltip</div>
 </div>
 ```
 
 ```css
 .tooltip-content::before {
-	/* Default "down" arrow for the 'top' position */
-	content: '▼';
-	position: absolute;
-	inset-block-end: 0;
-	inset-inline-start: 1rem;
+  /* Default "down" arrow for the 'top' position */
+  content: "▼";
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 1rem;
 }
 
 /* Update to an "up" arrow when the 'flip-block' fallback (bottom) is active */
 @container anchored(fallback: flip-block) {
-	.tooltip-content::before {
-		content: '▲';
-		inset-block-start: 0;
-		inset-block-end: auto;
-	}
+  .tooltip-content::before {
+    content: "▲";
+    inset-block-start: 0;
+    inset-block-end: auto;
+  }
 }
 ```
 
@@ -87,10 +87,10 @@ If you need to change properties on the container itself (like `margin` or `back
 
 ```css
 @container anchored(fallback: flip-block) {
-	.tooltip-content {
-		border-radius: 0 0 0.5rem 0.5rem;
-		margin-block-start: 0.25rem;
-	}
+  .tooltip-content {
+    border-radius: 0 0 0.5rem 0.5rem;
+    margin-block-start: 0.25rem;
+  }
 }
 ```
 
@@ -109,9 +109,9 @@ Positioning the arrow based on the applied fallback is a progressive enhancement
 
 ```css
 @supports (container-type: anchored) {
-	.tooltip-content::before {
-		content: '▼';
-	}
+  .tooltip-content::before {
+    content: "▼";
+  }
 }
 ```
 
@@ -129,10 +129,10 @@ Install the package (`npm install @oddbird/popover-polyfill`).
 
 ```javascript
 // MANDATORY: Feature detect 'popover' on HTMLElement.prototype.
-if (!('popover' in HTMLElement.prototype)) {
-	import('@oddbird/popover-polyfill/fn').then(({ apply }) => {
-		apply();
-	});
+if (!("popover" in HTMLElement.prototype)) {
+  import("@oddbird/popover-polyfill/fn").then(({ apply }) => {
+    apply();
+  });
 }
 ```
 
@@ -141,15 +141,15 @@ If you are not using a package manager, dynamically import the polyfill directly
 
 ```html
 <script type="module">
-	// MANDATORY: Feature detect 'popover' on HTMLElement.prototype.
-	// Conditionally load the popover-polyfill from a CDN only in browsers lacking native support.
-	if (!('popover' in HTMLElement.prototype)) {
-		import('https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover-fn.js').then(
-			({ apply }) => {
-				apply();
-			}
-		);
-	}
+  // MANDATORY: Feature detect 'popover' on HTMLElement.prototype.
+  // Conditionally load the popover-polyfill from a CDN only in browsers lacking native support.
+  if (!("popover" in HTMLElement.prototype)) {
+    import("https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover-fn.js").then(
+      ({ apply }) => {
+        apply();
+      },
+    );
+  }
 </script>
 ```
 

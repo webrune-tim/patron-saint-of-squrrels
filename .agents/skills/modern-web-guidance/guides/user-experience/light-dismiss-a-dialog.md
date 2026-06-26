@@ -20,8 +20,8 @@ When a dialog is opened as a modal using `showModal()`, the browser generates a 
 ```css
 /* Style the backdrop to indicate the dialog is modal */
 dialog::backdrop {
-	background-color: rgba(0, 0, 0, 0.5);
-	backdrop-filter: blur(2px); /* Optional: add blur for modern browsers */
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px); /* Optional: add blur for modern browsers */
 }
 ```
 
@@ -30,15 +30,15 @@ dialog::backdrop {
 ```html
 <!-- MANDATORY: Use closedby="any" to enable light-dismiss behavior -->
 <dialog id="myDialog" closedby="any" aria-labelledby="dialogTitle">
-	<form method="dialog">
-		<h2 id="dialogTitle">Feedback</h2>
-		<p>Click outside this box or press Esc to dismiss.</p>
-		<button type="submit">Close</button>
-	</form>
+  <form method="dialog">
+    <h2 id="dialogTitle">Feedback</h2>
+    <p>Click outside this box or press Esc to dismiss.</p>
+    <button type="submit">Close</button>
+  </form>
 </dialog>
 
 <button onclick="document.getElementById('myDialog').showModal()">
-	Open Dialog
+  Open Dialog
 </button>
 ```
 
@@ -59,28 +59,28 @@ Unsupported in: Safari.
 **MANDATORY**: For browsers that do not yet support `closedby`, you **must** implement a fallback for light-dismiss by checking if a click occurred outside the dialog content's boundaries using the following script:
 
 ```javascript
-const dialog = document.querySelector('dialog');
+const dialog = document.querySelector("dialog");
 
 // Fallback for browsers without closedby support
-if (!('closedBy' in HTMLDialogElement.prototype)) {
-	dialog.addEventListener('click', (event) => {
-		// 1. When clicking the backdrop, the event target is the dialog element itself.
-		// Ignore clicks where the target is a child element inside the dialog.
-		if (event.target !== dialog) return;
+if (!("closedBy" in HTMLDialogElement.prototype)) {
+  dialog.addEventListener("click", (event) => {
+    // 1. When clicking the backdrop, the event target is the dialog element itself.
+    // Ignore clicks where the target is a child element inside the dialog.
+    if (event.target !== dialog) return;
 
-		// 2. Check if the click coordinates fall within the dialog's content box.
-		// This distinguishes between a click on the backdrop vs a click on the dialog's background/padding.
-		const rect = dialog.getBoundingClientRect();
-		const isDialogContent =
-			rect.top <= event.clientY &&
-			event.clientY <= rect.top + rect.height &&
-			rect.left <= event.clientX &&
-			event.clientX <= rect.left + rect.width;
+    // 2. Check if the click coordinates fall within the dialog's content box.
+    // This distinguishes between a click on the backdrop vs a click on the dialog's background/padding.
+    const rect = dialog.getBoundingClientRect();
+    const isDialogContent =
+      rect.top <= event.clientY &&
+      event.clientY <= rect.top + rect.height &&
+      rect.left <= event.clientX &&
+      event.clientX <= rect.left + rect.width;
 
-		if (isDialogContent) return;
+    if (isDialogContent) return;
 
-		// 3. Since the click was outside the content area (on the backdrop), manually close the dialog.
-		dialog.close();
-	});
+    // 3. Since the click was outside the content area (on the backdrop), manually close the dialog.
+    dialog.close();
+  });
 }
 ```

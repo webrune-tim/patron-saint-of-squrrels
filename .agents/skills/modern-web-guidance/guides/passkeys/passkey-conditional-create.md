@@ -25,7 +25,7 @@ Determine whether Conditional Create is available by checking `conditionalCreate
 ```javascript
 const capabilities = await PublicKeyCredential.getClientCapabilities();
 if (capabilities.conditionalCreate) {
-	// Conditional create is available
+  // Conditional create is available
 }
 ```
 
@@ -50,62 +50,62 @@ if (capabilities.conditionalCreate) {
 
 ```javascript
 // optionsFetch and registerVerifyFetch are app-defined server endpoint requests
-import { optionsFetch, registerVerifyFetch } from './api.js';
+import { optionsFetch, registerVerifyFetch } from "./api.js";
 
 async function triggerConditionalCreate(loginAbortController) {
-	const capabilities = await PublicKeyCredential.getClientCapabilities();
-	if (capabilities.conditionalCreate !== true) {
-		return; // Platform does not support conditional creation
-	}
+  const capabilities = await PublicKeyCredential.getClientCapabilities();
+  if (capabilities.conditionalCreate !== true) {
+    return; // Platform does not support conditional creation
+  }
 
-	// 1. Abort any active autofill conditional-get controllers to clear the WebAuthn pipeline
-	loginAbortController.abort();
+  // 1. Abort any active autofill conditional-get controllers to clear the WebAuthn pipeline
+  loginAbortController.abort();
 
-	// 2. Fetch creation options signaling the backend that this is a conditional request
-	const creationOptionsJSON = await optionsFetch({ conditional: true });
-	const publicKey =
-		PublicKeyCredential.parseCreationOptionsFromJSON(creationOptionsJSON);
+  // 2. Fetch creation options signaling the backend that this is a conditional request
+  const creationOptionsJSON = await optionsFetch({ conditional: true });
+  const publicKey =
+    PublicKeyCredential.parseCreationOptionsFromJSON(creationOptionsJSON);
 
-	let credential;
-	try {
-		// 3. Invoke silent credentials creation prompt
-		credential = await navigator.credentials.create({
-			publicKey,
-			mediation: 'conditional' // Silent background creation mediation
-		});
-	} catch (e) {
-		// 4. Silently swallow common WebAuthn browser exceptions
-		if (
-			['InvalidStateError', 'NotAllowedError', 'AbortError'].includes(e.name)
-		) {
-			return;
-		}
-		console.error('Unexpected conditional create error:', e);
-		return;
-	}
+  let credential;
+  try {
+    // 3. Invoke silent credentials creation prompt
+    credential = await navigator.credentials.create({
+      publicKey,
+      mediation: "conditional", // Silent background creation mediation
+    });
+  } catch (e) {
+    // 4. Silently swallow common WebAuthn browser exceptions
+    if (
+      ["InvalidStateError", "NotAllowedError", "AbortError"].includes(e.name)
+    ) {
+      return;
+    }
+    console.error("Unexpected conditional create error:", e);
+    return;
+  }
 
-	// 5. Server verification step using dedicated Try/Catch block
-	let encodedResponse = credential.toJSON();
-	try {
-		const response = await registerVerifyFetch(encodedResponse);
-		if (!response.ok) {
-			// If the server verification fails, clean up using Signal API
-			if (PublicKeyCredential.signalUnknownCredential) {
-				await PublicKeyCredential.signalUnknownCredential({
-					rpId, // RP ID must match the one defined on the server
-					credentialId: encodedResponse.id
-				});
-			}
-		}
-	} catch (serverErr) {
-		console.error('Verification network failure:', serverErr);
-		if (PublicKeyCredential.signalUnknownCredential) {
-			await PublicKeyCredential.signalUnknownCredential({
-				rpId, // RP ID must match the one defined on the server
-				credentialId: encodedResponse.id
-			});
-		}
-	}
+  // 5. Server verification step using dedicated Try/Catch block
+  let encodedResponse = credential.toJSON();
+  try {
+    const response = await registerVerifyFetch(encodedResponse);
+    if (!response.ok) {
+      // If the server verification fails, clean up using Signal API
+      if (PublicKeyCredential.signalUnknownCredential) {
+        await PublicKeyCredential.signalUnknownCredential({
+          rpId, // RP ID must match the one defined on the server
+          credentialId: encodedResponse.id,
+        });
+      }
+    }
+  } catch (serverErr) {
+    console.error("Verification network failure:", serverErr);
+    if (PublicKeyCredential.signalUnknownCredential) {
+      await PublicKeyCredential.signalUnknownCredential({
+        rpId, // RP ID must match the one defined on the server
+        credentialId: encodedResponse.id,
+      });
+    }
+  }
 }
 ```
 
@@ -120,7 +120,7 @@ Always install 'webauthn-polyfills' and import it in the context.
 Consider as long as `PublicKeyCredential` is supported, `PublicKeyCredential.getClientCapabilities` is also supported.
 
 ```js
-import 'webauthn-polyfills';
+import "webauthn-polyfills";
 ```
 
 ### Signal API Synchronization Fallback
@@ -142,5 +142,5 @@ Always install 'webauthn-polyfills' and import it in the context.
 Consider as long as `PublicKeyCredential` is supported, `PublicKeyCredential.parseCreationOptionsFromJSON` and `PublicKeyCredential.prototype.toJSON` are also supported.
 
 ```js
-import 'webauthn-polyfills';
+import "webauthn-polyfills";
 ```

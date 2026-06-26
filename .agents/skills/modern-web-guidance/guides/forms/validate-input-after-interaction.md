@@ -23,40 +23,40 @@ MANDATORY: Rely on standard HTML5 attributes for email fields. The error message
 
 ```html
 <form>
-	<div class="field">
-		<label for="email">Email Address</label>
-		<!-- MANDATORY: Place format hints above the input so autocomplete popovers don't cover them during editing -->
-		<span id="email-hint" class="hint">Format: you@example.com</span>
-		<!-- DO: Use standard HTML validation attributes like type="email" and required -->
-		<input
-			type="email"
-			id="email"
-			name="email"
-			required
-			autocomplete="email"
-			aria-describedby="email-hint"
-			aria-errormessage="email-error"
-		/>
-		<div id="email-error" class="error-msg">
-			<span aria-hidden="true">❌</span> Please enter a valid email address.
-		</div>
-	</div>
+  <div class="field">
+    <label for="email">Email Address</label>
+    <!-- MANDATORY: Place format hints above the input so autocomplete popovers don't cover them during editing -->
+    <span id="email-hint" class="hint">Format: you@example.com</span>
+    <!-- DO: Use standard HTML validation attributes like type="email" and required -->
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      autocomplete="email"
+      aria-describedby="email-hint"
+      aria-errormessage="email-error"
+    />
+    <div id="email-error" class="error-msg">
+      <span aria-hidden="true">❌</span> Please enter a valid email address.
+    </div>
+  </div>
 </form>
 ```
 
 ```css
 .hint {
-	display: block;
-	color: #5f6368;
-	font-size: 0.85rem;
-	margin-bottom: 0.25rem;
+  display: block;
+  color: #5f6368;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
 }
 
 .error-msg {
-	display: none;
-	color: #d93025;
-	font-size: 0.875rem;
-	margin-top: 0.25rem;
+  display: none;
+  color: #d93025;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 
 /*
@@ -64,18 +64,18 @@ MANDATORY: Rely on standard HTML5 attributes for email fields. The error message
   Use multiple indicators (border/background shift + icon/text) to avoid color-only states.
 */
 input:user-invalid {
-	border-color: #d93025;
-	background-color: #fce8e6;
+  border-color: #d93025;
+  background-color: #fce8e6;
 }
 
 /* DO: Reveal the error message using the adjacent sibling selector */
 input:user-invalid + .error-msg {
-	display: block;
+  display: block;
 }
 
 /* DO: Provide a clear success indication on :user-valid */
 input:user-valid {
-	border-color: #188038;
+  border-color: #188038;
 }
 ```
 
@@ -85,58 +85,58 @@ MANDATORY: Define the complexity rule using a Regex Lookahead pattern in the `pa
 
 ```html
 <form>
-	<div class="field">
-		<label for="password">New Password</label>
-		<!-- MANDATORY: Place hints and rules above the input so mobile keyboards do not obscure them -->
-		<ul id="password-rules" class="rules-list">
-			<li>At least 8 characters</li>
-			<li>One uppercase letter</li>
-			<li>One number</li>
-			<li>One special character</li>
-		</ul>
-		<!-- DO: Use pattern and minlength for complex password validation
+  <div class="field">
+    <label for="password">New Password</label>
+    <!-- MANDATORY: Place hints and rules above the input so mobile keyboards do not obscure them -->
+    <ul id="password-rules" class="rules-list">
+      <li>At least 8 characters</li>
+      <li>One uppercase letter</li>
+      <li>One number</li>
+      <li>One special character</li>
+    </ul>
+    <!-- DO: Use pattern and minlength for complex password validation
          DO: Match all constraints with lookaheads via pattern attribute
      -->
-		<input
-			type="password"
-			id="password"
-			autocomplete="new-password"
-			required
-			pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}"
-			minlength="8"
-			aria-describedby="password-rules"
-		/>
-	</div>
+    <input
+      type="password"
+      id="password"
+      autocomplete="new-password"
+      required
+      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}"
+      minlength="8"
+      aria-describedby="password-rules"
+    />
+  </div>
 </form>
 ```
 
 ```css
 /* DO: State the default styling as neutral */
 .rules-list {
-	color: #5f6368;
-	margin-bottom: 0.5rem;
+  color: #5f6368;
+  margin-bottom: 0.5rem;
 }
 
 /* DO: Show invalid state (After interaction): Error */
 input:user-invalid {
-	border-color: #d93025;
-	background-color: #fce8e6;
+  border-color: #d93025;
+  background-color: #fce8e6;
 }
 
 /* DO: Highlight rules list when error is shown using the modern :has() selector */
 .field:has(input:user-invalid) .rules-list {
-	color: #d93025;
-	font-weight: 600;
+  color: #d93025;
+  font-weight: 600;
 }
 
 /* DO: Add success indications for :user-valid state */
 input:user-valid {
-	border-color: #188038;
+  border-color: #188038;
 }
 
 /* DO: Hide rules once satisfied */
 .field:has(input:user-valid) .rules-list {
-	display: none;
+  display: none;
 }
 ```
 
@@ -152,13 +152,13 @@ Supported by: Chrome 119 (Oct 2023), Edge 119 (Nov 2023), Firefox 88 (Apr 2021),
 ```css
 input:user-invalid,
 input.user-invalid-fallback {
-	border-color: #d93025;
-	background-color: #fce8e6;
+  border-color: #d93025;
+  background-color: #fce8e6;
 }
 
 input:user-invalid + .error-msg,
 input.user-invalid-fallback + .error-msg {
-	display: block;
+  display: block;
 }
 ```
 
@@ -168,75 +168,75 @@ Use a reusable utility that tracks interaction state using a `WeakMap`. This avo
 
 ```javascript
 const UserInvalidFallback = (() => {
-	const dirtyState = new WeakMap();
+  const dirtyState = new WeakMap();
 
-	const updateState = (input) => {
-		const isValid = input.checkValidity();
+  const updateState = (input) => {
+    const isValid = input.checkValidity();
 
-		// Update both visual and ARIA state
-		input.classList.toggle('user-invalid-fallback', !isValid);
-		input.classList.toggle('user-valid-fallback', isValid);
+    // Update both visual and ARIA state
+    input.classList.toggle("user-invalid-fallback", !isValid);
+    input.classList.toggle("user-valid-fallback", isValid);
 
-		if (!isValid) {
-			input.setAttribute('aria-invalid', 'true');
-		} else {
-			input.removeAttribute('aria-invalid');
-		}
-	};
+    if (!isValid) {
+      input.setAttribute("aria-invalid", "true");
+    } else {
+      input.removeAttribute("aria-invalid");
+    }
+  };
 
-	const handleEvent = (event) => {
-		const input = event.target;
+  const handleEvent = (event) => {
+    const input = event.target;
 
-		if (event.type === 'reset') {
-			const controls = input.elements || [];
-			for (const control of controls) {
-				dirtyState.delete(control);
-				control.classList.remove('user-invalid-fallback');
-				control.classList.remove('user-valid-fallback');
-				control.removeAttribute('aria-invalid');
-			}
-			return;
-		}
+    if (event.type === "reset") {
+      const controls = input.elements || [];
+      for (const control of controls) {
+        dirtyState.delete(control);
+        control.classList.remove("user-invalid-fallback");
+        control.classList.remove("user-valid-fallback");
+        control.removeAttribute("aria-invalid");
+      }
+      return;
+    }
 
-		if (!input.checkValidity) return;
+    if (!input.checkValidity) return;
 
-		if (event.type === 'input' || event.type === 'change') {
-			const state = dirtyState.get(input) || {
-				hasInteracted: false,
-				hasBlurred: false
-			};
-			state.hasInteracted = true;
-			dirtyState.set(input, state);
-			if (state.hasBlurred) {
-				updateState(input);
-			}
-		} else if (event.type === 'blur') {
-			const state = dirtyState.get(input) || {
-				hasInteracted: false,
-				hasBlurred: false
-			};
-			state.hasBlurred = true;
-			dirtyState.set(input, state);
-			if (state.hasInteracted) {
-				updateState(input);
-			}
-		}
-	};
+    if (event.type === "input" || event.type === "change") {
+      const state = dirtyState.get(input) || {
+        hasInteracted: false,
+        hasBlurred: false,
+      };
+      state.hasInteracted = true;
+      dirtyState.set(input, state);
+      if (state.hasBlurred) {
+        updateState(input);
+      }
+    } else if (event.type === "blur") {
+      const state = dirtyState.get(input) || {
+        hasInteracted: false,
+        hasBlurred: false,
+      };
+      state.hasBlurred = true;
+      dirtyState.set(input, state);
+      if (state.hasInteracted) {
+        updateState(input);
+      }
+    }
+  };
 
-	const init = (root = document) => {
-		if (CSS.supports('selector(:user-invalid)')) return;
+  const init = (root = document) => {
+    if (CSS.supports("selector(:user-invalid)")) return;
 
-		root.addEventListener('blur', handleEvent, true); // Capture phase
-		root.addEventListener('input', handleEvent);
-		root.addEventListener('change', handleEvent);
-		root.addEventListener('reset', handleEvent, true); // Capture resets
-	};
+    root.addEventListener("blur", handleEvent, true); // Capture phase
+    root.addEventListener("input", handleEvent);
+    root.addEventListener("change", handleEvent);
+    root.addEventListener("reset", handleEvent, true); // Capture resets
+  };
 
-	return { init };
+  return { init };
 })();
 
 // Initialize for a specific form
-const form = document.querySelector('#demo-form');
+const form = document.querySelector("#demo-form");
 UserInvalidFallback.init(form);
 ```
 
@@ -253,15 +253,15 @@ UserInvalidFallback.init(form);
 ```javascript
 // Sync aria-invalid with the CSS :user-invalid state
 const syncAria = (el) => {
-	el.setAttribute?.(
-		'aria-invalid',
-		el.matches(':user-invalid') ? 'true' : 'false'
-	);
+  el.setAttribute?.(
+    "aria-invalid",
+    el.matches(":user-invalid") ? "true" : "false",
+  );
 };
 
 // Update on blur (to show error) and input (to clear it)
-document.addEventListener('blur', (e) => syncAria(e.target), true);
-document.addEventListener('input', (e) => {
-	if (e.target.hasAttribute('aria-invalid')) syncAria(e.target);
+document.addEventListener("blur", (e) => syncAria(e.target), true);
+document.addEventListener("input", (e) => {
+  if (e.target.hasAttribute("aria-invalid")) syncAria(e.target);
 });
 ```

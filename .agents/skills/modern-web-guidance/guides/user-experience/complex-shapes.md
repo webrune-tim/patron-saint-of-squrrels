@@ -12,15 +12,15 @@ You can use the transparency of an image as a mask, with opaque parts visible an
 
 ```css
 .shaped-element {
-	/* MANDATORY: Use vendor prefix for wider support in older browsers */
-	-webkit-mask-image: url('mask.svg');
-	-webkit-mask-size: cover; /* Scale mask to cover element */
-	-webkit-mask-repeat: no-repeat; /* Do not tile the mask */
+  /* MANDATORY: Use vendor prefix for wider support in older browsers */
+  -webkit-mask-image: url("mask.svg");
+  -webkit-mask-size: cover; /* Scale mask to cover element */
+  -webkit-mask-repeat: no-repeat; /* Do not tile the mask */
 
-	/* Standard property for modern browsers */
-	mask-image: url('mask.svg');
-	mask-size: cover;
-	mask-repeat: no-repeat;
+  /* Standard property for modern browsers */
+  mask-image: url("mask.svg");
+  mask-size: cover;
+  mask-repeat: no-repeat;
 }
 ```
 
@@ -33,27 +33,27 @@ You can also reference a `<mask>` element defined in an inline SVG in your page'
 ```html
 <!-- White areas reveal content, gray creates semi-transparency, black or transparent hides it -->
 <svg width="0" height="0">
-	<defs>
-		<!-- objectBoundingBox scales mask coordinates (0 to 1) with the element's size -->
-		<mask id="custom-shape" maskContentUnits="objectBoundingBox">
-			<!-- Use white shapes to define fully opaque areas -->
-			<circle cx="0.5" cy="0.5" r="0.5" fill="white" />
-			<!-- Use gray shapes to define semi-transparent/faded areas -->
-			<circle cx="0.5" cy="0.5" r="0.25" fill="gray" />
-		</mask>
-	</defs>
+  <defs>
+    <!-- objectBoundingBox scales mask coordinates (0 to 1) with the element's size -->
+    <mask id="custom-shape" maskContentUnits="objectBoundingBox">
+      <!-- Use white shapes to define fully opaque areas -->
+      <circle cx="0.5" cy="0.5" r="0.5" fill="white" />
+      <!-- Use gray shapes to define semi-transparent/faded areas -->
+      <circle cx="0.5" cy="0.5" r="0.25" fill="gray" />
+    </mask>
+  </defs>
 </svg>
 
 <div class="masked-content">
-	<!-- Content to be masked -->
+  <!-- Content to be masked -->
 </div>
 
 <style>
-	.masked-content {
-		/* Reference the SVG mask ID */
-		-webkit-mask-image: url(#custom-shape);
-		mask-image: url(#custom-shape);
-	}
+  .masked-content {
+    /* Reference the SVG mask ID */
+    -webkit-mask-image: url(#custom-shape);
+    mask-image: url(#custom-shape);
+  }
 </style>
 ```
 
@@ -71,9 +71,9 @@ If a browser does not support `mask-image` or the prefixed version:
 ```css
 /* Fallback for browsers that do not support masking */
 @supports (not (mask-image: url(x))) and (not (-webkit-mask-image: url(x))) {
-	.shaped-element {
-		/* Use a simple rounded rectangle as fallback */
-		clip-path: inset(5% round 15px);
-	}
+  .shaped-element {
+    /* Use a simple rounded rectangle as fallback */
+    clip-path: inset(5% round 15px);
+  }
 }
 ```

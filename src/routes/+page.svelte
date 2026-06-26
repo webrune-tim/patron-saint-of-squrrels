@@ -11,15 +11,15 @@
 	import music from '$lib/assets/audio/music.mp3'
 
 	// State
-	let audioComponent = $state<HTMLAudioElement>()
-	let isAutoplayBlocked = false
+	let audioComponent = $state()
+	let isAutoplayBlocked = $state(false)
 
 	// Separate states: one for interaction, one for visibility
 	let isScrolling = $state(false)
 	let isInView = $state(false)
 
 	// Reference for the viewport observer
-	let scenesElement = $state<HTMLElement>()
+	let scenesElement = $state()
 
 	onMount(() => {
 		if (audioComponent) {
@@ -31,7 +31,7 @@
 	$effect(() => {
 		if (!scenesElement) return
 
-		let scrollTimeout: number
+		let scrollTimeout
 
 		const handleScrollState = () => {
 			isScrolling = true
@@ -360,6 +360,7 @@
 		margin: var(--gap-md) auto;
 		border: 2px solid var(--color-text-primary);
 		background-color: rgb(from var(--color-text-primary) r g b / 0.1);
+		cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">🌰</text></svg>') 12 12, pointer;
 	}
 
 	.bounce-arrow {

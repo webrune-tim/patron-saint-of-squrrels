@@ -9,15 +9,15 @@ To highlight text ranges, you must collect the target text nodes, create `Range`
 Use a `TreeWalker` to collect all text nodes in the target element, then create `Range` objects pointing at the character offsets you want to highlight.
 
 ```javascript
-const article = document.querySelector('article');
+const article = document.querySelector("article");
 
 // MANDATORY: Use TreeWalker to collect text nodes — do not manipulate innerHTML.
 const treeWalker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT);
 const allTextNodes = [];
 let currentNode = treeWalker.nextNode();
 while (currentNode) {
-	allTextNodes.push(currentNode);
-	currentNode = treeWalker.nextNode();
+  allTextNodes.push(currentNode);
+  currentNode = treeWalker.nextNode();
 }
 
 // MANDATORY: Set range start/end on text nodes, not element nodes.
@@ -45,7 +45,7 @@ Register each `Highlight` under a custom name using `CSS.highlights`, which is a
 // to avoid stale ranges persisting on the page.
 CSS.highlights.clear();
 
-CSS.highlights.set('search-results', searchHighlight);
+CSS.highlights.set("search-results", searchHighlight);
 ```
 
 When multiple highlights overlap, use the `priority` property to control stacking order. Higher priority highlights paint on top.
@@ -57,8 +57,8 @@ primary.priority = 1;
 const secondary = new Highlight(...secondaryRanges);
 secondary.priority = 0; // painted first (behind primary)
 
-CSS.highlights.set('primary', primary);
-CSS.highlights.set('secondary', secondary);
+CSS.highlights.set("primary", primary);
+CSS.highlights.set("secondary", secondary);
 ```
 
 #### 4. Style with `::highlight()`
@@ -67,8 +67,8 @@ Use the `::highlight()` pseudo-element in CSS to style each registered highlight
 
 ```css
 ::highlight(search-results) {
-	background-color: #ffdd00;
-	color: black;
+  background-color: #ffdd00;
+  color: black;
 }
 ```
 
@@ -93,9 +93,9 @@ You can detect support before using the API:
 
 ```javascript
 if (CSS.highlights) {
-	// CSS Custom Highlight API is supported.
+  // CSS Custom Highlight API is supported.
 } else {
-	// Fallback: wrap matches in <mark> elements.
+  // Fallback: wrap matches in <mark> elements.
 }
 ```
 
@@ -103,30 +103,30 @@ If the highlight is critical for the user experience, fall back to wrapping matc
 
 ```javascript
 if (!CSS.highlights) {
-	// Walk text nodes and wrap matches in <mark>, preserving structure.
-	const walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT);
-	const nodes = [];
-	for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
+  // Walk text nodes and wrap matches in <mark>, preserving structure.
+  const walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
 
-	const term = searchTerm.toLowerCase();
-	for (const textNode of nodes) {
-		const text = textNode.textContent;
-		let pos = text.toLowerCase().indexOf(term);
-		if (pos === -1) continue;
+  const term = searchTerm.toLowerCase();
+  for (const textNode of nodes) {
+    const text = textNode.textContent;
+    let pos = text.toLowerCase().indexOf(term);
+    if (pos === -1) continue;
 
-		const frag = document.createDocumentFragment();
-		let last = 0;
-		while (pos !== -1) {
-			frag.append(text.slice(last, pos));
-			const mark = document.createElement('mark');
-			// textContent assignment avoids HTML injection.
-			mark.textContent = text.slice(pos, pos + term.length);
-			frag.append(mark);
-			last = pos + term.length;
-			pos = text.toLowerCase().indexOf(term, last);
-		}
-		frag.append(text.slice(last));
-		textNode.replaceWith(frag);
-	}
+    const frag = document.createDocumentFragment();
+    let last = 0;
+    while (pos !== -1) {
+      frag.append(text.slice(last, pos));
+      const mark = document.createElement("mark");
+      // textContent assignment avoids HTML injection.
+      mark.textContent = text.slice(pos, pos + term.length);
+      frag.append(mark);
+      last = pos + term.length;
+      pos = text.toLowerCase().indexOf(term, last);
+    }
+    frag.append(text.slice(last));
+    textNode.replaceWith(frag);
+  }
 }
 ```

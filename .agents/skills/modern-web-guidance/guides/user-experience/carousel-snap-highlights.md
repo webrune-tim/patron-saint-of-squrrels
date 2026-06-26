@@ -10,21 +10,21 @@ The parent container must have `scroll-snap-type` enabled.
 
 ```html
 <div class="carousel">
-	<div class="carousel-item">
-		<div class="card">Product 1 content</div>
-	</div>
-	<div class="carousel-item">
-		<div class="card">Product 2 content</div>
-	</div>
+  <div class="carousel-item">
+    <div class="card">Product 1 content</div>
+  </div>
+  <div class="carousel-item">
+    <div class="card">Product 2 content</div>
+  </div>
 </div>
 ```
 
 ```css
 .carousel {
-	display: flex;
-	overflow-x: auto;
-	/* MANDATORY: Enable scroll snapping on the container */
-	scroll-snap-type: x mandatory;
+  display: flex;
+  overflow-x: auto;
+  /* MANDATORY: Enable scroll snapping on the container */
+  scroll-snap-type: x mandatory;
 }
 ```
 
@@ -34,11 +34,11 @@ Each item in the carousel that should be tracked for snapping must be declared a
 
 ```css
 .carousel-item {
-	/* Define where the item snaps within the container */
-	scroll-snap-align: center;
+  /* Define where the item snaps within the container */
+  scroll-snap-align: center;
 
-	/* MANDATORY: Establish this element as a scroll-state query container */
-	container-type: scroll-state;
+  /* MANDATORY: Establish this element as a scroll-state query container */
+  container-type: scroll-state;
 }
 ```
 
@@ -51,33 +51,33 @@ Because container queries style **descendants**, you must apply the highlight st
 ```css
 /* Specify transition outside of queries so that it is applied regardless of state.  */
 .card {
-	transition:
-		scale 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-		background-color 0.4s,
-		color 0.4s,
-		box-shadow 0.4s;
+  transition:
+    scale 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 0.4s,
+    color 0.4s,
+    box-shadow 0.4s;
 }
 /* 
 Only show the effect for users not requesting reduced motion. Disable completely, including the color change, as it causes a flash that may be problematic.
 */
 @media (prefers-reduced-motion: no-preference) {
-	/* Style the content when its parent .carousel-item is snapped on the x axis */
-	@container scroll-state(snapped: x) {
-		.card {
-			background: #007bff;
-			color: white;
-			scale: 1.15;
-			box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
-		}
-	}
+  /* Style the content when its parent .carousel-item is snapped on the x axis */
+  @container scroll-state(snapped: x) {
+    .card {
+      background: #007bff;
+      color: white;
+      scale: 1.15;
+      box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
+    }
+  }
 }
 
 /* MANDATORY Copy-Paste Safety: Disable highlight scaling/flashing for motion sensitive users */
 @media (prefers-reduced-motion: reduce) {
-	.card {
-		transition: none !important;
-		scale: 1 !important;
-	}
+  .card {
+    transition: none !important;
+    scale: 1 !important;
+  }
 }
 ```
 
@@ -108,7 +108,7 @@ You can use `@supports` to provide enhancements only to supported browsers:
 
 ```css
 @supports (container-type: scroll-state) {
-	/* Enhancement styles here */
+  /* Enhancement styles here */
 }
 ```
 
@@ -118,23 +118,23 @@ If the highlight is critical for the user experience, use `IntersectionObserver`
 
 ```javascript
 // Optional: detect support and apply a JS-based fallback
-if (!CSS.supports('container-type', 'scroll-state')) {
-	const observer = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				// Toggle a class based on intersection
-				entry.target.classList.toggle('is-snapped', entry.isIntersecting);
-			});
-		},
-		{
-			root: document.querySelector('.carousel'),
-			// Carousel item intersects if any part of the carousel item is in the middle 2% of the carousel.
-			rootMargin: '0px -49%'
-		}
-	);
+if (!CSS.supports("container-type", "scroll-state")) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        // Toggle a class based on intersection
+        entry.target.classList.toggle("is-snapped", entry.isIntersecting);
+      });
+    },
+    {
+      root: document.querySelector(".carousel"),
+      // Carousel item intersects if any part of the carousel item is in the middle 2% of the carousel.
+      rootMargin: "0px -49%",
+    },
+  );
 
-	document.querySelectorAll('.carousel-item').forEach((item) => {
-		observer.observe(item);
-	});
+  document.querySelectorAll(".carousel-item").forEach((item) => {
+    observer.observe(item);
+  });
 }
 ```

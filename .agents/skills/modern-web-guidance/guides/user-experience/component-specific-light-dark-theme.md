@@ -35,7 +35,7 @@ Once a page-wide `color-scheme` is in place, and you are using color tokens sens
 pre,
 code,
 .dark {
-	color-scheme: dark;
+  color-scheme: dark;
 }
 ```
 
@@ -76,30 +76,30 @@ Example:
 
 ```css
 :root {
-	--accent-color: light-dark(blue, skyblue);
-	--surface-color: light-dark(white, #222);
-	--text-color: light-dark(#111, white);
+  --accent-color: light-dark(blue, skyblue);
+  --surface-color: light-dark(white, #222);
+  --text-color: light-dark(#111, white);
 
-	color-scheme: light dark;
-	accent-color: var(--accent-color);
-	color: var(--text-color);
+  color-scheme: light dark;
+  accent-color: var(--accent-color);
+  color: var(--text-color);
 }
 
 body {
-	/* --surface-color dynamically switches despite being inherited because --surface-color is not registered */
-	background: var(--surface-color);
+  /* --surface-color dynamically switches despite being inherited because --surface-color is not registered */
+  background: var(--surface-color);
 }
 
 pre,
 code {
-	color-scheme: dark;
-	background: var(--surface-color);
+  color-scheme: dark;
+  background: var(--surface-color);
 
-	/* Without this, accent-color would be blue, not skyblue! */
-	accent-color: var(--accent-color);
+  /* Without this, accent-color would be blue, not skyblue! */
+  accent-color: var(--accent-color);
 
-	/* Without this, text-color would be #111, not white! */
-	color: var(--text-color);
+  /* Without this, text-color would be #111, not white! */
+  color: var(--text-color);
 }
 ```
 
@@ -126,22 +126,22 @@ To adapt to the user's preferences in older browsers, use `prefers-color-scheme`
 
 ```css
 :root {
-	/* Define brand colors for each mode */
-	--color-brand-light: #0056b3;
-	--color-brand-dark: #00e5ff;
-	--color-brand: var(--color-brand-light);
+  /* Define brand colors for each mode */
+  --color-brand-light: #0056b3;
+  --color-brand-dark: #00e5ff;
+  --color-brand: var(--color-brand-light);
 
-	/* MANDATORY: Fallback for browsers without light-dark support */
-	@media (prefers-color-scheme: dark) {
-		--color-brand: var(--color-brand-dark);
-	}
+  /* MANDATORY: Fallback for browsers without light-dark support */
+  @media (prefers-color-scheme: dark) {
+    --color-brand: var(--color-brand-dark);
+  }
 
-	/* Ignored in older browsers */
-	color-scheme: light dark;
+  /* Ignored in older browsers */
+  color-scheme: light dark;
 }
 
 button.primary {
-	background-color: var(--color-brand);
+  background-color: var(--color-brand);
 }
 ```
 
@@ -154,36 +154,36 @@ For browsers that support `color-scheme` but not yet `light-dark()`, light and d
 
 ```css
 :root {
-	/* Define browser UI accent color for each mode */
-	--brand-accent-light: #0056b3;
-	--brand-accent-dark: #00e5ff;
-	--accent-color: var(--brand-accent-light);
+  /* Define browser UI accent color for each mode */
+  --brand-accent-light: #0056b3;
+  --brand-accent-dark: #00e5ff;
+  --accent-color: var(--brand-accent-light);
 
-	/* MANDATORY: Fallback for browsers without light-dark support */
-	@media (prefers-color-scheme: dark) {
-		--accent-color: var(--brand-accent-dark);
-	}
+  /* MANDATORY: Fallback for browsers without light-dark support */
+  @media (prefers-color-scheme: dark) {
+    --accent-color: var(--brand-accent-dark);
+  }
 
-	/* OPTIONAL: use light-dark() for more control of built-in UI colors */
-	@supports (color: light-dark(white, black)) {
-		--accent-color: light-dark(
-			var(--brand-accent-light),
-			var(--brand-accent-dark)
-		);
-	}
+  /* OPTIONAL: use light-dark() for more control of built-in UI colors */
+  @supports (color: light-dark(white, black)) {
+    --accent-color: light-dark(
+      var(--brand-accent-light),
+      var(--brand-accent-dark)
+    );
+  }
 
-	/* MANDATORY: Automatically adapt native UI to user system preferences */
-	color-scheme: light dark;
+  /* MANDATORY: Automatically adapt native UI to user system preferences */
+  color-scheme: light dark;
 
-	/* Example inherited color property */
-	accent-color: var(--accent-color);
+  /* Example inherited color property */
+  accent-color: var(--accent-color);
 }
 
 pre,
 code {
-	color-scheme: dark;
+  color-scheme: dark;
 
-	/* **Mandatory**: any inherited color properties must be set again, even if to the same design tokens */
-	accent-color: var(--accent-color);
+  /* **Mandatory**: any inherited color properties must be set again, even if to the same design tokens */
+  accent-color: var(--accent-color);
 }
 ```

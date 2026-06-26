@@ -16,22 +16,22 @@ You can apply this pattern to any container (like a "Show More" section or a nav
 ```css
 /* Opt-in globally for all children */
 :root {
-	/* MANDATORY: Transitions to intrinsic keywords are disabled by default for compatibility */
-	interpolate-size: allow-keywords;
+  /* MANDATORY: Transitions to intrinsic keywords are disabled by default for compatibility */
+  interpolate-size: allow-keywords;
 }
 
 .expandable-container {
-	/* 1. Define a fixed initial size (or 0) and hide overflow */
-	block-size: 100px;
-	overflow: hidden;
+  /* 1. Define a fixed initial size (or 0) and hide overflow */
+  block-size: 100px;
+  overflow: hidden;
 
-	/* 2. Transition the sizing property */
-	transition: block-size 0.4s ease-out;
+  /* 2. Transition the sizing property */
+  transition: block-size 0.4s ease-out;
 }
 
 .expandable-container.is-expanded {
-	/* 3. Smoothly animate to the intrinsic natural height */
-	block-size: auto;
+  /* 3. Smoothly animate to the intrinsic natural height */
+  block-size: auto;
 }
 ```
 
@@ -39,16 +39,16 @@ You can apply this pattern to any container (like a "Show More" section or a nav
 
 ```css
 .badge {
-	inline-size: 40px;
-	overflow: hidden;
-	white-space: nowrap;
-	transition: inline-size 0.3s ease;
+  inline-size: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: inline-size 0.3s ease;
 }
 
 .badge:hover {
-	/* calc-size(basis, calculation) */
-	/* 'size' refers to the evaluated basis (max-content in this case) */
-	inline-size: calc-size(max-content, size + 20px);
+  /* calc-size(basis, calculation) */
+  /* 'size' refers to the evaluated basis (max-content in this case) */
+  inline-size: calc-size(max-content, size + 20px);
 }
 ```
 
@@ -58,48 +58,48 @@ You can also animate in the opposite direction—starting from a natural size an
 
 ```css
 .collapsible-alert {
-	/* 1. Start with the natural content height */
-	block-size: auto;
-	overflow: hidden;
-	transition:
-		block-size 0.5s ease-in-out,
-		opacity 0.5s ease;
+  /* 1. Start with the natural content height */
+  block-size: auto;
+  overflow: hidden;
+  transition:
+    block-size 0.5s ease-in-out,
+    opacity 0.5s ease;
 }
 
 .collapsible-alert.is-dismissed {
-	/* 2. Smoothly collapse to zero */
-	block-size: 0;
-	opacity: 0;
-	pointer-events: none;
+  /* 2. Smoothly collapse to zero */
+  block-size: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* MANDATORY Copy-Paste Safety: Disable sizing animations for sensitive users */
 @media (prefers-reduced-motion: reduce) {
-	.expandable-container,
-	.badge,
-	.collapsible-alert {
-		transition: none !important;
-	}
+  .expandable-container,
+  .badge,
+  .collapsible-alert {
+    transition: none !important;
+  }
 }
 ```
 
 ```javascript
 // MANDATORY Accessibility Synchronization: Ensure elements collapsed to zero dimensions are removed from the assistive technology tree, and sync aria-expanded states on triggers.
-const alertElement = document.querySelector('.collapsible-alert');
-alertElement.addEventListener('transitionend', (e) => {
-	if (
-		e.propertyName === 'block-size' &&
-		alertElement.classList.contains('is-dismissed')
-	) {
-		alertElement.hidden = true;
-	}
+const alertElement = document.querySelector(".collapsible-alert");
+alertElement.addEventListener("transitionend", (e) => {
+  if (
+    e.propertyName === "block-size" &&
+    alertElement.classList.contains("is-dismissed")
+  ) {
+    alertElement.hidden = true;
+  }
 });
 
 // Example trigger syncer
-const triggerBtn = document.querySelector('.accordion-trigger');
-triggerBtn?.addEventListener('click', () => {
-	const isExpanded = triggerBtn.getAttribute('aria-expanded') === 'true';
-	triggerBtn.setAttribute('aria-expanded', !isExpanded);
+const triggerBtn = document.querySelector(".accordion-trigger");
+triggerBtn?.addEventListener("click", () => {
+  const isExpanded = triggerBtn.getAttribute("aria-expanded") === "true";
+  triggerBtn.setAttribute("aria-expanded", !isExpanded);
 });
 ```
 
@@ -125,8 +125,8 @@ Unsupported in: Firefox and Safari.
 
 ```css
 .card {
-	block-size: auto; /* Fallback for older browsers */
-	block-size: calc-size(auto, size); /* Modern browsers use this */
-	transition: block-size 0.3s ease;
+  block-size: auto; /* Fallback for older browsers */
+  block-size: calc-size(auto, size); /* Modern browsers use this */
+  transition: block-size 0.3s ease;
 }
 ```

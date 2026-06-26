@@ -39,34 +39,34 @@
 ```html
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Dashboard | Platform</title>
-	</head>
-	<body>
-		<header>
-			<nav>
-				<ul>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</nav>
-		</header>
-		<main>
-			<h1>Analytics</h1>
-			<search>
-				<form action="/filter" method="GET">
-					<label for="search-input">Scan items:</label>
-					<input type="search" id="search-input" name="q" />
-					<button type="submit">Search</button>
-				</form>
-			</search>
-			<article>
-				<h2>First post</h2>
-			</article>
-		</main>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Platform</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Analytics</h1>
+      <search>
+        <form action="/filter" method="GET">
+          <label for="search-input">Scan items:</label>
+          <input type="search" id="search-input" name="q" />
+          <button type="submit">Search</button>
+        </form>
+      </search>
+      <article>
+        <h2>First post</h2>
+      </article>
+    </main>
+  </body>
 </html>
 ```
 
@@ -91,35 +91,35 @@
 ```html
 <!-- Quote with attribution using Figure -->
 <figure>
-	<blockquote cite="https://html.spec.whatwg.org/">
-		<p>
-			The figure element represents some flow content, optionally with a
-			caption, that is self-contained and is typically referenced as a single
-			unit from the main flow of the document.
-		</p>
-	</blockquote>
-	<figcaption>
-		Definition of the &lt;figure&gt; element from the
-		<cite>HTML Living Standard</cite>
-	</figcaption>
+  <blockquote cite="https://html.spec.whatwg.org/">
+    <p>
+      The figure element represents some flow content, optionally with a
+      caption, that is self-contained and is typically referenced as a single
+      unit from the main flow of the document.
+    </p>
+  </blockquote>
+  <figcaption>
+    Definition of the &lt;figure&gt; element from the
+    <cite>HTML Living Standard</cite>
+  </figcaption>
 </figure>
 
 <!-- Image with caption -->
 <figure>
-	<img
-		src="architecture-diagram.webp"
-		alt="Diagram showing the flow between Client, API Gateway, and Microservices"
-		width="800"
-		height="450"
-		loading="lazy"
-	/>
-	<figcaption>Figure 1: High-level system architecture overview.</figcaption>
+  <img
+    src="architecture-diagram.webp"
+    alt="Diagram showing the flow between Client, API Gateway, and Microservices"
+    width="800"
+    height="450"
+    loading="lazy"
+  />
+  <figcaption>Figure 1: High-level system architecture overview.</figcaption>
 </figure>
 
 <!-- Code block with accessibility and language hint -->
 <figure>
-	<figcaption>Example configuration:</figcaption>
-	<pre tabindex="0"><code class="language-json">
+  <figcaption>Example configuration:</figcaption>
+  <pre tabindex="0"><code class="language-json">
 {
   "name": "gemini-cli",
   "version": "1.0.0",
@@ -151,43 +151,43 @@
 ```html
 <!-- High-priority hero image with responsive sizes -->
 <img
-	src="hero-large.webp"
-	srcset="hero-small.webp 480w, hero-medium.webp 800w, hero-large.webp 1200w"
-	sizes="(max-width: 600px) 100vw, (max-width: 1200px) 80vw, 70vw"
-	alt="Main product view"
-	fetchpriority="high"
-	width="1200"
-	height="600"
+  src="hero-large.webp"
+  srcset="hero-small.webp 480w, hero-medium.webp 800w, hero-large.webp 1200w"
+  sizes="(max-width: 600px) 100vw, (max-width: 1200px) 80vw, 70vw"
+  alt="Main product view"
+  fetchpriority="high"
+  width="1200"
+  height="600"
 />
 
 <!-- Art direction and format switching with <picture> -->
 <picture>
-	<!-- Mobile Art Direction: Different aspect ratio (square) and format (AVIF) -->
-	<source
-		media="(max-width: 600px)"
-		srcset="hero-mobile.avif 1x, hero-mobile-2x.avif 2x"
-		type="image/avif"
-		width="600"
-		height="600"
-	/>
-	<source
-		media="(max-width: 600px)"
-		srcset="hero-mobile.webp 1x, hero-mobile-2x.webp 2x"
-		width="600"
-		height="600"
-	/>
+  <!-- Mobile Art Direction: Different aspect ratio (square) and format (AVIF) -->
+  <source
+    media="(max-width: 600px)"
+    srcset="hero-mobile.avif 1x, hero-mobile-2x.avif 2x"
+    type="image/avif"
+    width="600"
+    height="600"
+  />
+  <source
+    media="(max-width: 600px)"
+    srcset="hero-mobile.webp 1x, hero-mobile-2x.webp 2x"
+    width="600"
+    height="600"
+  />
 
-	<!-- Desktop: Modern format for primary layout -->
-	<source srcset="hero-desktop.avif" type="image/avif" />
+  <!-- Desktop: Modern format for primary layout -->
+  <source srcset="hero-desktop.avif" type="image/avif" />
 
-	<!-- Fallback img defines the default aspect ratio (2:1) -->
-	<img
-		src="hero-desktop.webp"
-		alt="Platform dashboard overview"
-		width="1200"
-		height="600"
-		loading="lazy"
-	/>
+  <!-- Fallback img defines the default aspect ratio (2:1) -->
+  <img
+    src="hero-desktop.webp"
+    alt="Platform dashboard overview"
+    width="1200"
+    height="600"
+    loading="lazy"
+  />
 </picture>
 
 <!-- Low-priority decorative footer image -->
@@ -214,31 +214,31 @@ See `declarative-dialog-popover-control` (via `npx -y modern-web-guidance@latest
 <!-- Popover (No JS required for toggle) -->
 <button popovertarget="help-menu">Info</button>
 <div id="help-menu" popover="auto">
-	<p>Standard help text.</p>
+  <p>Standard help text.</p>
 </div>
 
 <!-- Modal Dialog with Form-based closing -->
 <button id="show-dialog">Open dialog</button>
 <dialog id="fav-modal">
-	<!-- method="dialog" closes the dialog natively and sets the returnValue -->
-	<form method="dialog">
-		<p>Confirm action?</p>
-		<button value="cancel">Cancel</button>
-		<button value="confirm">Confirm</button>
-	</form>
+  <!-- method="dialog" closes the dialog natively and sets the returnValue -->
+  <form method="dialog">
+    <p>Confirm action?</p>
+    <button value="cancel">Cancel</button>
+    <button value="confirm">Confirm</button>
+  </form>
 </dialog>
 
 <script>
-	const dialog = document.getElementById('fav-modal');
-	const openModal = document.getElementById('show-dialog');
+  const dialog = document.getElementById("fav-modal");
+  const openModal = document.getElementById("show-dialog");
 
-	// Show modal dialog
-	openModal.addEventListener('click', () => dialog.showModal());
+  // Show modal dialog
+  openModal.addEventListener("click", () => dialog.showModal());
 
-	// Listen for the 'close' event to retrieve the user's choice (returnValue)
-	dialog.addEventListener('close', () => {
-		console.log(dialog.returnValue); // "confirm" or "cancel"
-	});
+  // Listen for the 'close' event to retrieve the user's choice (returnValue)
+  dialog.addEventListener("close", () => {
+    console.log(dialog.returnValue); // "confirm" or "cancel"
+  });
 </script>
 ```
 
@@ -272,12 +272,12 @@ See `declarative-dialog-popover-control` (via `npx -y modern-web-guidance@latest
 ```html
 <!-- Exclusive Accordion Set -->
 <details name="faq">
-	<summary>Item 1</summary>
-	<p>Contents...</p>
+  <summary>Item 1</summary>
+  <p>Contents...</p>
 </details>
 <details name="faq">
-	<summary>Item 2</summary>
-	<p>Contents...</p>
+  <summary>Item 2</summary>
+  <p>Contents...</p>
 </details>
 ```
 
@@ -298,19 +298,19 @@ See `declarative-dialog-popover-control` (via `npx -y modern-web-guidance@latest
 ```html
 <!-- De-tabbing a background app shell while custom drawer is open -->
 <main id="app-shell" inert>
-	<a href="/">Dashboard</a>
+  <a href="/">Dashboard</a>
 </main>
 <aside id="drawer">
-	<button>Close</button>
+  <button>Close</button>
 </aside>
 ```
 
 ```css
 [inert],
 [inert] * {
-	opacity: 0.5;
-	cursor: default;
-	user-select: none;
+  opacity: 0.5;
+  cursor: default;
+  user-select: none;
 }
 ```
 
@@ -331,15 +331,15 @@ See `forms` (via `npx -y modern-web-guidance@latest retrieve "forms"`) for more 
 
 ```html
 <form>
-	<fieldset>
-		<legend>Address Information</legend>
-		<label for="city">City:</label>
-		<input type="text" id="city" list="cities" autocomplete="address-level2" />
-		<datalist id="cities">
-			<option value="New York"></option>
-			<option value="London"></option>
-		</datalist>
-	</fieldset>
+  <fieldset>
+    <legend>Address Information</legend>
+    <label for="city">City:</label>
+    <input type="text" id="city" list="cities" autocomplete="address-level2" />
+    <datalist id="cities">
+      <option value="New York"></option>
+      <option value="London"></option>
+    </datalist>
+  </fieldset>
 </form>
 ```
 
@@ -359,9 +359,9 @@ See `forms` (via `npx -y modern-web-guidance@latest retrieve "forms"`) for more 
 
 ```html
 <video controls width="800" height="450" poster="poster.webp">
-	<source src="intro.webm" type="video/webm" />
-	<source src="intro.mp4" type="video/mp4" />
-	<track src="caps.vtt" kind="captions" srclang="en" label="English" />
+  <source src="intro.webm" type="video/webm" />
+  <source src="intro.mp4" type="video/mp4" />
+  <track src="caps.vtt" kind="captions" srclang="en" label="English" />
 </video>
 ```
 
@@ -378,34 +378,34 @@ See `forms` (via `npx -y modern-web-guidance@latest retrieve "forms"`) for more 
 
 ```html
 <body>
-	<!-- Progress with style-driven color data -->
-	<label for="upload-progress">Upload status:</label>
-	<progress
-		id="upload-progress"
-		class="loading-bar"
-		value="0"
-		max="100"
-		style="--brand-hue: 200;"
-	></progress>
+  <!-- Progress with style-driven color data -->
+  <label for="upload-progress">Upload status:</label>
+  <progress
+    id="upload-progress"
+    class="loading-bar"
+    value="0"
+    max="100"
+    style="--brand-hue: 200;"
+  ></progress>
 
-	<script>
-		const updateProgress = (percent, hue) => {
-			const bar = document.querySelector('.loading-bar');
-			bar.value = percent;
+  <script>
+    const updateProgress = (percent, hue) => {
+      const bar = document.querySelector(".loading-bar");
+      bar.value = percent;
 
-			// Update dynamic style variable
-			if (hue) bar.style.setProperty('--brand-hue', hue);
-		};
+      // Update dynamic style variable
+      if (hue) bar.style.setProperty("--brand-hue", hue);
+    };
 
-		// Example: Move to 85% and shift color to green (120)
-		setTimeout(() => updateProgress(85, 120), 1000);
-	</script>
+    // Example: Move to 85% and shift color to green (120)
+    setTimeout(() => updateProgress(85, 120), 1000);
+  </script>
 </body>
 ```
 
 ```css
 .loading-bar {
-	accent-color: hsl(var(--brand-hue, 200) 80% 50%);
-	transition: accent-color 0.3s ease;
+  accent-color: hsl(var(--brand-hue, 200) 80% 50%);
+  transition: accent-color 0.3s ease;
 }
 ```

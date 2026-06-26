@@ -12,14 +12,14 @@ This is useful for indicating that there is more content below in a scrollable a
 
 ```css
 .container {
-	/* Enable scrolling */
-	overflow-y: auto;
+  /* Enable scrolling */
+  overflow-y: auto;
 
-	/* MANDATORY: Use vendor prefix for wider support in older browsers */
-	-webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  /* MANDATORY: Use vendor prefix for wider support in older browsers */
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 
-	/* Standard property for modern browsers */
-	mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  /* Standard property for modern browsers */
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 ```
 
@@ -29,21 +29,21 @@ You can use a single gradient with multiple color stops to fade both edges.
 
 ```css
 .dual-fade-container {
-	/* Content is visible between 10% and 90% of the height */
-	-webkit-mask-image: linear-gradient(
-		to bottom,
-		transparent 0%,
-		black 10%,
-		black 90%,
-		transparent 100%
-	);
-	mask-image: linear-gradient(
-		to bottom,
-		transparent 0%,
-		black 10%,
-		black 90%,
-		transparent 100%
-	);
+  /* Content is visible between 10% and 90% of the height */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
 }
 ```
 
@@ -61,25 +61,25 @@ If a browser does not support `mask-image` or the prefixed version:
 ```css
 /* Fallback using an overlay for browsers that do not support masking */
 @supports (not (mask-image: linear-gradient(to bottom, black, transparent))) and
-	(not (-webkit-mask-image: linear-gradient(to bottom, black, transparent))) {
-	.container {
-		position: relative;
-	}
+  (not (-webkit-mask-image: linear-gradient(to bottom, black, transparent))) {
+  .container {
+    position: relative;
+  }
 
-	.container::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 20%;
-		/* Fallback assumes a solid background color (e.g., white) */
-		background: linear-gradient(
-			to bottom,
-			rgba(255, 255, 255, 0),
-			rgba(255, 255, 255, 1)
-		);
-		pointer-events: none; /* Allow interaction with text underneath */
-	}
+  .container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20%;
+    /* Fallback assumes a solid background color (e.g., white) */
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 1)
+    );
+    pointer-events: none; /* Allow interaction with text underneath */
+  }
 }
 ```

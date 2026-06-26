@@ -116,16 +116,16 @@ If your application communicates with other origins using `window.postMessage`, 
 
 ```javascript
 // Receiver (Safe - traditional string check)
-window.addEventListener('message', (event) => {
-	if (event.origin !== 'https://trusted-origin.com') return;
-	const data = event.data;
-	if (data && data.action === 'update') {
-		// Process data safely
-	}
+window.addEventListener("message", (event) => {
+  if (event.origin !== "https://trusted-origin.com") return;
+  const data = event.data;
+  if (data && data.action === "update") {
+    // Process data safely
+  }
 });
 
 // Sender (Safe)
-targetWindow.postMessage({ action: 'update' }, 'https://trusted-origin.com');
+targetWindow.postMessage({ action: "update" }, "https://trusted-origin.com");
 ```
 
 ## Phase 2: Discovery & Data Collection (Prerequisites)
@@ -254,10 +254,10 @@ Trusted Types enforces the §1.2 source-level guidance at runtime: once enabled,
 
 ```javascript
 if (window.trustedTypes && trustedTypes.createPolicy) {
-	const policy = trustedTypes.createPolicy('escapePolicy', {
-		createHTML: (str) => str.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-	});
-	el.innerHTML = policy.createHTML(untrustedString);
+  const policy = trustedTypes.createPolicy("escapePolicy", {
+    createHTML: (str) => str.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+  });
+  el.innerHTML = policy.createHTML(untrustedString);
 }
 ```
 
@@ -301,25 +301,25 @@ Server-side enforcement that uses `Sec-Fetch-*` request headers to reject suspic
 
 ```javascript
 app.use((req, res, next) => {
-	const site = req.get('Sec-Fetch-Site');
-	const mode = req.get('Sec-Fetch-Mode');
-	const dest = req.get('Sec-Fetch-Dest');
+  const site = req.get("Sec-Fetch-Site");
+  const mode = req.get("Sec-Fetch-Mode");
+  const dest = req.get("Sec-Fetch-Dest");
 
-	if (!site) return next(); // Fallback for legacy browsers
+  if (!site) return next(); // Fallback for legacy browsers
 
-	if (['same-origin', 'same-site', 'none'].includes(site)) return next();
+  if (["same-origin", "same-site", "none"].includes(site)) return next();
 
-	// Allow standard navigate GET requests (link clicks)
-	if (
-		site === 'cross-site' &&
-		mode === 'navigate' &&
-		req.method === 'GET' &&
-		!['object', 'embed'].includes(dest)
-	) {
-		return next();
-	}
+  // Allow standard navigate GET requests (link clicks)
+  if (
+    site === "cross-site" &&
+    mode === "navigate" &&
+    req.method === "GET" &&
+    !["object", "embed"].includes(dest)
+  ) {
+    return next();
+  }
 
-	res.status(403).send('Forbidden');
+  res.status(403).send("Forbidden");
 });
 ```
 
@@ -353,8 +353,8 @@ Permissions-Policy: camera=(), geolocation=(), microphone=()
 
 ```html
 <iframe
-	src="https://trusted-video.com/player"
-	allow="fullscreen; camera"
+  src="https://trusted-video.com/player"
+  allow="fullscreen; camera"
 ></iframe>
 ```
 
@@ -366,9 +366,9 @@ Permissions-Policy: camera=(), geolocation=(), microphone=()
 
 ```html
 <script
-	src="https://cdn.example.com/lib.js"
-	integrity="sha256-H8df...39v"
-	crossorigin="anonymous"
+  src="https://cdn.example.com/lib.js"
+  integrity="sha256-H8df...39v"
+  crossorigin="anonymous"
 ></script>
 ```
 

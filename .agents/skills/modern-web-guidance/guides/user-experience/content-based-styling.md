@@ -19,34 +19,34 @@ _Example: A card component that switches to a side-by-side layout if an image is
 /* 1. Define the default state on the component container */
 /* This applies when there is NO image */
 .article-card {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	padding: 1.5rem;
-	border: 1px solid #ccc;
-	border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 /* 2. Apply styles when a specific child element is present */
 /* MANDATORY: Target the container and use :has() to check for the descendant */
 .article-card:has(img) {
-	/* Change the layout to a row if an image exists */
-	flex-direction: row;
-	align-items: center;
+  /* Change the layout to a row if an image exists */
+  flex-direction: row;
+  align-items: center;
 }
 
 /* Optional: Style the image itself (no :has() needed here) */
 .article-card img {
-	width: 150px;
-	height: auto;
-	border-radius: 4px;
+  width: 150px;
+  height: auto;
+  border-radius: 4px;
 }
 
 /* You can also combine :has() and :not() to explicitly target the ABSENCE of content */
 /* This selects a card that DOES NOT have an image */
 .article-card:not(:has(img)) {
-	/* E.g., apply a different background color for text-only cards */
-	background-color: #f9f9f9;
+  /* E.g., apply a different background color for text-only cards */
+  background-color: #f9f9f9;
 }
 ```
 
@@ -54,22 +54,22 @@ _Example: A card component that switches to a side-by-side layout if an image is
 <!-- Assume an <h1> precedes these components in the document layout -->
 <!-- A card WITH an image (will use row layout) -->
 <article class="article-card">
-	<img src="thumbnail.jpg" alt="Article thumbnail" />
-	<div class="content">
-		<h2>Card With Image</h2>
-		<p>This card lays out its content horizontally.</p>
-	</div>
+  <img src="thumbnail.jpg" alt="Article thumbnail" />
+  <div class="content">
+    <h2>Card With Image</h2>
+    <p>This card lays out its content horizontally.</p>
+  </div>
 </article>
 
 <!-- A card WITHOUT an image (will use default column layout) -->
 <article class="article-card">
-	<div class="content">
-		<h2>Text-Only Card</h2>
-		<p>
-			This card lays out its content vertically, and gets its background color
-			from the :not(:has()) rule.
-		</p>
-	</div>
+  <div class="content">
+    <h2>Text-Only Card</h2>
+    <p>
+      This card lays out its content vertically, and gets its background color
+      from the :not(:has()) rule.
+    </p>
+  </div>
 </article>
 ```
 
@@ -92,30 +92,30 @@ If server-side rendering is not an option, you must use a small script with `CSS
 /* Fallback CSS for older browsers */
 /* We check if the browser DOES NOT support the :has() selector */
 @supports not selector(:has(*)) {
-	/* Define a traditional modifier class that applies the exact same layout overrides */
-	.article-card.has-image {
-		flex-direction: row;
-		align-items: center;
-	}
+  /* Define a traditional modifier class that applies the exact same layout overrides */
+  .article-card.has-image {
+    flex-direction: row;
+    align-items: center;
+  }
 
-	.article-card:not(.has-image) {
-		background-color: #f9f9f9;
-	}
+  .article-card:not(.has-image) {
+    background-color: #f9f9f9;
+  }
 }
 ```
 
 ```javascript
 /* Fallback JavaScript for older browsers (if not using SSR to add the class) */
 /* Check for support before running the script to avoid unnecessary work in modern browsers */
-if (!CSS.supports('selector(:has(*))')) {
-	// Find all components that need checking
-	const cards = document.querySelectorAll('.article-card');
+if (!CSS.supports("selector(:has(*))")) {
+  // Find all components that need checking
+  const cards = document.querySelectorAll(".article-card");
 
-	cards.forEach((card) => {
-		// If the critical content exists, manually add the fallback class
-		if (card.querySelector('img')) {
-			card.classList.add('has-image');
-		}
-	});
+  cards.forEach((card) => {
+    // If the critical content exists, manually add the fallback class
+    if (card.querySelector("img")) {
+      card.classList.add("has-image");
+    }
+  });
 }
 ```
