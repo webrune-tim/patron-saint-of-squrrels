@@ -5,6 +5,8 @@ export function scrollStory(node: HTMLElement) {
 
 	node.style.setProperty('--step-count', String(stepCount));
 
+	let ticking = false;
+
 	function handleScroll() {
 		const rect = node.getBoundingClientRect();
 		const viewHeight = window.innerHeight;
@@ -23,7 +25,6 @@ export function scrollStory(node: HTMLElement) {
 			stepCount - 1
 		);
 
-		// Feed index into the CSS layer for the progress calculation loop
 		node.style.setProperty('--active-step-index', String(activeIndex));
 
 		steps.forEach((step, index) => {
@@ -35,14 +36,25 @@ export function scrollStory(node: HTMLElement) {
 		});
 	}
 
-	window.addEventListener('scroll', handleScroll, { passive: true });
-	window.addEventListener('resize', handleScroll, { passive: true });
-	setTimeout(handleScroll, 0);
+	function requestTick() {
+		if (!ticking) {
+			requestAnimationFrame(() => {
+				handleScroll();
+				ticking = false;
+			});
+			ticking = true;
+		}
+	}
+
+	window.addEventListener('scroll', requestTick, { passive: true });
+	window.addEventListener('resize', requestTick, { passive: true });
+
+	requestAnimationFrame(handleScroll);
 
 	return {
 		destroy() {
-			window.removeEventListener('scroll', handleScroll);
-			window.removeEventListener('resize', handleScroll);
+			window.removeEventListener('scroll', requestTick);
+			window.removeEventListener('resize', requestTick);
 		}
 	};
 }
