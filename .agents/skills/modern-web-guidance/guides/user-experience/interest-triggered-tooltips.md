@@ -50,11 +50,11 @@ The tooltip can be positioned using anchor positioning. When the tooltip is open
 
 ```css
 /* MANDATORY: use explicit anchor names for compatibility with the polyfill */
-button[interestfor="tooltip-dom"] {
-  anchor-name: --tooltip-dom;
+button[interestfor='tooltip-dom'] {
+	anchor-name: --tooltip-dom;
 }
 #tooltip-dom {
-  position-anchor: --tooltip-dom;
+	position-anchor: --tooltip-dom;
 }
 ```
 
@@ -62,11 +62,11 @@ Also, the polyfill does not support `position-area` on popovers, so **MANDATORY:
 
 ```css
 [popover] {
-  /* MANDATORY: use anchor functions and a position-try fallback for the polyfill */
-  top: anchor(bottom);
-  left: anchor(center);
-  position-try: flip-block;
-  margin: unset;
+	/* MANDATORY: use anchor functions and a position-try fallback for the polyfill */
+	top: anchor(bottom);
+	left: anchor(center);
+	position-try: flip-block;
+	margin: unset;
 }
 ```
 
@@ -80,10 +80,10 @@ Interest invokers must be conditionally polyfilled using the `interestfor` polyf
 
 ```html
 <script type="module">
-  if (!HTMLButtonElement.prototype.hasOwnProperty("interestForElement")) {
-    // CDN link only used for example, prefer bundling.
-    await import("https://unpkg.com/interestfor@latest");
-  }
+	if (!HTMLButtonElement.prototype.hasOwnProperty('interestForElement')) {
+		// CDN link only used for example, prefer bundling.
+		await import('https://unpkg.com/interestfor@latest');
+	}
 </script>
 ```
 
@@ -97,9 +97,9 @@ Popover and popover hint must conditionally be polyfilled with the `@oddbird/pop
 
 ```html
 <script type="module">
-  if (!HTMLElement.prototype.hasOwnProperty("popover")) {
-    await import("https://unpkg.com/@oddbird/popover-polyfill@latest");
-  }
+	if (!HTMLElement.prototype.hasOwnProperty('popover')) {
+		await import('https://unpkg.com/@oddbird/popover-polyfill@latest');
+	}
 </script>
 ```
 
@@ -110,22 +110,22 @@ Anchor positioning is not natively supported by any major browser yet.
 ```html
 <!-- MANDATORY: Conditionally install the anchor positioning polyfill -->
 <script type="module">
-  if (!("anchorName" in document.documentElement.style)) {
-    await import("https://unpkg.com/@oddbird/css-anchor-positioning");
-  }
+	if (!('anchorName' in document.documentElement.style)) {
+		await import('https://unpkg.com/@oddbird/css-anchor-positioning');
+	}
 </script>
 ```
 
 ```css
-button[interestfor="tooltip-attrs"] {
-  /* MANDATORY: Each trigger and popover pair must have a unique anchor name, referenced by `anchor-name` on the trigger and `position-anchor` on the popover. */
-  anchor-name: --tooltip-attrs;
+button[interestfor='tooltip-attrs'] {
+	/* MANDATORY: Each trigger and popover pair must have a unique anchor name, referenced by `anchor-name` on the trigger and `position-anchor` on the popover. */
+	anchor-name: --tooltip-attrs;
 }
 #tooltip-attrs {
-  position-anchor: --tooltip-attrs;
-  /* If using the anchor positioning polyfill with a popover, DO use `anchor()` functions, and not `position-area. */
-  top: anchor(bottom);
-  left: anchor(right);
-  margin: unset;
+	position-anchor: --tooltip-attrs;
+	/* If using the anchor positioning polyfill with a popover, DO use `anchor()` functions, and not `position-area. */
+	top: anchor(bottom);
+	left: anchor(right);
+	margin: unset;
 }
 ```

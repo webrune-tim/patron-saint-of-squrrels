@@ -117,11 +117,11 @@ MANDATORY: Add the `required` attribute to both email and password fields. Moder
 ```html
 <input type="email" id="email" name="email" autocomplete="username" required />
 <input
-  type="password"
-  id="password"
-  name="password"
-  autocomplete="current-password"
-  required
+	type="password"
+	id="password"
+	name="password"
+	autocomplete="current-password"
+	required
 />
 ```
 

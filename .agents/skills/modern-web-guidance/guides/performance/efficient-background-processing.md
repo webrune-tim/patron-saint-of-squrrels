@@ -23,10 +23,10 @@ Set `content-visibility: auto` on the heavy container and provide a placeholder 
 
 ```css
 .heavy-component {
-  /* Defer rendering work when off-screen */
-  content-visibility: auto;
+	/* Defer rendering work when off-screen */
+	content-visibility: auto;
 
-  /* Mandatory: Provide a placeholder size to prevent layouts shifts.
+	/* Mandatory: Provide a placeholder size to prevent layouts shifts.
     - 'auto' is optional and enables the browser to remember the actual size
       once rendered. It must be paired with a <length> value to be used for
       the first render.
@@ -36,7 +36,7 @@ Set `content-visibility: auto` on the heavy container and provide a placeholder 
       CSS <length> value. Replace it with the expected height of your
       component.
    */
-  contain-intrinsic-size: auto none auto 500px;
+	contain-intrinsic-size: auto none auto 500px;
 }
 ```
 
@@ -50,36 +50,36 @@ Add an event listener for `contentvisibilityautostatechange` to pause or resume 
 > - Use a capturing event listener (`{ capture: true }`) if you are delegating events to a parent container.
 
 ```javascript
-const component = document.querySelector(".heavy-component");
+const component = document.querySelector('.heavy-component');
 
 // Option 1: Direct listener (recommended)
-component.addEventListener("contentvisibilityautostatechange", (event) => {
-  if (event.skipped) {
-    // The browser skipped rendering this content.
-    // DO NOT perform heavy mutations or animation loops here.
-    stopSimulation();
-    pauseWebSocketPolling();
-  } else {
-    // The browser is about to render the content.
-    // Resume your work so it is ready when visible.
-    startSimulation();
-    resumeWebSocketPolling();
-  }
+component.addEventListener('contentvisibilityautostatechange', (event) => {
+	if (event.skipped) {
+		// The browser skipped rendering this content.
+		// DO NOT perform heavy mutations or animation loops here.
+		stopSimulation();
+		pauseWebSocketPolling();
+	} else {
+		// The browser is about to render the content.
+		// Resume your work so it is ready when visible.
+		startSimulation();
+		resumeWebSocketPolling();
+	}
 });
 
 // Option 2: Capturing listener for event delegation
 document.addEventListener(
-  "contentvisibilityautostatechange",
-  (event) => {
-    if (event.target.matches(".heavy-component")) {
-      if (event.skipped) {
-        stopSimulation();
-      } else {
-        startSimulation();
-      }
-    }
-  },
-  { capture: true },
+	'contentvisibilityautostatechange',
+	(event) => {
+		if (event.target.matches('.heavy-component')) {
+			if (event.skipped) {
+				stopSimulation();
+			} else {
+				startSimulation();
+			}
+		}
+	},
+	{ capture: true }
 );
 ```
 
@@ -97,30 +97,30 @@ If you must support pausing tasks on older browsers, you can fallback to using `
 
 ```javascript
 // Fallback using IntersectionObserver for older browsers
-const target = document.getElementById("target-container");
+const target = document.getElementById('target-container');
 
 // Check if content-visibility is supported
-const isSupported = "contentVisibility" in document.documentElement.style;
+const isSupported = 'contentVisibility' in document.documentElement.style;
 
 if (!isSupported) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // The element is close to the screen. Start work!
-          startSimulation();
-        } else {
-          // The element is far away. Pause work!
-          stopSimulation();
-        }
-      });
-    },
-    {
-      // Use rootMargin to start rendering before it hits the screen
-      rootMargin: "200px",
-    },
-  );
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					// The element is close to the screen. Start work!
+					startSimulation();
+				} else {
+					// The element is far away. Pause work!
+					stopSimulation();
+				}
+			});
+		},
+		{
+			// Use rootMargin to start rendering before it hits the screen
+			rootMargin: '200px'
+		}
+	);
 
-  observer.observe(target);
+	observer.observe(target);
 }
 ```

@@ -16,32 +16,32 @@ To coordinate global events and handle potential DST conflicts:
 
 ```javascript
 // 1. Define the event time and target time zone
-const date = "2025-03-09";
-const time = "02:30"; // This time is skipped in New York during Spring Forward
-const timeZone = "America/New_York";
+const date = '2025-03-09';
+const time = '02:30'; // This time is skipped in New York during Spring Forward
+const timeZone = 'America/New_York';
 const inputStr = `${date}T${time}[${timeZone}]`;
 
 // 2. Detect conflicts using 'reject'
 let hasConflict = false;
 try {
-  // 'reject' throws RangeError if the time is ambiguous or does not exist
-  Temporal.ZonedDateTime.from(inputStr, { disambiguation: "reject" });
+	// 'reject' throws RangeError if the time is ambiguous or does not exist
+	Temporal.ZonedDateTime.from(inputStr, { disambiguation: 'reject' });
 } catch (e) {
-  if (e instanceof RangeError) {
-    hasConflict = true;
-    console.log("This time falls in a DST transition gap or overlap.");
-  }
+	if (e instanceof RangeError) {
+		hasConflict = true;
+		console.log('This time falls in a DST transition gap or overlap.');
+	}
 }
 
 // 3. Resolve the time safely using 'compatible' (default)
 // 'compatible' will resolve to a valid time even if skipped or repeated
 const hostTime = Temporal.ZonedDateTime.from(inputStr, {
-  disambiguation: "compatible",
+	disambiguation: 'compatible'
 });
 console.log(`Resolved time: ${hostTime.toString()}`);
 
 // 4. Convert to another time zone (e.g., Tokyo)
-const tokyoTime = hostTime.withTimeZone("Asia/Tokyo");
+const tokyoTime = hostTime.withTimeZone('Asia/Tokyo');
 console.log(`Tokyo time: ${tokyoTime.toString()}`);
 ```
 
@@ -64,18 +64,18 @@ For environments without native `Temporal` support, you must conditionally load 
 ```javascript
 // Check if Temporal is supported natively
 (async () => {
-  if (typeof Temporal === "undefined") {
-    // Load the polyfill conditionally
-    const module = await import("https://esm.sh/@js-temporal/polyfill");
-    globalThis.Temporal = module.Temporal;
-    // Extend Date.prototype if needed
-    Date.prototype.toTemporalInstant = module.toTemporalInstant;
-    initializeApp();
-  }
+	if (typeof Temporal === 'undefined') {
+		// Load the polyfill conditionally
+		const module = await import('https://esm.sh/@js-temporal/polyfill');
+		globalThis.Temporal = module.Temporal;
+		// Extend Date.prototype if needed
+		Date.prototype.toTemporalInstant = module.toTemporalInstant;
+		initializeApp();
+	}
 })();
 
 function initializeApp() {
-  // Your app logic here
-  console.log("Temporal is ready:", typeof Temporal);
+	// Your app logic here
+	console.log('Temporal is ready:', typeof Temporal);
 }
 ```

@@ -27,8 +27,8 @@ The following examples demonstrate dynamic container layout controls, showcasing
 
 ```html
 <div class="nested-curve-parent">
-  <img src="avatar.jpg" alt="Nested Curve Demo" />
-  <div class="nested-curve-footer">Card Footer</div>
+	<img src="avatar.jpg" alt="Nested Curve Demo" />
+	<div class="nested-curve-footer">Card Footer</div>
 </div>
 ```
 
@@ -38,23 +38,23 @@ The following examples demonstrate dynamic container layout controls, showcasing
  * Keeps base level 1 fallback clipping roughly at the inner padding box.
  */
 .nested-curve-parent {
-  /* Level 1 Fallback: clips child roughly at the padding box */
-  overflow: hidden;
+	/* Level 1 Fallback: clips child roughly at the padding box */
+	overflow: hidden;
 }
 
 /* Inner footer component with 12px rounded to visually demonstrate automatic concentric corner clipping */
 .nested-curve-footer {
-  background: #111;
-  color: #fff;
+	background: #111;
+	color: #fff;
 }
 
 @supports (overflow-clip-margin: content-box) {
-  .nested-curve-parent {
-    /* MANDATORY: overflow: clip is required on non-replaced elements */
-    overflow: clip;
-    /* Automatically curves clipping edge to match inner content-box radius */
-    overflow-clip-margin: content-box;
-  }
+	.nested-curve-parent {
+		/* MANDATORY: overflow: clip is required on non-replaced elements */
+		overflow: clip;
+		/* Automatically curves clipping edge to match inner content-box radius */
+		overflow-clip-margin: content-box;
+	}
 }
 ```
 
@@ -64,10 +64,10 @@ The following examples demonstrate dynamic container layout controls, showcasing
 
 ```html
 <div class="safety-zone-parent">
-  <h4>Clipped Container</h4>
-  <p>Inner content boundaries safely contained.</p>
-  <!-- Child button element positioned inside with a prominent shadow -->
-  <button class="demo-glowing-btn">Submit</button>
+	<h4>Clipped Container</h4>
+	<p>Inner content boundaries safely contained.</p>
+	<!-- Child button element positioned inside with a prominent shadow -->
+	<button class="demo-glowing-btn">Submit</button>
 </div>
 ```
 
@@ -77,22 +77,22 @@ The following examples demonstrate dynamic container layout controls, showcasing
  * Base fallback uses overflow: hidden, which abruptly slices child element shadows.
  */
 .safety-zone-parent {
-  /* Level 1 Fallback: clips overflowing content but truncates child shadows */
-  overflow: hidden;
+	/* Level 1 Fallback: clips overflowing content but truncates child shadows */
+	overflow: hidden;
 }
 
 /* Child button element positioned inside with an expanded shadow */
 .demo-glowing-btn {
-  display: block;
-  box-shadow: 0 8px 13px rgba(229, 46, 113, 0.7);
+	display: block;
+	box-shadow: 0 8px 13px rgba(229, 46, 113, 0.7);
 }
 
 @supports (overflow-clip-margin: 15px) {
-  .safety-zone-parent {
-    overflow: clip;
-    /* Establishes a visible safety zone allowing child element shadows to render safely outside */
-    overflow-clip-margin: 15px;
-  }
+	.safety-zone-parent {
+		overflow: clip;
+		/* Establishes a visible safety zone allowing child element shadows to render safely outside */
+		overflow-clip-margin: 15px;
+	}
 }
 ```
 
@@ -121,15 +121,15 @@ For target environments lacking native support for `overflow: clip` or `overflow
 ```html
 <!-- 1. Nested rounded edges fallback -->
 <div class="demo-container-fallback">
-  <img src="example.jpg" alt="Nested Curve Fallback" />
-  <div class="demo-footer-fallback">Footer</div>
+	<img src="example.jpg" alt="Nested Curve Fallback" />
+	<div class="demo-footer-fallback">Footer</div>
 </div>
 
 <!-- 2. Child element shadow bleed fallback -->
 <div class="demo-safety-parent">
-  <h4>Container</h4>
-  <p>Inner boundaries contained.</p>
-  <button class="demo-glowing-btn">Submit</button>
+	<h4>Container</h4>
+	<p>Inner boundaries contained.</p>
+	<button class="demo-glowing-btn">Submit</button>
 </div>
 ```
 
@@ -139,20 +139,20 @@ For target environments lacking native support for `overflow: clip` or `overflow
  * Keeps base level 1 fallback clipping roughly at the inner padding box.
  */
 .demo-container-fallback {
-  /* Level 1 Fallback: clip child roughly at padding box */
-  overflow: hidden;
+	/* Level 1 Fallback: clip child roughly at padding box */
+	overflow: hidden;
 }
 
 .demo-container-fallback img {
-  object-fit: cover;
-  display: block;
+	object-fit: cover;
+	display: block;
 }
 
 @supports (overflow-clip-margin: content-box) {
-  .demo-container-fallback {
-    overflow: clip;
-    overflow-clip-margin: content-box;
-  }
+	.demo-container-fallback {
+		overflow: clip;
+		overflow-clip-margin: content-box;
+	}
 }
 
 /**
@@ -160,22 +160,22 @@ For target environments lacking native support for `overflow: clip` or `overflow
  * Base fallback clips content using overflow: hidden, abruptly truncating child element shadows.
  */
 .demo-safety-parent {
-  /* Level 1 Fallback */
-  overflow: hidden;
+	/* Level 1 Fallback */
+	overflow: hidden;
 }
 
 .demo-glowing-btn {
-  display: block;
-  width: 100%;
-  padding: 6px 12px;
-  background: #e52e71;
-  box-shadow: 0 8px 13px rgba(229, 46, 113, 0.65);
+	display: block;
+	width: 100%;
+	padding: 6px 12px;
+	background: #e52e71;
+	box-shadow: 0 8px 13px rgba(229, 46, 113, 0.65);
 }
 
 @supports (overflow-clip-margin: 15px) {
-  .demo-safety-parent {
-    overflow: clip;
-    overflow-clip-margin: 15px;
-  }
+	.demo-safety-parent {
+		overflow: clip;
+		overflow-clip-margin: 15px;
+	}
 }
 ```

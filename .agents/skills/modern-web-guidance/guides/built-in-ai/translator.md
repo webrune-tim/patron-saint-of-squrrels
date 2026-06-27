@@ -31,26 +31,26 @@ To run Gemini Nano and associated models, the system needs:
 
 ```javascript
 const options = {
-  sourceLanguage: "es",
-  targetLanguage: "fr",
+	sourceLanguage: 'es',
+	targetLanguage: 'fr'
 };
 
 const availability = await Translator.availability(options);
 
-if (availability === "available" || availability === "downloadable") {
-  // A user gesture is strictly required to trigger create when downloadable
-  document
-    .getElementById("start-translation-btn")
-    .addEventListener("click", async () => {
-      const translator = await Translator.create({
-        ...options,
-        monitor(m) {
-          m.addEventListener("downloadprogress", (e) => {
-            console.log(`Downloaded ${Math.round(e.loaded * 100)}%`);
-          });
-        },
-      });
-    });
+if (availability === 'available' || availability === 'downloadable') {
+	// A user gesture is strictly required to trigger create when downloadable
+	document
+		.getElementById('start-translation-btn')
+		.addEventListener('click', async () => {
+			const translator = await Translator.create({
+				...options,
+				monitor(m) {
+					m.addEventListener('downloadprogress', (e) => {
+						console.log(`Downloaded ${Math.round(e.loaded * 100)}%`);
+					});
+				}
+			});
+		});
 }
 ```
 
@@ -62,12 +62,12 @@ The API supports both static and streaming responses.
 
 ```javascript
 const translator = await Translator.create({
-  sourceLanguage: "en",
-  targetLanguage: "fr",
+	sourceLanguage: 'en',
+	targetLanguage: 'fr'
 });
 
 const result = await translator.translate(
-  "Where is the next bus stop, please?",
+	'Where is the next bus stop, please?'
 );
 console.log(result);
 // Output: "Où est le prochain arrêt de bus, s'il vous plaît ?"
@@ -78,7 +78,7 @@ console.log(result);
 ```javascript
 const stream = translator.translateStreaming(longText);
 for await (const chunk of stream) {
-  console.log(chunk);
+	console.log(chunk);
 }
 ```
 
@@ -146,10 +146,10 @@ Unsupported in: Edge, Firefox, and Safari.
 Before use, check if the `Translator` object is available in the global scope:
 
 ```javascript
-if ("Translator" in self) {
-  // The Translator API is supported.
+if ('Translator' in self) {
+	// The Translator API is supported.
 } else {
-  // Execute fallback strategy
+	// Execute fallback strategy
 }
 ```
 

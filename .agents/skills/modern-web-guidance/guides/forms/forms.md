@@ -19,12 +19,12 @@
 
 ```html
 <form action="/search" method="GET">
-  <fieldset>
-    <legend>Search Preferences</legend>
-    <label for="q">Query:</label>
-    <input type="text" id="q" name="q" required />
-    <button type="submit">Search</button>
-  </fieldset>
+	<fieldset>
+		<legend>Search Preferences</legend>
+		<label for="q">Query:</label>
+		<input type="text" id="q" name="q" required />
+		<button type="submit">Search</button>
+	</fieldset>
 </form>
 ```
 
@@ -61,22 +61,22 @@
 
 ```html
 <div class="field">
-  <label for="username">Username:</label>
-  <input
-    type="text"
-    id="username"
-    name="username"
-    aria-describedby="user-help"
-    required
-  />
-  <span id="user-help" class="hint">3-12 characters.</span>
+	<label for="username">Username:</label>
+	<input
+		type="text"
+		id="username"
+		name="username"
+		aria-describedby="user-help"
+		required
+	/>
+	<span id="user-help" class="hint">3-12 characters.</span>
 </div>
 
 <style>
-  input:focus-visible {
-    outline: 3px solid #0b57d0;
-    outline-offset: 2px;
-  }
+	input:focus-visible {
+		outline: 3px solid #0b57d0;
+		outline-offset: 2px;
+	}
 </style>
 ```
 
@@ -96,12 +96,12 @@
 ```html
 <label for="zip">ZIP Code:</label>
 <input
-  type="text"
-  id="zip"
-  name="zip"
-  autocomplete="postal-code"
-  inputmode="numeric"
-  pattern="\d{5}"
+	type="text"
+	id="zip"
+	name="zip"
+	autocomplete="postal-code"
+	inputmode="numeric"
+	pattern="\d{5}"
 />
 ```
 
@@ -122,13 +122,13 @@
 <input type="text" id="code" name="code" required pattern="\d{4}" />
 
 <script>
-  const input = document.getElementById("code");
-  input.addEventListener("invalid", () => {
-    input.setCustomValidity("Please enter exactly 4 digits.");
-  });
-  input.addEventListener("input", () => {
-    input.setCustomValidity("");
-  });
+	const input = document.getElementById('code');
+	input.addEventListener('invalid', () => {
+		input.setCustomValidity('Please enter exactly 4 digits.');
+	});
+	input.addEventListener('input', () => {
+		input.setCustomValidity('');
+	});
 </script>
 ```
 
@@ -159,27 +159,27 @@
 
 ```css
 .form-group {
-  margin-block-end: 1.5rem;
+	margin-block-end: 1.5rem;
 }
 
 /* Expand clickable tap area without layout shift */
 label {
-  display: inline-block;
-  padding: 10px 0;
-  margin: -10px 0;
+	display: inline-block;
+	padding: 10px 0;
+	margin: -10px 0;
 }
 
 input {
-  font-size: 1rem;
-  padding: 0.75rem;
-  min-height: 48px;
-  box-sizing: border-box;
+	font-size: 1rem;
+	padding: 0.75rem;
+	min-height: 48px;
+	box-sizing: border-box;
 }
 
 @media (pointer: coarse) {
-  input {
-    min-height: 52px;
-  }
+	input {
+		min-height: 52px;
+	}
 }
 ```
 
@@ -196,32 +196,32 @@ input {
 
 ```html
 <div class="checkbox-container">
-  <input type="checkbox" id="sub" name="sub" class="visually-hidden" />
-  <label for="sub" class="checkbox-label">Subscribe</label>
+	<input type="checkbox" id="sub" name="sub" class="visually-hidden" />
+	<label for="sub" class="checkbox-label">Subscribe</label>
 </div>
 
 <style>
-  .visually-hidden {
-    position: absolute;
-    clip-path: inset(50%);
-    overflow: hidden;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
-    white-space: nowrap;
-  }
-  .checkbox-label::before {
-    content: "";
-    display: inline-block;
-    width: 1.25rem;
-    height: 1.25rem;
-    border: 2px solid #ccc;
-  }
-  input:focus-visible + .checkbox-label::before {
-    outline: 2px solid #0b57d0;
-  }
+	.visually-hidden {
+		position: absolute;
+		clip-path: inset(50%);
+		overflow: hidden;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		border: 0;
+		white-space: nowrap;
+	}
+	.checkbox-label::before {
+		content: '';
+		display: inline-block;
+		width: 1.25rem;
+		height: 1.25rem;
+		border: 2px solid #ccc;
+	}
+	input:focus-visible + .checkbox-label::before {
+		outline: 2px solid #0b57d0;
+	}
 </style>
 ```
 
@@ -238,10 +238,10 @@ input {
 ### Code Example
 
 ```js
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const data = new FormData(form);
-  // fetch('/submit', { method: 'POST', body: data });
+form.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const data = new FormData(form);
+	// fetch('/submit', { method: 'POST', body: data });
 });
 ```
 
@@ -266,72 +266,72 @@ form.addEventListener("submit", (e) => {
 
 ```html
 <form method="post">
-  <input type="hidden" name="csrf_token" value="secure_token_abc123" />
+	<input type="hidden" name="csrf_token" value="secure_token_abc123" />
 
-  <h1>Sign up</h1>
+	<h1>Sign up</h1>
 
-  <div class="form-group">
-    <label for="name">Full name</label>
-    <input
-      id="name"
-      name="name"
-      autocomplete="name"
-      required
-      pattern="[\p{L}\.\- ]+"
-    />
-  </div>
+	<div class="form-group">
+		<label for="name">Full name</label>
+		<input
+			id="name"
+			name="name"
+			autocomplete="name"
+			required
+			pattern="[\p{L}\.\- ]+"
+		/>
+	</div>
 
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input
-      id="email"
-      name="email"
-      type="email"
-      autocomplete="username"
-      required
-    />
-  </div>
+	<div class="form-group">
+		<label for="email">Email</label>
+		<input
+			id="email"
+			name="email"
+			type="email"
+			autocomplete="username"
+			required
+		/>
+	</div>
 
-  <div class="form-group">
-    <label for="password">Password</label>
-    <button
-      id="toggle-password"
-      type="button"
-      aria-pressed="false"
-      aria-label="Show password"
-      aria-describedby="toggle-warning"
-    >
-      <img
-        class="icon-eye"
-        src="/icons/eye.svg"
-        alt=""
-        width="20"
-        height="20"
-      />
-      <img
-        class="icon-eye-off"
-        src="/icons/eye-off.svg"
-        alt=""
-        width="20"
-        height="20"
-      />
-    </button>
-    <span id="toggle-warning" class="visually-hidden"
-      >Warning: this will display your password on the screen.</span
-    >
-    <input
-      id="password"
-      name="password"
-      type="password"
-      autocomplete="new-password"
-      minlength="8"
-      aria-describedby="password-constraints"
-      required
-    />
-    <div id="password-constraints">Eight or more characters.</div>
-  </div>
+	<div class="form-group">
+		<label for="password">Password</label>
+		<button
+			id="toggle-password"
+			type="button"
+			aria-pressed="false"
+			aria-label="Show password"
+			aria-describedby="toggle-warning"
+		>
+			<img
+				class="icon-eye"
+				src="/icons/eye.svg"
+				alt=""
+				width="20"
+				height="20"
+			/>
+			<img
+				class="icon-eye-off"
+				src="/icons/eye-off.svg"
+				alt=""
+				width="20"
+				height="20"
+			/>
+		</button>
+		<span id="toggle-warning" class="visually-hidden"
+			>Warning: this will display your password on the screen.</span
+		>
+		<input
+			id="password"
+			name="password"
+			type="password"
+			autocomplete="new-password"
+			minlength="8"
+			aria-describedby="password-constraints"
+			required
+		/>
+		<div id="password-constraints">Eight or more characters.</div>
+	</div>
 
-  <button id="sign-up">Sign up</button>
+	<button id="sign-up">Sign up</button>
 </form>
 ```
 
@@ -352,30 +352,30 @@ form.addEventListener("submit", (e) => {
 ```html
 <!-- Accessible Address Form with Autofill -->
 <form action="/save-address" method="POST">
-  <div class="form-group">
-    <label for="full-name">Full name</label>
-    <input
-      type="text"
-      id="full-name"
-      name="full_name"
-      maxlength="100"
-      required
-      autocomplete="name"
-    />
-  </div>
+	<div class="form-group">
+		<label for="full-name">Full name</label>
+		<input
+			type="text"
+			id="full-name"
+			name="full_name"
+			maxlength="100"
+			required
+			autocomplete="name"
+		/>
+	</div>
 
-  <div class="form-group">
-    <label for="address">Address</label>
-    <textarea
-      id="address"
-      name="address"
-      required
-      autocomplete="street-address"
-      maxlength="300"
-    ></textarea>
-  </div>
+	<div class="form-group">
+		<label for="address">Address</label>
+		<textarea
+			id="address"
+			name="address"
+			required
+			autocomplete="street-address"
+			maxlength="300"
+		></textarea>
+	</div>
 
-  <button type="submit">Save Address</button>
+	<button type="submit">Save Address</button>
 </form>
 ```
 
@@ -396,25 +396,25 @@ form.addEventListener("submit", (e) => {
 
 ```html
 <form action="/submit" method="POST" id="track-form">
-  <label for="postal-code">ZIP or postal code</label>
-  <input
-    type="text"
-    id="postal-code"
-    name="postal-code"
-    autocomplete="postal-code"
-    maxlength="20"
-    required
-  />
-  <button type="submit" id="submit-btn">Submit</button>
+	<label for="postal-code">ZIP or postal code</label>
+	<input
+		type="text"
+		id="postal-code"
+		name="postal-code"
+		autocomplete="postal-code"
+		maxlength="20"
+		required
+	/>
+	<button type="submit" id="submit-btn">Submit</button>
 </form>
 
 <script>
-  const trackForm = document.getElementById("track-form");
-  const trackBtn = document.getElementById("submit-btn");
+	const trackForm = document.getElementById('track-form');
+	const trackBtn = document.getElementById('submit-btn');
 
-  trackBtn.addEventListener("click", () => {
-    console.log("Analytics Event: Submit clicked");
-  });
+	trackBtn.addEventListener('click', () => {
+		console.log('Analytics Event: Submit clicked');
+	});
 </script>
 ```
 
@@ -431,15 +431,15 @@ form.addEventListener("submit", (e) => {
 
 ```html
 <nav aria-label="Progress">
-  <ol class="progress-tracker">
-    <li class="step-done">Step 1: Account</li>
-    <li class="step-active" aria-current="step">Step 2: Shipping</li>
-    <li class="step-todo">Step 3: Payment</li>
-  </ol>
+	<ol class="progress-tracker">
+		<li class="step-done">Step 1: Account</li>
+		<li class="step-active" aria-current="step">Step 2: Shipping</li>
+		<li class="step-todo">Step 3: Payment</li>
+	</ol>
 </nav>
 
 <button type="button" onclick="history.back()" enterkeyhint="previous">
-  Previous
+	Previous
 </button>
 <button type="submit" enterkeyhint="next">Next</button>
 ```

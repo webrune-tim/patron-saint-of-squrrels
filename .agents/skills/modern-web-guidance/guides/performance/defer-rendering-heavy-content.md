@@ -39,10 +39,10 @@ The `contain-intrinsic-size` CSS shorthand property acts as a placeholder dimens
 ```css
 /* DO ONLY apply this class to items OUTSIDE the initial layout viewport */
 .heavy-section-deferred {
-  /* MANDATORY: Skips rendering calculations when off-screen */
-  content-visibility: auto;
+	/* MANDATORY: Skips rendering calculations when off-screen */
+	content-visibility: auto;
 
-  /* Mandatory: Provide an estimated size to prevent layouts shifts.
+	/* Mandatory: Provide an estimated size to prevent layouts shifts.
     - 'auto' is optional and enables the browser to remember the actual size
       once rendered. It must be paired with a <length> value to be used for
       the first render.
@@ -51,7 +51,7 @@ The `contain-intrinsic-size` CSS shorthand property acts as a placeholder dimens
     - '150px' is the estimated height of this element. This can be any valid
       CSS <length> value.
    */
-  contain-intrinsic-size: auto none auto 150px;
+	contain-intrinsic-size: auto none auto 150px;
 }
 ```
 
@@ -65,12 +65,12 @@ The `contain-intrinsic-size` CSS shorthand property acts as a placeholder dimens
 
 ```css
 .cached-view {
-  /* Hides content but caches rendering state */
-  content-visibility: hidden;
+	/* Hides content but caches rendering state */
+	content-visibility: hidden;
 }
 
 .cached-view.is-active {
-  content-visibility: visible;
+	content-visibility: visible;
 }
 ```
 
@@ -94,14 +94,14 @@ When `content-visibility` is not supported it will be ignored by the browser. In
 ```css
 /* Default for everyone */
 .inactive {
-  display: none;
+	display: none;
 }
 
 /* Modern Browsers only */
 @supports (content-visibility: hidden) {
-  .inactive {
-    display: block; /* Turn the layout box back on */
-    content-visibility: hidden;
-  }
+	.inactive {
+		display: block; /* Turn the layout box back on */
+		content-visibility: hidden;
+	}
 }
 ```

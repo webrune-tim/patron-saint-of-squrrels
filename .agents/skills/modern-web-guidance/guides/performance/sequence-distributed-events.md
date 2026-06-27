@@ -18,35 +18,35 @@ To sequence high-frequency events using `Temporal`:
 ```javascript
 // 1. Capture timestamps for incoming events
 function recordEvent(eventType, nodeId) {
-  return {
-    nodeId,
-    eventType,
-    timestamp: Temporal.Now.instant(), // Nanosecond resolution
-  };
+	return {
+		nodeId,
+		eventType,
+		timestamp: Temporal.Now.instant() // Nanosecond resolution
+	};
 }
 
 // 2. Sort events chronologically
 function sequenceEvents(events) {
-  // Always use Temporal.Instant.compare for sorting instants
-  return [...events].sort((a, b) =>
-    Temporal.Instant.compare(a.timestamp, b.timestamp),
-  );
+	// Always use Temporal.Instant.compare for sorting instants
+	return [...events].sort((a, b) =>
+		Temporal.Instant.compare(a.timestamp, b.timestamp)
+	);
 }
 
 // 3. Calculate delays between events
 function analyzeTelemetry(sortedEvents) {
-  for (let i = 1; i < sortedEvents.length; i++) {
-    const prev = sortedEvents[i - 1];
-    const curr = sortedEvents[i];
+	for (let i = 1; i < sortedEvents.length; i++) {
+		const prev = sortedEvents[i - 1];
+		const curr = sortedEvents[i];
 
-    // Calculate difference in nanoseconds
-    const duration = curr.timestamp.since(prev.timestamp);
-    const nsDiff = duration.total("nanoseconds");
+		// Calculate difference in nanoseconds
+		const duration = curr.timestamp.since(prev.timestamp);
+		const nsDiff = duration.total('nanoseconds');
 
-    console.log(
-      `Delay between Event ${prev.eventType} and Event ${curr.eventType}: ${nsDiff}ns`,
-    );
-  }
+		console.log(
+			`Delay between Event ${prev.eventType} and Event ${curr.eventType}: ${nsDiff}ns`
+		);
+	}
 }
 ```
 
@@ -67,14 +67,14 @@ For environments without native support, use a standards-compliant polyfill such
 
 ```javascript
 (async () => {
-  // Check for native support
-  if (typeof Temporal === "undefined") {
-    // Dynamically load polyfill using an ESM-compatible CDN
-    const module = await import("https://esm.sh/@js-temporal/polyfill");
-    // The polyfill does not auto-install globally, so we must assign it
-    globalThis.Temporal = module.Temporal;
-  }
+	// Check for native support
+	if (typeof Temporal === 'undefined') {
+		// Dynamically load polyfill using an ESM-compatible CDN
+		const module = await import('https://esm.sh/@js-temporal/polyfill');
+		// The polyfill does not auto-install globally, so we must assign it
+		globalThis.Temporal = module.Temporal;
+	}
 
-  // Proceed with application logic
+	// Proceed with application logic
 })();
 ```

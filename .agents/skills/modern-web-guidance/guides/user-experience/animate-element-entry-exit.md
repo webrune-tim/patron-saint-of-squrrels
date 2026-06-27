@@ -13,49 +13,49 @@ To animate an element when toggling its visibility via an attribute (e.g., `hidd
 
 ```css
 .card {
-  display: block;
-  opacity: 1;
-  translate: 0;
-  /* MANDATORY: Use transition-behavior: allow-discrete for display transition */
-  transition:
-    display 0.4s,
-    opacity 0.4s ease-out,
-    translate 0.4s ease-out;
-  transition-behavior: allow-discrete;
+	display: block;
+	opacity: 1;
+	translate: 0;
+	/* MANDATORY: Use transition-behavior: allow-discrete for display transition */
+	transition:
+		display 0.4s,
+		opacity 0.4s ease-out,
+		translate 0.4s ease-out;
+	transition-behavior: allow-discrete;
 }
 
 /* Entry animation: transition FROM these values when first rendered */
 @starting-style {
-  .card {
-    opacity: 0;
-    translate: 0 -20px;
-  }
+	.card {
+		opacity: 0;
+		translate: 0 -20px;
+	}
 }
 
 /* Exit animation: transition TO these values when hidden */
 .card:where(.hidden, [hidden]) {
-  display: none;
-  opacity: 0;
-  translate: 0 -20px;
+	display: none;
+	opacity: 0;
+	translate: 0 -20px;
 }
 
 /* Respect user preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .card {
-    /* Disable movement and shorten duration for a simple fade */
-    translate: none;
-    transition-duration: 0.1s;
-  }
+	.card {
+		/* Disable movement and shorten duration for a simple fade */
+		translate: none;
+		transition-duration: 0.1s;
+	}
 
-  @starting-style {
-    .card {
-      translate: none;
-    }
-  }
+	@starting-style {
+		.card {
+			translate: none;
+		}
+	}
 
-  .card:where(.hidden, [hidden]) {
-    translate: none;
-  }
+	.card:where(.hidden, [hidden]) {
+		translate: none;
+	}
 }
 ```
 
@@ -68,17 +68,17 @@ For elements added via `appendChild()` or removed via `remove()`:
 
 ```javascript
 // Trigger exit transition
-element.setAttribute("hidden", true);
+element.setAttribute('hidden', true);
 
 // 2. Wait for all active transitions/animations to finish,
 //    with a failsafe timeout in case an animation never ends (e.g. for looping animations)
 const animations = element.getAnimations();
 if (animations.length > 0) {
-  await Promise.race([
-    // Promise.allSettled ensures we wait even if some animations fail
-    Promise.allSettled(animations.map((a) => a.finished)),
-    new Promise((r) => setTimeout(r, 2000)),
-  ]);
+	await Promise.race([
+		// Promise.allSettled ensures we wait even if some animations fail
+		Promise.allSettled(animations.map((a) => a.finished)),
+		new Promise((r) => setTimeout(r, 2000))
+	]);
 }
 
 // 3. Finally remove the node from the DOM
@@ -104,10 +104,10 @@ For browsers that do not support these features, elements will toggle `display: 
 ```javascript
 // Detect support for discrete transitions and starting-style
 const supportsModernTransitions =
-  window.CSS && CSS.supports("transition-behavior", "allow-discrete");
+	window.CSS && CSS.supports('transition-behavior', 'allow-discrete');
 
 if (!supportsModernTransitions) {
-  // Implement manual JS-based fallback for entry/exit
+	// Implement manual JS-based fallback for entry/exit
 }
 ```
 
@@ -115,20 +115,20 @@ if (!supportsModernTransitions) {
 
 ```javascript
 // To show:
-el.style.display = "";
+el.style.display = '';
 requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-    el.classList.remove("hidden");
-  });
+	requestAnimationFrame(() => {
+		el.classList.remove('hidden');
+	});
 });
 
 // To hide:
-el.setAttribute("hidden", true);
+el.setAttribute('hidden', true);
 el.addEventListener(
-  "transitionend",
-  () => {
-    if (el.classList.contains("hidden")) el.style.display = "none";
-  },
-  { once: true },
+	'transitionend',
+	() => {
+		if (el.classList.contains('hidden')) el.style.display = 'none';
+	},
+	{ once: true }
 );
 ```

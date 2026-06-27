@@ -34,14 +34,14 @@ A `tag` can also be used, either at a global level or on a per-rule basis. When 
 
 ```html
 <script type="speculationrules">
-  {
-    "tag": "product-page-speculations",
-    "prefetch": [
-      {
-        "urls": ["/product/1", "/product/2", "/product/3"]
-      }
-    ]
-  }
+	{
+		"tag": "product-page-speculations",
+		"prefetch": [
+			{
+				"urls": ["/product/1", "/product/2", "/product/3"]
+			}
+		]
+	}
 </script>
 ```
 
@@ -49,14 +49,14 @@ A `tag` can also be used, either at a global level or on a per-rule basis. When 
 
 ```html
 <script type="speculationrules">
-  {
-    "tag": "all-links-speculations",
-    "prerender": [
-      {
-        "where": { "href_matches": "/*" }
-      }
-    ]
-  }
+	{
+		"tag": "all-links-speculations",
+		"prerender": [
+			{
+				"where": { "href_matches": "/*" }
+			}
+		]
+	}
 </script>
 ```
 
@@ -64,22 +64,22 @@ A `tag` can also be used, either at a global level or on a per-rule basis. When 
 
 ```html
 <script type="speculationrules">
-  {
-    "tag": "speculations-with-exclusions",
-    "prerender": [
-      {
-        "where": {
-          "and": [
-            { "href_matches": "/*" },
-            { "not": { "href_matches": "/wp-admin" } },
-            { "not": { "href_matches": "/*\\?*(^|&)add-to-cart=*" } },
-            { "not": { "selector_matches": ".do-not-prerender" } },
-            { "not": { "selector_matches": "[rel~=nofollow]" } }
-          ]
-        }
-      }
-    ]
-  }
+	{
+		"tag": "speculations-with-exclusions",
+		"prerender": [
+			{
+				"where": {
+					"and": [
+						{ "href_matches": "/*" },
+						{ "not": { "href_matches": "/wp-admin" } },
+						{ "not": { "href_matches": "/*\\?*(^|&)add-to-cart=*" } },
+						{ "not": { "selector_matches": ".do-not-prerender" } },
+						{ "not": { "selector_matches": "[rel~=nofollow]" } }
+					]
+				}
+			}
+		]
+	}
 </script>
 ```
 
@@ -89,22 +89,22 @@ This example shows a rule set that prefetches all links eagerly, and then goes f
 
 ```html
 <script type="speculationrules">
-  {
-    "prefetch": [
-      {
-        "tag": "prefetch-speculations",
-        "where": { "href_matches": "/*" },
-        "eagerness": "eager"
-      }
-    ],
-    "prerender": [
-      {
-        "tag": "prerender-speculations",
-        "where": { "href_matches": "/*" },
-        "eagerness": "moderate"
-      }
-    ]
-  }
+	{
+		"prefetch": [
+			{
+				"tag": "prefetch-speculations",
+				"where": { "href_matches": "/*" },
+				"eagerness": "eager"
+			}
+		],
+		"prerender": [
+			{
+				"tag": "prerender-speculations",
+				"where": { "href_matches": "/*" },
+				"eagerness": "moderate"
+			}
+		]
+	}
 </script>
 ```
 

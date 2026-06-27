@@ -80,50 +80,50 @@ Make sure to add appropriate `autocomplete` values in payment card forms. Withou
 <!-- inputmode="numeric" gives a numeric keyboard without the increment/decrement spinner -->
 <!-- DO NOT use type="number" — it adds increment/decrement controls and strips leading zeros -->
 <input
-  id="cc-number"
-  name="cc-number"
-  type="text"
-  autocomplete="cc-number"
-  inputmode="numeric"
-  maxlength="19"
-  pattern="[\d ]{13,19}"
-  required
+	id="cc-number"
+	name="cc-number"
+	type="text"
+	autocomplete="cc-number"
+	inputmode="numeric"
+	maxlength="19"
+	pattern="[\d ]{13,19}"
+	required
 />
 
 <!-- cc-name autofills with the name exactly as it appears on the card; Unicode pattern allows international names -->
 <input
-  id="cc-name"
-  name="cc-name"
-  type="text"
-  autocomplete="cc-name"
-  maxlength="50"
-  pattern="[\p{L} \-\.]+"
-  required
+	id="cc-name"
+	name="cc-name"
+	type="text"
+	autocomplete="cc-name"
+	maxlength="50"
+	pattern="[\p{L} \-\.]+"
+	required
 />
 
 <!-- cc-exp autofills the full expiry date as MM/YY -->
 <!-- MANDATORY: Place format hints above the input so autocomplete popovers or virtual keyboards do not obscure them during editing -->
 <span id="exp-hint" class="hint">Format: MM/YY</span>
 <input
-  id="cc-exp"
-  name="cc-exp"
-  type="text"
-  autocomplete="cc-exp"
-  aria-describedby="exp-hint"
-  maxlength="5"
-  required
+	id="cc-exp"
+	name="cc-exp"
+	type="text"
+	autocomplete="cc-exp"
+	aria-describedby="exp-hint"
+	maxlength="5"
+	required
 />
 
 <!-- cc-csc autofills the security code; DO NOT use type="password" here -->
 <input
-  id="cc-csc"
-  name="cc-csc"
-  type="text"
-  autocomplete="cc-csc"
-  inputmode="numeric"
-  maxlength="4"
-  pattern="[0-9]{3,4}"
-  required
+	id="cc-csc"
+	name="cc-csc"
+	type="text"
+	autocomplete="cc-csc"
+	inputmode="numeric"
+	maxlength="4"
+	pattern="[0-9]{3,4}"
+	required
 />
 ```
 

@@ -75,15 +75,15 @@ Modern browser-native selectors reduce the need for preprocessors and complex st
 ```css
 /* BAD: duplicate rules instead of using `:where()` */
 [popover]:popover-open {
-  /* styles for native popovers */
+	/* styles for native popovers */
 }
 [popover].\:popover-open {
-  /* same styles again, for polyfilled popovers */
+	/* same styles again, for polyfilled popovers */
 }
 
 /* GOOD */
 [popover]:where(:popover-open, .\:popover-open) {
-  /* same styles in one rule */
+	/* same styles in one rule */
 }
 ```
 
@@ -101,11 +101,11 @@ For example, to apply bottom borders between list items, don't do this:
 
 ```css
 .fancy-list li {
-  border-bottom: 1px solid silver;
+	border-bottom: 1px solid silver;
 }
 
 .fancy-list li:last-child {
-  border-bottom: none;
+	border-bottom: none;
 }
 ```
 
@@ -114,7 +114,7 @@ The actual intent was to only apply the bottom border to the non-last `li`s. The
 
 ```css
 .fancy-list li:not(:last-child) {
-  border-bottom: 1px solid silver;
+	border-bottom: 1px solid silver;
 }
 ```
 
@@ -122,11 +122,11 @@ Similarly, don't do this:
 
 ```css
 button:hover {
-  background: var(--color-blue);
+	background: var(--color-blue);
 }
 
 button:disabled {
-  background: var(--color-neutral);
+	background: var(--color-neutral);
 }
 ```
 
@@ -135,11 +135,11 @@ Instead, do this:
 
 ```css
 button:hover:not(:disabled) {
-  background: var(--color-blue);
+	background: var(--color-blue);
 }
 
 button:disabled {
-  background: var(--color-neutral);
+	background: var(--color-neutral);
 }
 ```
 
@@ -153,7 +153,7 @@ For example, `.card :not(.content *)` will not work as expected for nested cards
 
 ```css
 @scope (.card) to (.content) {
-  /* styles for elements inside .card but not inside .content */
+	/* styles for elements inside .card but not inside .content */
 }
 ```
 
@@ -165,11 +165,11 @@ This is fine:
 
 ```css
 button {
-  background: var(--color-neutral);
+	background: var(--color-neutral);
 }
 
 button.primary {
-  background: var(--color-blue);
+	background: var(--color-blue);
 }
 ```
 
@@ -189,10 +189,10 @@ For example this will not work as expected:
 
 ```css
 .dark .invert {
-  color-scheme: light;
+	color-scheme: light;
 }
 .light .invert {
-  color-scheme: dark;
+	color-scheme: dark;
 }
 ```
 
@@ -201,15 +201,15 @@ Using `@scope` fixes this:
 
 ```css
 @scope (.dark) {
-  .invert {
-    color-scheme: light;
-  }
+	.invert {
+		color-scheme: light;
+	}
 }
 
 @scope (.light) {
-  .invert {
-    color-scheme: dark;
-  }
+	.invert {
+		color-scheme: dark;
+	}
 }
 ```
 
@@ -347,8 +347,8 @@ For most styling purposes (e.g. colors, borders, backgrounds, typography, etc) t
 
 ```css
 .hero {
-  background-image: url("texture.png"), linear-gradient(to bottom, #fff, #eee);
-  background-blend-mode: soft-light;
+	background-image: url('texture.png'), linear-gradient(to bottom, #fff, #eee);
+	background-blend-mode: soft-light;
 }
 ```
 
@@ -372,15 +372,15 @@ To support these browsers, use the token only when its usage is safe by defining
 
 ```css
 :root {
-  --in-oklab: ;
-  --in-oklch: ;
+	--in-oklab: ;
+	--in-oklch: ;
 }
 
 @supports (linear-gradient(in oklab, white, black)) {
-  :root {
-    --in-oklab: in oklab;
-    --in-oklch: in oklch;
-  }
+	:root {
+		--in-oklab: in oklab;
+		--in-oklch: in oklch;
+	}
 }
 ```
 
@@ -388,11 +388,11 @@ Then use like:
 
 ```css
 .card {
-  background: linear-gradient(
-    to bottom var(--in-oklab),
-    var(--accent-color),
-    var(--darker)
-  );
+	background: linear-gradient(
+		to bottom var(--in-oklab),
+		var(--accent-color),
+		var(--darker)
+	);
 }
 ```
 
@@ -410,16 +410,16 @@ Vertical stripes of `1em` width each:
 
 ```css
 background: linear-gradient(to right, var(--color-1) 50%, var(--color-2) 0) 0 /
-  2em;
+	2em;
 ```
 
 Diagonal stripes of `1em` width each:
 
 ```css
 background: repeating-linear-gradient(
-  -45deg,
-  var(--color-1) 0 1em,
-  var(--color-2) 0 2em
+	-45deg,
+	var(--color-1) 0 1em,
+	var(--color-2) 0 2em
 );
 ```
 
@@ -427,7 +427,7 @@ Checkerboard pattern with `1em` squares:
 
 ```css
 background: repeating-conic-gradient(var(--color-1) 0 25%, var(--color-2) 0 50%)
-  0 / 2em 2em;
+	0 / 2em 2em;
 ```
 
 Polka dot with `.5em` radius dots spaced `2em` apart (horizontally/vertically â€” multiply by `sqrt(2)` for diagonal distance):
@@ -436,13 +436,13 @@ Polka dot with `.5em` radius dots spaced `2em` apart (horizontally/vertically â€
 --distance: 2em;
 --radius: 0.5em;
 --polka: radial-gradient(
-  circle,
-  var(--color-1) var(--radius),
-  transparent calc(var(--radius) + 1px)
+	circle,
+	var(--color-1) var(--radius),
+	transparent calc(var(--radius) + 1px)
 );
 background:
-  var(--polka) 0 0,
-  var(--polka) var(--distance) var(--distance) var(--color-2);
+	var(--polka) 0 0,
+	var(--polka) var(--distance) var(--distance) var(--color-2);
 background-size: calc(var(--distance) * 2) calc(var(--distance) * 2);
 ```
 
@@ -450,12 +450,12 @@ Simple pie chart:
 
 ```css
 .pie {
-  --p: 80%;
-  width: 60px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: conic-gradient(var(--color-1) var(--p), transparent 0%)
-    var(--color-2);
+	--p: 80%;
+	width: 60px;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: conic-gradient(var(--color-1) var(--p), transparent 0%)
+		var(--color-2);
 }
 ```
 
@@ -481,26 +481,26 @@ Rendering performance is critical for smooth user experiences, especially in hea
 
 ```css
 .large-section {
-  content-visibility: auto;
-  contain-intrinsic-block-size: auto 800px;
+	content-visibility: auto;
+	contain-intrinsic-block-size: auto 800px;
 }
 
 .row {
-  --row-gap: 0.4rem;
-  --title-height: 1lh;
-  --description-height: 0.85lh;
+	--row-gap: 0.4rem;
+	--title-height: 1lh;
+	--description-height: 0.85lh;
 
-  display: grid;
-  row-gap: var(--row-gap);
-  content-visibility: auto;
-  /* The sum of the title height, row gap, and description height should be the size of the contents when skipped for rendering. */
-  contain-intrinsic-block-size: auto
-    calc(var(--title-height) + var(--row-gap) + var(--description-height));
+	display: grid;
+	row-gap: var(--row-gap);
+	content-visibility: auto;
+	/* The sum of the title height, row gap, and description height should be the size of the contents when skipped for rendering. */
+	contain-intrinsic-block-size: auto
+		calc(var(--title-height) + var(--row-gap) + var(--description-height));
 }
 
 .popover-reveal {
-  /* Allow discrete animations for display transitions */
-  transition: display 0.2s allow-discrete;
+	/* Allow discrete animations for display transitions */
+	transition: display 0.2s allow-discrete;
 }
 ```
 
@@ -513,15 +513,15 @@ Either apply reduced motion versions on a case by case basis, or use a custom pr
 
 ```css
 @property --animation-reduced {
-  syntax: "*";
-  inherits: false;
-  initial-value: none;
+	syntax: '*';
+	inherits: false;
+	initial-value: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation: var(--animation-reduced) !important;
-  }
+	* {
+		animation: var(--animation-reduced) !important;
+	}
 }
 ```
 
@@ -529,8 +529,8 @@ Then, reduced motion versions can be kept together with the original animations:
 
 ```css
 progress:not([value]) {
-  animation: slide 1s infinite linear;
-  --animation-reduced: slide 20s infinite linear;
+	animation: slide 1s infinite linear;
+	--animation-reduced: slide 20s infinite linear;
 }
 ```
 
@@ -554,7 +554,7 @@ CSS:
 
 ```css
 button.save::before {
-  content: url(cloud.svg) / "Save";
+	content: url(cloud.svg) / 'Save';
 }
 ```
 

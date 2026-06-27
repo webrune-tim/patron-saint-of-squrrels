@@ -10,9 +10,9 @@ A custom function is defined using the `@function` rule followed by a dashed nam
 
 ```css
 @function --my-function(--input1 <length>, --input2: default-value) returns
-  <length> {
-  /* Logic goes here */
-  result: var(--input1);
+	<length> {
+	/* Logic goes here */
+	result: var(--input1);
 }
 ```
 
@@ -32,20 +32,20 @@ Ensure consistent color gradients across your app by encapsulating gradient logi
 
 ```css
 @function --fancy-gradient(
-    --start-color <color>,
-    --end-color <color>,
-    --angle: 98deg
-  )
-  returns <image> {
-  result: linear-gradient(
-    in oklab var(--angle),
-    var(--start-color),
-    var(--end-color)
-  );
+		--start-color <color>,
+		--end-color <color>,
+		--angle: 98deg
+	)
+	returns <image> {
+	result: linear-gradient(
+		in oklab var(--angle),
+		var(--start-color),
+		var(--end-color)
+	);
 }
 
 .card {
-  background: --fancy-gradient(#ed73d7, #5d87e9);
+	background: --fancy-gradient(#ed73d7, #5d87e9);
 }
 ```
 
@@ -55,16 +55,16 @@ You can use `@media` or other queries directly inside a function to return diffe
 
 ```css
 @function --grid-template(--count <number>) {
-  /* MANDATORY: Put default value first. */
-  result: 1fr; /* Default: stack */
-  @media (min-width: 800px) {
-    result: repeat(var(--count), 1fr); /* Grid on larger screens */
-  }
+	/* MANDATORY: Put default value first. */
+	result: 1fr; /* Default: stack */
+	@media (min-width: 800px) {
+		result: repeat(var(--count), 1fr); /* Grid on larger screens */
+	}
 }
 
 main {
-  display: grid;
-  grid-template-columns: --grid-template(2);
+	display: grid;
+	grid-template-columns: --grid-template(2);
 }
 ```
 
@@ -86,15 +86,15 @@ In browsers that do not support CSS Functions, values set using CSS functions wi
 
 ```css
 .card {
-  /* Provide fallback, in this case a solid color. */
-  background: #5d87e9;
-  background: --fancy-gradient(#ed73d7, #5d87e9);
+	/* Provide fallback, in this case a solid color. */
+	background: #5d87e9;
+	background: --fancy-gradient(#ed73d7, #5d87e9);
 }
 
 main {
-  /* Provide fallback, in this case a simple stacked default. */
-  grid-template-columns: 1fr;
-  grid-template-columns: --grid-template(2);
+	/* Provide fallback, in this case a simple stacked default. */
+	grid-template-columns: 1fr;
+	grid-template-columns: --grid-template(2);
 }
 ```
 

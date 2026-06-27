@@ -22,21 +22,21 @@ The Critical Rendering Path dictates how quickly the browser converts HTML, CSS,
 ```html
 <!-- Inline critical styles directly in head -->
 <style>
-  body {
-    margin: 0;
-    font-family: system-ui;
-  }
-  .hero {
-    min-height: 100vh;
-  }
+	body {
+		margin: 0;
+		font-family: system-ui;
+	}
+	.hero {
+		min-height: 100vh;
+	}
 </style>
 
 <!-- Defer non-critical CSS -->
 <link
-  rel="preload"
-  href="non-critical.css"
-  as="style"
-  onload="this.onload=null;this.rel='stylesheet'"
+	rel="preload"
+	href="non-critical.css"
+	as="style"
+	onload="this.onload=null;this.rel='stylesheet'"
 />
 <noscript><link rel="stylesheet" href="non-critical.css" /></noscript>
 
@@ -82,21 +82,21 @@ LCP measures the time required to render the largest visible text or image block
 ```html
 <!-- Standard LCP Image -->
 <img
-  src="/images/hero.webp"
-  alt="Hero Product"
-  fetchpriority="high"
-  decoding="sync"
-  width="1200"
-  height="600"
+	src="/images/hero.webp"
+	alt="Hero Product"
+	fetchpriority="high"
+	decoding="sync"
+	width="1200"
+	height="600"
 />
 
 <!-- Preloading a CSS-based LCP background -->
 <link
-  rel="preload"
-  as="image"
-  href="/images/bg-hero.webp"
-  fetchpriority="high"
-  type="image/webp"
+	rel="preload"
+	as="image"
+	href="/images/bg-hero.webp"
+	fetchpriority="high"
+	type="image/webp"
 />
 
 <!-- Demoting an above-the-fold non-LCP carousel image -->
@@ -127,22 +127,22 @@ INP measures the latency of all interactive events across the page's lifecycle. 
 ```javascript
 // Polyfill for yielding to main thread
 async function yieldToMain() {
-  if ("scheduler" in window && "yield" in scheduler) {
-    return await scheduler.yield();
-  }
-  return new Promise((resolve) => setTimeout(resolve, 0));
+	if ('scheduler' in window && 'yield' in scheduler) {
+		return await scheduler.yield();
+	}
+	return new Promise((resolve) => setTimeout(resolve, 0));
 }
 
 // Processing a large array without blocking user input
 async function processLargeList(items) {
-  for (let i = 0; i < items.length; i++) {
-    processItem(items[i]);
+	for (let i = 0; i < items.length; i++) {
+		processItem(items[i]);
 
-    // Yield every 50 iterations to allow rendering/interaction
-    if (i % 50 === 0) {
-      await yieldToMain();
-    }
-  }
+		// Yield every 50 iterations to allow rendering/interaction
+		if (i % 50 === 0) {
+			await yieldToMain();
+		}
+	}
 }
 ```
 
@@ -196,19 +196,19 @@ Rendering involves Layout, Style, Paint, and Compositing calculations. CSS Conta
 ```css
 /* Optimize a long list of articles below the fold */
 .article-list-item {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px; /* Provides a 600px placeholder */
+	content-visibility: auto;
+	contain-intrinsic-size: auto 600px; /* Provides a 600px placeholder */
 }
 
 /* Scope a complex widget to prevent layout thrashing */
 .isolated-widget {
-  contain: layout style paint;
+	contain: layout style paint;
 }
 
 /* Hardware accelerate an animation only on hover */
 .interactive-button:hover {
-  will-change: transform;
-  transform: scale(1.05);
+	will-change: transform;
+	transform: scale(1.05);
 }
 ```
 
@@ -235,45 +235,45 @@ Images typically represent the largest payload on a given web page. Optimization
 
 ```html
 <picture>
-  <!-- Modern Formats with Source Negotiation -->
-  <source
-    type="image/avif"
-    srcset="hero-400w.avif 400w, hero-800w.avif 800w"
-    sizes="(max-width: 600px) 100vw, 50vw"
-  />
-  <source
-    type="image/webp"
-    srcset="hero-400w.webp 400w, hero-800w.webp 800w"
-    sizes="(max-width: 600px) 100vw, 50vw"
-  />
+	<!-- Modern Formats with Source Negotiation -->
+	<source
+		type="image/avif"
+		srcset="hero-400w.avif 400w, hero-800w.avif 800w"
+		sizes="(max-width: 600px) 100vw, 50vw"
+	/>
+	<source
+		type="image/webp"
+		srcset="hero-400w.webp 400w, hero-800w.webp 800w"
+		sizes="(max-width: 600px) 100vw, 50vw"
+	/>
 
-  <!-- Fallback + Dimensions + Priority for Above-The-Fold -->
-  <img
-    src="hero-800w.jpg"
-    alt="Descriptive text"
-    width="800"
-    height="600"
-    fetchpriority="high"
-    loading="eager"
-  />
+	<!-- Fallback + Dimensions + Priority for Above-The-Fold -->
+	<img
+		src="hero-800w.jpg"
+		alt="Descriptive text"
+		width="800"
+		height="600"
+		fetchpriority="high"
+		loading="eager"
+	/>
 </picture>
 
 <!-- Below-The-Fold Image -->
 <img
-  src="footer-icon.png"
-  alt="Footer Logo"
-  width="100"
-  height="100"
-  loading="lazy"
+	src="footer-icon.png"
+	alt="Footer Logo"
+	width="100"
+	height="100"
+	loading="lazy"
 />
 
 <!-- DO: Use native lazy loading for below the fold iframes -->
 <iframe
-  src="https://example.com/map"
-  width="800"
-  height="600"
-  loading="lazy"
-  title="Example Map"
+	src="https://example.com/map"
+	width="800"
+	height="600"
+	loading="lazy"
+	title="Example Map"
 ></iframe>
 ```
 
@@ -299,43 +299,43 @@ Client-side caching via Service Workers allows applications to bypass the networ
 **JS: Service Worker Caching via Workbox**
 
 ```javascript
-import { registerRoute } from "workbox-routing";
+import { registerRoute } from 'workbox-routing';
 import {
-  CacheFirst,
-  StaleWhileRevalidate,
-  NetworkFirst,
-} from "workbox-strategies";
-import { ExpirationPlugin } from "workbox-expiration";
-import { CacheableResponsePlugin } from "workbox-cacheable-response";
+	CacheFirst,
+	StaleWhileRevalidate,
+	NetworkFirst
+} from 'workbox-strategies';
+import { ExpirationPlugin } from 'workbox-expiration';
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 
 // 1. HTML Documents: Network First
 registerRoute(
-  ({ request }) => request.mode === "navigate",
-  new NetworkFirst({ cacheName: "pages-cache" }),
+	({ request }) => request.mode === 'navigate',
+	new NetworkFirst({ cacheName: 'pages-cache' })
 );
 
 // 2. Static Assets (JS, CSS, Fonts): Cache First
 registerRoute(
-  ({ request }) => ["style", "script", "font"].includes(request.destination),
-  new CacheFirst({
-    cacheName: "static-resources",
-    plugins: [
-      new CacheableResponsePlugin({ statuses: [0, 200] }),
-      new ExpirationPlugin({
-        maxEntries: 50,
-        maxAgeSeconds: 30 * 24 * 60 * 60,
-      }),
-    ],
-  }),
+	({ request }) => ['style', 'script', 'font'].includes(request.destination),
+	new CacheFirst({
+		cacheName: 'static-resources',
+		plugins: [
+			new CacheableResponsePlugin({ statuses: [0, 200] }),
+			new ExpirationPlugin({
+				maxEntries: 50,
+				maxAgeSeconds: 30 * 24 * 60 * 60
+			})
+		]
+	})
 );
 
 // 3. API Responses: Stale While Revalidate
 registerRoute(
-  ({ url }) => url.pathname.startsWith("/api/v1/content"),
-  new StaleWhileRevalidate({
-    cacheName: "api-cache",
-    plugins: [new CacheableResponsePlugin({ statuses: [0, 200] })],
-  }),
+	({ url }) => url.pathname.startsWith('/api/v1/content'),
+	new StaleWhileRevalidate({
+		cacheName: 'api-cache',
+		plugins: [new CacheableResponsePlugin({ statuses: [0, 200] })]
+	})
 );
 ```
 
@@ -358,8 +358,8 @@ Web fonts are a common source of render blocking. Optimizing them reduces the Fl
 
 ```css
 @font-face {
-  font-family: "Modern Sans";
-  src: url("/fonts/modern-sans.woff2") format("woff2");
+	font-family: 'Modern Sans';
+	src: url('/fonts/modern-sans.woff2') format('woff2');
 }
 ```
 
@@ -368,11 +368,11 @@ Web fonts are a common source of render blocking. Optimizing them reduces the Fl
 ```html
 <!-- Always use crossorigin for fonts even if on the same origin -->
 <link
-  rel="preload"
-  href="/fonts/modern-sans.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
+	rel="preload"
+	href="/fonts/modern-sans.woff2"
+	as="font"
+	type="font/woff2"
+	crossorigin
 />
 ```
 
@@ -399,16 +399,16 @@ Video payloads are among the heaviest assets. Optimization focuses on reducing b
 
 ```html
 <video
-  controls
-  width="1200"
-  height="675"
-  poster="/images/video-poster.webp"
-  preload="none"
+	controls
+	width="1200"
+	height="675"
+	poster="/images/video-poster.webp"
+	preload="none"
 >
-  <source src="/videos/intro.webm" type="video/webm" />
-  <source src="/videos/intro.mp4" type="video/mp4" />
-  <!-- Include accessibility tracks -->
-  <track src="/video-caps.vtt" kind="captions" srclang="en" label="English" />
+	<source src="/videos/intro.webm" type="video/webm" />
+	<source src="/videos/intro.mp4" type="video/mp4" />
+	<!-- Include accessibility tracks -->
+	<track src="/video-caps.vtt" kind="captions" srclang="en" label="English" />
 </video>
 ```
 
@@ -431,8 +431,8 @@ Heavy monolithic bundles block main thread parse times on low-end devices. Split
 
 ```javascript
 // Dynamic import of heavy module only when button is clicked
-document.getElementById("heavy-btn").addEventListener("click", async () => {
-  const { heavyFunction } = await import("./heavy-module.js");
-  heavyFunction();
+document.getElementById('heavy-btn').addEventListener('click', async () => {
+	const { heavyFunction } = await import('./heavy-module.js');
+	heavyFunction();
 });
 ```

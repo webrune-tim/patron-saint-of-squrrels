@@ -40,8 +40,8 @@ h3,
 h4,
 h5,
 h6 {
-  /* Enables balanced line-breaking logic */
-  text-wrap: balance;
+	/* Enables balanced line-breaking logic */
+	text-wrap: balance;
 }
 ```
 
@@ -53,8 +53,8 @@ p,
 blockquote,
 li,
 .pretty-text {
-  /* Enables pretty line-breaking logic for body copy */
-  text-wrap: pretty;
+	/* Enables pretty line-breaking logic for body copy */
+	text-wrap: pretty;
 }
 ```
 

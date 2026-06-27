@@ -31,11 +31,11 @@ Set `content-visibility: hidden` on views that are not currently active.
 
 ```css
 .spa-view.inactive {
-  /* MANDATORY: Use hidden to cache the rendering state of inactive views */
-  content-visibility: hidden;
+	/* MANDATORY: Use hidden to cache the rendering state of inactive views */
+	content-visibility: hidden;
 
-  /* Optional: Prevent hidden views from taking up physical space in layout flow */
-  position: absolute;
+	/* Optional: Prevent hidden views from taking up physical space in layout flow */
+	position: absolute;
 }
 ```
 
@@ -45,19 +45,19 @@ When swapping views, ensure you manage keyboard focus correctly to preserve acce
 
 ```javascript
 function switchToView(viewId) {
-  // Hide all views
-  document.querySelectorAll(".spa-view").forEach((view) => {
-    view.classList.add("inactive");
-    view.setAttribute("aria-hidden", "true");
-  });
+	// Hide all views
+	document.querySelectorAll('.spa-view').forEach((view) => {
+		view.classList.add('inactive');
+		view.setAttribute('aria-hidden', 'true');
+	});
 
-  // Show the target view
-  const activeView = document.getElementById(viewId);
-  activeView.classList.remove("inactive");
-  activeView.setAttribute("aria-hidden", "false");
+	// Show the target view
+	const activeView = document.getElementById(viewId);
+	activeView.classList.remove('inactive');
+	activeView.setAttribute('aria-hidden', 'false');
 
-  // MANDATORY: Move focus to the new view to ensure a logical tab-order
-  activeView.focus();
+	// MANDATORY: Move focus to the new view to ensure a logical tab-order
+	activeView.focus();
 }
 ```
 
@@ -73,8 +73,8 @@ The `content-visibility` property degrades gracefully. In browsers that do not s
 
 ```css
 @supports not (content-visibility: hidden) {
-  .spa-view.inactive {
-    display: none;
-  }
+	.spa-view.inactive {
+		display: none;
+	}
 }
 ```

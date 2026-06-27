@@ -18,7 +18,7 @@ if ('requestPaint' in HTMLCanvasElement.prototype) {
 
 ```html
 <canvas id="canvas" layoutsubtree>
-  <div id="html-content"></div>
+	<div id="html-content"></div>
 </canvas>
 ```
 
@@ -26,21 +26,21 @@ if ('requestPaint' in HTMLCanvasElement.prototype) {
 
 ```js
 const observer = new ResizeObserver(([entry]) => {
-  const dpc = entry.devicePixelContentBoxSize;
-  canvas.width = dpc
-    ? dpc[0].inlineSize
-    : Math.round(entry.contentRect.width * window.devicePixelRatio);
-  canvas.height = dpc
-    ? dpc[0].blockSize
-    : Math.round(entry.contentRect.height * window.devicePixelRatio);
+	const dpc = entry.devicePixelContentBoxSize;
+	canvas.width = dpc
+		? dpc[0].inlineSize
+		: Math.round(entry.contentRect.width * window.devicePixelRatio);
+	canvas.height = dpc
+		? dpc[0].blockSize
+		: Math.round(entry.contentRect.height * window.devicePixelRatio);
 });
 
 const supportsDevicePixelContentBox =
-  typeof ResizeObserverEntry !== "undefined" &&
-  "devicePixelContentBoxSize" in ResizeObserverEntry.prototype;
+	typeof ResizeObserverEntry !== 'undefined' &&
+	'devicePixelContentBoxSize' in ResizeObserverEntry.prototype;
 const options = supportsDevicePixelContentBox
-  ? { box: "device-pixel-content-box" }
-  : {};
+	? { box: 'device-pixel-content-box' }
+	: {};
 observer.observe(canvas, options);
 ```
 
@@ -50,9 +50,9 @@ observer.observe(canvas, options);
 
 ```js
 canvas.onpaint = () => {
-  ctx.reset();
-  // Draw the form element at x:0, y:0
-  let transform = ctx.drawElementImage(form_element, 0, 0);
+	ctx.reset();
+	// Draw the form element at x:0, y:0
+	let transform = ctx.drawElementImage(form_element, 0, 0);
 };
 ```
 
@@ -60,13 +60,13 @@ canvas.onpaint = () => {
 
 ```js
 canvas.onpaint = () => {
-  if (gl.texElementImage2D) {
-    try {
-      gl.texElementImage2D(gl.TEXTURE_2D, gl.RGBA8, uiElement);
-    } catch (err) {
-      console.error("texElementImage2D copy failed:", err);
-    }
-  }
+	if (gl.texElementImage2D) {
+		try {
+			gl.texElementImage2D(gl.TEXTURE_2D, gl.RGBA8, uiElement);
+		} catch (err) {
+			console.error('texElementImage2D copy failed:', err);
+		}
+	}
 };
 ```
 
@@ -74,19 +74,19 @@ canvas.onpaint = () => {
 
 ```js
 canvas.onpaint = () => {
-  if (root.device.queue.copyElementImageToTexture) {
-    try {
-      const sourceDict = { source: valueElement };
-      const destDict = {
-        destination: { texture: targetTexture },
-        width: 512,
-        height: 128,
-      };
-      root.device.queue.copyElementImageToTexture(sourceDict, destDict);
-    } catch (err) {
-      console.error("copyElementImageToTexture copy failed:", err);
-    }
-  }
+	if (root.device.queue.copyElementImageToTexture) {
+		try {
+			const sourceDict = { source: valueElement };
+			const destDict = {
+				destination: { texture: targetTexture },
+				width: 512,
+				height: 128
+			};
+			root.device.queue.copyElementImageToTexture(sourceDict, destDict);
+		} catch (err) {
+			console.error('copyElementImageToTexture copy failed:', err);
+		}
+	}
 };
 ```
 
@@ -94,16 +94,16 @@ When using a `requestAnimationFrame` loop to render the scene, call `canvas.requ
 
 ```js
 function render() {
-  // Request to update the canvas
-  canvas.requestPaint();
-  requestAnimationFrame(render);
+	// Request to update the canvas
+	canvas.requestPaint();
+	requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
 
 canvas.onpaint = (event) => {
-  if (event.changedElements && event.changedElements.length > 0) {
-    // Update the texture with drawElementImage, texElementImage2D, or copyElementImageToTexture, and update the CSS transform as shown in step 5
-  }
+	if (event.changedElements && event.changedElements.length > 0) {
+		// Update the texture with drawElementImage, texElementImage2D, or copyElementImageToTexture, and update the CSS transform as shown in step 5
+	}
 };
 ```
 
@@ -113,12 +113,12 @@ canvas.onpaint = (event) => {
 
 ```js
 canvas.onpaint = () => {
-  ctx.reset();
-  // Draw the form element at x:0, y:0
-  let transform = ctx.drawElementImage(form_element, 0, 0);
+	ctx.reset();
+	// Draw the form element at x:0, y:0
+	let transform = ctx.drawElementImage(form_element, 0, 0);
 
-  // Sync the DOM location with the drawn location
-  form_element.style.transform = transform.toString();
+	// Sync the DOM location with the drawn location
+	form_element.style.transform = transform.toString();
 };
 ```
 
@@ -131,39 +131,39 @@ canvas.onpaint = () => {
 
   ```js
   if (canvas.getElementTransform) {
-    // 1. Convert WebGL MVP Matrix to DOM Matrix
-    const mvpDOM = new DOMMatrix(Array.from(htmlElementMVP));
+  	// 1. Convert WebGL MVP Matrix to DOM Matrix
+  	const mvpDOM = new DOMMatrix(Array.from(htmlElementMVP));
 
-    // 2. Normalize the HTML element (Canvas Grid pixels -> WebGL Model Space)
-    const dprX = canvas.width / canvas.clientWidth;
-    const dprY = canvas.height / canvas.clientHeight;
-    const gridWidth = targetHTMLElement.offsetWidth * dprX;
-    const gridHeight = targetHTMLElement.offsetHeight * dprY;
+  	// 2. Normalize the HTML element (Canvas Grid pixels -> WebGL Model Space)
+  	const dprX = canvas.width / canvas.clientWidth;
+  	const dprY = canvas.height / canvas.clientHeight;
+  	const gridWidth = targetHTMLElement.offsetWidth * dprX;
+  	const gridHeight = targetHTMLElement.offsetHeight * dprY;
 
-    const toGLModel = new DOMMatrix()
-      // Scale pixels to 1 unit, flip Y (as in CSS it points down, and in WebGL it points up)
-      .scale(1 / gridWidth, -1 / gridHeight, 1 / gridHeight)
-      // Center the origin: (0,0) becomes (-width/2, -height/2) before scaling
-      .translate(-gridWidth / 2, -gridHeight / 2);
+  	const toGLModel = new DOMMatrix()
+  		// Scale pixels to 1 unit, flip Y (as in CSS it points down, and in WebGL it points up)
+  		.scale(1 / gridWidth, -1 / gridHeight, 1 / gridHeight)
+  		// Center the origin: (0,0) becomes (-width/2, -height/2) before scaling
+  		.translate(-gridWidth / 2, -gridHeight / 2);
 
-    // 3. Map to the canvas viewport
-    const clipToCanvasViewport = new DOMMatrix()
-      // Move center (0,0) to center of canvas
-      .translate(canvas.width / 2, canvas.height / 2)
-      // Scale normalized clip (-1..1) to viewport size
-      .scale(canvas.width / 2, -canvas.height / 2, canvas.height / 2);
+  	// 3. Map to the canvas viewport
+  	const clipToCanvasViewport = new DOMMatrix()
+  		// Move center (0,0) to center of canvas
+  		.translate(canvas.width / 2, canvas.height / 2)
+  		// Scale normalized clip (-1..1) to viewport size
+  		.scale(canvas.width / 2, -canvas.height / 2, canvas.height / 2);
 
-    // 4. Multiply: (Clip -> Pixels) * (MVP) * (pixels -> unit square)
-    const screenSpaceTransform = clipToCanvasViewport
-      .multiply(mvpDOM)
-      .multiply(toGLModel);
+  	// 4. Multiply: (Clip -> Pixels) * (MVP) * (pixels -> unit square)
+  	const screenSpaceTransform = clipToCanvasViewport
+  		.multiply(mvpDOM)
+  		.multiply(toGLModel);
 
-    // 5. Apply to the transform
-    const computedTransform = canvas.getElementTransform(
-      targetHTMLElement,
-      screenSpaceTransform,
-    );
-    targetHTMLElement.style.transform = computedTransform.toString();
+  	// 5. Apply to the transform
+  	const computedTransform = canvas.getElementTransform(
+  		targetHTMLElement,
+  		screenSpaceTransform
+  	);
+  	targetHTMLElement.style.transform = computedTransform.toString();
   }
   ```
 
@@ -171,11 +171,11 @@ canvas.onpaint = () => {
 
 ```js
 if (transform.is2D) {
-  // Workaround for Chromium bug https://crbug.com/512171941
-  // affecting Chrome versions under 149 where `transform.is2D`
-  // is incorrectly true for a 3D DOMMatrix. The assignment
-  // below re-initializes the DOMMatrix which corrects is2D to be false.
-  transform = DOMMatrix.fromFloat64Array(transform.toFloat64Array());
+	// Workaround for Chromium bug https://crbug.com/512171941
+	// affecting Chrome versions under 149 where `transform.is2D`
+	// is incorrectly true for a 3D DOMMatrix. The assignment
+	// below re-initializes the DOMMatrix which corrects is2D to be false.
+	transform = DOMMatrix.fromFloat64Array(transform.toFloat64Array());
 }
 targetHTMLElement.style.transform = computedTransform.toString();
 ```
@@ -186,54 +186,54 @@ targetHTMLElement.style.transform = computedTransform.toString();
 
 ```html
 <body>
-  <canvas id="canvas" style="width: 400px; height: 200px;" layoutsubtree>
-    <input id="element" />
-  </canvas>
+	<canvas id="canvas" style="width: 400px; height: 200px;" layoutsubtree>
+		<input id="element" />
+	</canvas>
 
-  <button id="download">Download Image</button>
+	<button id="download">Download Image</button>
 
-  <script>
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    const element = document.getElementById("element");
-    const download = document.getElementById("download");
+	<script>
+		const canvas = document.getElementById('canvas');
+		const ctx = canvas.getContext('2d');
+		const element = document.getElementById('element');
+		const download = document.getElementById('download');
 
-    canvas.onpaint = (event) => {
-      ctx.reset();
-      // Draw the element into the canvas
-      const transform = ctx.drawElementImage(element, 10, 10);
-      // Synchronize DOM position for hit testing (typing)
-      element.style.transform = transform.toString();
-    };
+		canvas.onpaint = (event) => {
+			ctx.reset();
+			// Draw the element into the canvas
+			const transform = ctx.drawElementImage(element, 10, 10);
+			// Synchronize DOM position for hit testing (typing)
+			element.style.transform = transform.toString();
+		};
 
-    download.onclick = () => {
-      // Export the canvas content as an image
-      const dataURL = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      link.download = "exported-canvas.png";
-      link.href = dataURL;
-      link.click();
-    };
+		download.onclick = () => {
+			// Export the canvas content as an image
+			const dataURL = canvas.toDataURL('image/png');
+			const link = document.createElement('a');
+			link.download = 'exported-canvas.png';
+			link.href = dataURL;
+			link.click();
+		};
 
-    // Re-initialize canvas size on screen resize
-    const observer = new ResizeObserver(([entry]) => {
-      const dpc = entry.devicePixelContentBoxSize;
-      canvas.width = dpc
-        ? dpc[0].inlineSize
-        : Math.round(entry.contentRect.width * window.devicePixelRatio);
-      canvas.height = dpc
-        ? dpc[0].blockSize
-        : Math.round(entry.contentRect.height * window.devicePixelRatio);
-      canvas.requestPaint();
-    });
-    const supportsDevicePixelContentBox =
-      typeof ResizeObserverEntry !== "undefined" &&
-      "devicePixelContentBoxSize" in ResizeObserverEntry.prototype;
-    const options = supportsDevicePixelContentBox
-      ? { box: "device-pixel-content-box" }
-      : {};
-    observer.observe(canvas, options);
-  </script>
+		// Re-initialize canvas size on screen resize
+		const observer = new ResizeObserver(([entry]) => {
+			const dpc = entry.devicePixelContentBoxSize;
+			canvas.width = dpc
+				? dpc[0].inlineSize
+				: Math.round(entry.contentRect.width * window.devicePixelRatio);
+			canvas.height = dpc
+				? dpc[0].blockSize
+				: Math.round(entry.contentRect.height * window.devicePixelRatio);
+			canvas.requestPaint();
+		});
+		const supportsDevicePixelContentBox =
+			typeof ResizeObserverEntry !== 'undefined' &&
+			'devicePixelContentBoxSize' in ResizeObserverEntry.prototype;
+		const options = supportsDevicePixelContentBox
+			? { box: 'device-pixel-content-box' }
+			: {};
+		observer.observe(canvas, options);
+	</script>
 </body>
 ```
 

@@ -15,7 +15,7 @@ The first step is to create a trigger button that opens the overlay container us
 <button popovertarget="action-panel">Open Actions</button>
 <!-- Use the Popover API (`popover="auto"`) for the overlay to ensure it is placed in the top layer and handled accessibly by the browser. -->
 <div id="action-panel" popover="auto" class="panel">
-  <button class="action-item" type="button">Edit</button>
+	<button class="action-item" type="button">Edit</button>
 </div>
 ```
 
@@ -27,14 +27,14 @@ Instead of manual `top`/`left` offsets, use `position-area` to place the target 
 
 ```css
 .panel {
-  /* 
+	/* 
      Position the panel below the anchor (block-end), 
      aligned to the start of the anchor and spanning to its end (span-inline-end).
   */
-  position-area: block-end span-inline-end;
+	position-area: block-end span-inline-end;
 
-  /* Reset insets to allow the grid to take control */
-  inset: auto;
+	/* Reset insets to allow the grid to take control */
+	inset: auto;
 }
 ```
 
@@ -48,11 +48,11 @@ To prevent the panel from being cut off at the edge of the screen, define "try t
 
 ```css
 .panel {
-  /* 
+	/* 
      If the panel overflows the bottom, flip it to the top (flip-block).
      If it overflows the inline edges, flip it horizontally (flip-inline).
   */
-  position-try-fallbacks: flip-block, flip-inline;
+	position-try-fallbacks: flip-block, flip-inline;
 }
 ```
 
@@ -65,9 +65,9 @@ Popover must conditionally be polyfilled with the `@oddbird/popover-polyfill` po
 
 ```html
 <script type="module">
-  if (!HTMLElement.prototype.hasOwnProperty("popover")) {
-    await import("https://unpkg.com/@oddbird/popover-polyfill@latest");
-  }
+	if (!HTMLElement.prototype.hasOwnProperty('popover')) {
+		await import('https://unpkg.com/@oddbird/popover-polyfill@latest');
+	}
 </script>
 ```
 
@@ -80,21 +80,21 @@ For some use cases, you may be able to use the `@oddbird/css-anchor-positioning`
 ```html
 <!-- MANDATORY: Conditionally install the anchor positioning polyfill -->
 <script type="module">
-  if (!("anchorName" in document.documentElement.style)) {
-    await import("https://unpkg.com/@oddbird/css-anchor-positioning");
-  }
+	if (!('anchorName' in document.documentElement.style)) {
+		await import('https://unpkg.com/@oddbird/css-anchor-positioning');
+	}
 </script>
 ```
 
 ```css
 .panel {
-  /* Mandatory: use explicit anchor name */
-  position-anchor: --kebab-anchor;
-  /* Mandatory: use insets rather that position-area for positioning */
-  bottom: auto;
-  right: auto;
-  top: anchor(bottom);
-  left: anchor(left);
-  margin: 0;
+	/* Mandatory: use explicit anchor name */
+	position-anchor: --kebab-anchor;
+	/* Mandatory: use insets rather that position-area for positioning */
+	bottom: auto;
+	right: auto;
+	top: anchor(bottom);
+	left: anchor(left);
+	margin: 0;
 }
 ```

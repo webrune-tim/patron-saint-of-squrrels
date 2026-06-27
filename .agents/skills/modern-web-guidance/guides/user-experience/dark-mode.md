@@ -20,8 +20,8 @@ MANDATORY: Apply the `color-scheme` property to the `html` element or the `:root
 ```css
 /* MANDATORY: Apply color-scheme to :root or html for viewport-wide theming */
 :root {
-  /* MANDATORY: Automatically adapt native UI to user system preferences */
-  color-scheme: light dark;
+	/* MANDATORY: Automatically adapt native UI to user system preferences */
+	color-scheme: light dark;
 }
 ```
 
@@ -35,25 +35,25 @@ For more control over the colors of built-in UI such as `accent-color` or `scrol
 
 ```css
 :root {
-  --color-brand-light: oklch(45% 0.23 270);
-  --color-brand-dark: oklch(85% 0.15 210);
-  --color-brand-text-light: white;
-  --color-brand-text-dark: oklch(40% 0.23 270);
+	--color-brand-light: oklch(45% 0.23 270);
+	--color-brand-dark: oklch(85% 0.15 210);
+	--color-brand-text-light: white;
+	--color-brand-text-dark: oklch(40% 0.23 270);
 
-  --color-brand: light-dark(var(--color-brand-light), var(--color-brand-dark));
-  --color-brand-text: light-dark(
-    var(--color-brand-text-light),
-    var(--color-brand-text-dark)
-  );
+	--color-brand: light-dark(var(--color-brand-light), var(--color-brand-dark));
+	--color-brand-text: light-dark(
+		var(--color-brand-text-light),
+		var(--color-brand-text-dark)
+	);
 
-  /* MANDATORY: Automatically adapt native UI to user system preferences */
-  color-scheme: light dark;
+	/* MANDATORY: Automatically adapt native UI to user system preferences */
+	color-scheme: light dark;
 }
 
 button.primary {
-  /* These automatically adapt to color scheme */
-  background-color: var(--color-brand);
-  color: var(--color-brand-text);
+	/* These automatically adapt to color scheme */
+	background-color: var(--color-brand);
+	color: var(--color-brand-text);
 }
 ```
 
@@ -78,7 +78,7 @@ This resolves to the OS setting by default, but you can use the `accent-color` p
 
 ```css
 html {
-  accent-color: light-dark(var(--color-accent-light), var(--color-accent-dark));
+	accent-color: light-dark(var(--color-accent-light), var(--color-accent-dark));
 }
 ```
 
@@ -92,9 +92,9 @@ You can use `scrollbar-color` together with `light-dark()` to set custom scrollb
 
 ```css
 :root {
-  --color-scrollbar-track: light-dark(#eee, #222);
-  --color-scrollbar-thumb: light-dark(#999, #666);
-  scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
+	--color-scrollbar-track: light-dark(#eee, #222);
+	--color-scrollbar-thumb: light-dark(#999, #666);
+	scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
 }
 ```
 
@@ -138,12 +138,12 @@ If a user-facing toggle to override it is desired, it should:
 ```html
 <meta name="color-scheme" content="light dark" />
 <script>
-  {
-    const colorScheme = localStorage.getItem("color-scheme");
-    if (colorScheme) {
-      document.querySelector('meta[name="color-scheme"]').content = colorScheme;
-    }
-  }
+	{
+		const colorScheme = localStorage.getItem('color-scheme');
+		if (colorScheme) {
+			document.querySelector('meta[name="color-scheme"]').content = colorScheme;
+		}
+	}
 </script>
 ```
 
@@ -171,8 +171,8 @@ This is useful for "dark mode" sections within a light-themed site, such as code
 ```css
 pre,
 code {
-  /* Forces element and its children to use dark themed UI */
-  color-scheme: dark;
+	/* Forces element and its children to use dark themed UI */
+	color-scheme: dark;
 }
 ```
 
@@ -203,22 +203,22 @@ To adapt to the user's preferences in older browsers, use `prefers-color-scheme`
 
 ```css
 :root {
-  /* Define brand colors for each mode */
-  --color-brand-light: #0056b3;
-  --color-brand-dark: #00e5ff;
-  --color-brand: var(--color-brand-light);
+	/* Define brand colors for each mode */
+	--color-brand-light: #0056b3;
+	--color-brand-dark: #00e5ff;
+	--color-brand: var(--color-brand-light);
 
-  /* MANDATORY: Fallback for browsers without light-dark support */
-  @media (prefers-color-scheme: dark) {
-    --color-brand: var(--color-brand-dark);
-  }
+	/* MANDATORY: Fallback for browsers without light-dark support */
+	@media (prefers-color-scheme: dark) {
+		--color-brand: var(--color-brand-dark);
+	}
 
-  /* Ignored in older browsers */
-  color-scheme: light dark;
+	/* Ignored in older browsers */
+	color-scheme: light dark;
 }
 
 button.primary {
-  background-color: var(--color-brand);
+	background-color: var(--color-brand);
 }
 ```
 
@@ -231,37 +231,37 @@ For browsers that support `color-scheme` but not yet `light-dark()`, light and d
 
 ```css
 :root {
-  /* Define browser UI accent color for each mode */
-  --brand-accent-light: #0056b3;
-  --brand-accent-dark: #00e5ff;
-  --accent-color: var(--brand-accent-light);
+	/* Define browser UI accent color for each mode */
+	--brand-accent-light: #0056b3;
+	--brand-accent-dark: #00e5ff;
+	--accent-color: var(--brand-accent-light);
 
-  /* MANDATORY: Fallback for browsers without light-dark support */
-  @media (prefers-color-scheme: dark) {
-    --accent-color: var(--brand-accent-dark);
-  }
+	/* MANDATORY: Fallback for browsers without light-dark support */
+	@media (prefers-color-scheme: dark) {
+		--accent-color: var(--brand-accent-dark);
+	}
 
-  /* OPTIONAL: use light-dark() for more control of built-in UI colors */
-  @supports (color: light-dark(white, black)) {
-    --accent-color: light-dark(
-      var(--brand-accent-light),
-      var(--brand-accent-dark)
-    );
-  }
+	/* OPTIONAL: use light-dark() for more control of built-in UI colors */
+	@supports (color: light-dark(white, black)) {
+		--accent-color: light-dark(
+			var(--brand-accent-light),
+			var(--brand-accent-dark)
+		);
+	}
 
-  /* MANDATORY: Automatically adapt native UI to user system preferences */
-  color-scheme: light dark;
+	/* MANDATORY: Automatically adapt native UI to user system preferences */
+	color-scheme: light dark;
 
-  /* Example inherited color property */
-  accent-color: var(--accent-color);
+	/* Example inherited color property */
+	accent-color: var(--accent-color);
 }
 
 pre,
 code {
-  color-scheme: dark;
+	color-scheme: dark;
 
-  /* **Mandatory**: any inherited color properties must be set again, even if to the same design tokens */
-  accent-color: var(--accent-color);
+	/* **Mandatory**: any inherited color properties must be set again, even if to the same design tokens */
+	accent-color: var(--accent-color);
 }
 ```
 
@@ -281,19 +281,19 @@ If you are using custom properties to define colors, these will cascade to the l
 ```css
 /* Legacy fallback for WebKit/Blink browsers */
 @supports not (scrollbar-color: auto) {
-  .scroller::-webkit-scrollbar {
-    /* Must define base size in WebKit for custom colors to be visual */
-    width: 12px;
-    height: 12px;
-  }
+	.scroller::-webkit-scrollbar {
+		/* Must define base size in WebKit for custom colors to be visual */
+		width: 12px;
+		height: 12px;
+	}
 
-  .scroller::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb);
-  }
+	.scroller::-webkit-scrollbar-thumb {
+		background: var(--scrollbar-thumb);
+	}
 
-  .scroller::-webkit-scrollbar-track {
-    background: var(--scrollbar-track);
-  }
+	.scroller::-webkit-scrollbar-track {
+		background: var(--scrollbar-track);
+	}
 }
 ```
 

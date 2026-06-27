@@ -10,14 +10,14 @@ To add entry and exit effects to an element, you need to combine a few CSS prope
 
     ```css
     @keyframes slide-in {
-      from {
-        transform: translateX(-100%);
-      }
+    	from {
+    		transform: translateX(-100%);
+    	}
     }
     @keyframes slide-out {
-      to {
-        transform: translateX(100%);
-      }
+    	to {
+    		transform: translateX(100%);
+    	}
     }
     ```
 
@@ -28,9 +28,9 @@ To add entry and exit effects to an element, you need to combine a few CSS prope
 
     ```css
     .animated-element {
-      animation:
-        slide-in 1s linear backwards,
-        slide-out 1s linear forwards;
+    	animation:
+    		slide-in 1s linear backwards,
+    		slide-out 1s linear forwards;
     }
     ```
 
@@ -38,7 +38,7 @@ To add entry and exit effects to an element, you need to combine a few CSS prope
 
     ```css
     .animated-element {
-      animation-timeline: view();
+    	animation-timeline: view();
     }
     ```
 
@@ -51,7 +51,7 @@ To add entry and exit effects to an element, you need to combine a few CSS prope
 
     ```css
     .animated-element {
-      animation-range: entry, exit;
+    	animation-range: entry, exit;
     }
     ```
 
@@ -61,26 +61,26 @@ This code animates the direct children of the scroller on scroll using an **anon
 
 ```css
 @media (prefers-reduced-motion: no-preference) {
-  @supports ((animation-timeline: view()) and (animation-range: entry)) {
-    @keyframes grow {
-      from {
-        scale: 0.5;
-      }
-    }
-    @keyframes shrink {
-      to {
-        scale: 0.5;
-      }
-    }
+	@supports ((animation-timeline: view()) and (animation-range: entry)) {
+		@keyframes grow {
+			from {
+				scale: 0.5;
+			}
+		}
+		@keyframes shrink {
+			to {
+				scale: 0.5;
+			}
+		}
 
-    .scroller > * {
-      animation:
-        grow auto linear backwards,
-        shrink auto linear forwards;
-      animation-timeline: view(inline);
-      animation-range: entry, exit;
-    }
-  }
+		.scroller > * {
+			animation:
+				grow auto linear backwards,
+				shrink auto linear forwards;
+			animation-timeline: view(inline);
+			animation-range: entry, exit;
+		}
+	}
 }
 ```
 
@@ -90,27 +90,27 @@ The following code has the same visual outcome, but animates the direct children
 
 ```css
 @media (prefers-reduced-motion: no-preference) {
-  @supports ((animation-timeline: view()) and (animation-range: entry)) {
-    @keyframes grow {
-      from {
-        scale: 0.5;
-      }
-    }
-    @keyframes shrink {
-      to {
-        scale: 0.5;
-      }
-    }
+	@supports ((animation-timeline: view()) and (animation-range: entry)) {
+		@keyframes grow {
+			from {
+				scale: 0.5;
+			}
+		}
+		@keyframes shrink {
+			to {
+				scale: 0.5;
+			}
+		}
 
-    .scroller > * {
-      view-timeline: --tl inline;
-      animation:
-        grow auto linear backwards,
-        shrink auto linear forwards;
-      animation-timeline: --tl;
-      animation-range: entry, exit;
-    }
-  }
+		.scroller > * {
+			view-timeline: --tl inline;
+			animation:
+				grow auto linear backwards,
+				shrink auto linear forwards;
+			animation-timeline: --tl;
+			animation-range: entry, exit;
+		}
+	}
 }
 ```
 
@@ -155,25 +155,25 @@ For this use-case specifically, the following script applies the fallback for br
 
 ```html
 <script>
-  if (
-    !CSS.supports("(animation-timeline: view()) and (animation-range: entry)")
-  ) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          // This matches the effect as defined in the CSS example above.
-          // Customize this further if needed.
-          entry.target.style.scale = 0.5 + entry.intersectionRatio * 0.5;
-        }
-      },
-      {
-        threshold: Array.from({ length: 101 }, (_, i) => i / 100),
-      },
-    );
+	if (
+		!CSS.supports('(animation-timeline: view()) and (animation-range: entry)')
+	) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					// This matches the effect as defined in the CSS example above.
+					// Customize this further if needed.
+					entry.target.style.scale = 0.5 + entry.intersectionRatio * 0.5;
+				}
+			},
+			{
+				threshold: Array.from({ length: 101 }, (_, i) => i / 100)
+			}
+		);
 
-    document.querySelectorAll(".scroller > *").forEach((el) => {
-      observer.observe(el);
-    });
-  }
+		document.querySelectorAll('.scroller > *').forEach((el) => {
+			observer.observe(el);
+		});
+	}
 </script>
 ```

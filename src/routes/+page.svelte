@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { scrollStory } from "$lib/actions/scrollStory";
-  import SquirrelProgress from "$lib/components/SquirrelProgress.svelte";
+  import { scrollStory, SquirrelProgress } from "$lib";
 
   import intro from "$lib/assets/images/intro.png?enhanced";
   import scene1 from "$lib/assets/images/scene-1.png?enhanced";

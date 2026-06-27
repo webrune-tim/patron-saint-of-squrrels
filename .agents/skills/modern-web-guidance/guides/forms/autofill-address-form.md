@@ -54,10 +54,10 @@ Use a single `<textarea>` element for the street address if possible.
 ```html
 <!-- textarea handles multi-line international address formats that split inputs can't accommodate -->
 <textarea
-  id="address"
-  name="address"
-  autocomplete="street-address"
-  required
+	id="address"
+	name="address"
+	autocomplete="street-address"
+	required
 ></textarea>
 ```
 
@@ -69,11 +69,11 @@ Add the `required` attribute to mandatory fields.
 
 ```html
 <input
-  type="text"
-  id="city"
-  name="city"
-  autocomplete="address-level2"
-  required
+	type="text"
+	id="city"
+	name="city"
+	autocomplete="address-level2"
+	required
 />
 ```
 

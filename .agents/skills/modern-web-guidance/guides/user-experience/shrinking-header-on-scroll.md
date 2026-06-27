@@ -14,11 +14,11 @@ Here’s how to create a shrinking header on scroll:
 
     ```css
     header {
-      position: fixed;
-      height: 200px;
-      top: 0;
-      left: 0;
-      right: 0;
+    	position: fixed;
+    	height: 200px;
+    	top: 0;
+    	left: 0;
+    	right: 0;
     }
     ```
 
@@ -26,9 +26,9 @@ Here’s how to create a shrinking header on scroll:
 
     ```css
     @keyframes shrink {
-      to {
-        height: 50px;
-      }
+    	to {
+    		height: 50px;
+    	}
     }
     ```
 
@@ -36,8 +36,8 @@ Here’s how to create a shrinking header on scroll:
 
     ```css
     header {
-      animation: shrink auto linear both;
-      animation-timeline: scroll(block root);
+    	animation: shrink auto linear both;
+    	animation-timeline: scroll(block root);
     }
     ```
 
@@ -45,7 +45,7 @@ Here’s how to create a shrinking header on scroll:
 
     ```css
     header {
-      animation-range: 0px 150px;
+    	animation-range: 0px 150px;
     }
     ```
 
@@ -57,15 +57,15 @@ Here’s how to create a shrinking header on scroll:
 
 ```css
 @keyframes shrink {
-  to {
-    height: 50px;
-  }
+	to {
+		height: 50px;
+	}
 }
 
 header {
-  animation: shrink auto linear both;
-  animation-timeline: scroll(block root);
-  animation-range: 0px 150px;
+	animation: shrink auto linear both;
+	animation-timeline: scroll(block root);
+	animation-range: 0px 150px;
 }
 ```
 
@@ -109,21 +109,21 @@ For this use-case specifically, the following script applies the fallback for br
 ```js
 // Fallback for browsers that don't support scroll-driven animations
 if (
-  !CSS.supports("(animation-timeline: scroll()) and (animation-range: 0% 100%)")
+	!CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')
 ) {
-  const header = document.querySelector("header");
+	const header = document.querySelector('header');
 
-  const initialHeight = 200;
-  const finalHeight = 50;
-  const scrollDistance = 150;
+	const initialHeight = 200;
+	const finalHeight = 50;
+	const scrollDistance = 150;
 
-  window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY;
-    const scrollPercent = Math.min(1, scrollY / scrollDistance);
-    const newHeight =
-      initialHeight - (initialHeight - finalHeight) * scrollPercent;
+	window.addEventListener('scroll', () => {
+		const scrollY = window.scrollY;
+		const scrollPercent = Math.min(1, scrollY / scrollDistance);
+		const newHeight =
+			initialHeight - (initialHeight - finalHeight) * scrollPercent;
 
-    header.style.height = `${newHeight}px`;
-  });
+		header.style.height = `${newHeight}px`;
+	});
 }
 ```

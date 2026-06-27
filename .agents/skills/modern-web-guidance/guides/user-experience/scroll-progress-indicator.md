@@ -21,29 +21,29 @@ This code grows the `#progress` element on scroll using an anonymous scroll-time
 
 ```css
 @media (prefers-reduced-motion: no-preference) {
-  @supports ((animation-timeline: scroll())) {
-    @keyframes grow-progress {
-      from {
-        transform: scaleX(0);
-      }
-      to {
-        transform: scaleX(1);
-      }
-    }
+	@supports ((animation-timeline: scroll())) {
+		@keyframes grow-progress {
+			from {
+				transform: scaleX(0);
+			}
+			to {
+				transform: scaleX(1);
+			}
+		}
 
-    #progress {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 1em;
-      background: red;
+		#progress {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 1em;
+			background: red;
 
-      transform-origin: 0 50%;
-      animation: grow-progress auto linear;
-      animation-timeline: scroll();
-    }
-  }
+			transform-origin: 0 50%;
+			animation: grow-progress auto linear;
+			animation-timeline: scroll();
+		}
+	}
 }
 ```
 
@@ -51,8 +51,8 @@ Because of its location in the DOM, the `scroll()` function will track its neare
 
 ```html
 <body>
-  <!-- MANDATORY: Purely decorative visual scroll progress bars MUST set aria-hidden="true" to remove the empty element from the assistive technology reading tree -->
-  <div id="progress" aria-hidden="true"></div>
+	<!-- MANDATORY: Purely decorative visual scroll progress bars MUST set aria-hidden="true" to remove the empty element from the assistive technology reading tree -->
+	<div id="progress" aria-hidden="true"></div>
 </body>
 ```
 
@@ -60,33 +60,33 @@ This code grows the `#progress` element on scroll using a named scroll-timeline,
 
 ```css
 @media (prefers-reduced-motion: no-preference) {
-  @supports ((animation-timeline: scroll())) {
-    @keyframes grow-progress {
-      from {
-        transform: scaleX(0);
-      }
-      to {
-        transform: scaleX(1);
-      }
-    }
+	@supports ((animation-timeline: scroll())) {
+		@keyframes grow-progress {
+			from {
+				transform: scaleX(0);
+			}
+			to {
+				transform: scaleX(1);
+			}
+		}
 
-    :root {
-      scroll-timeline: --tl block;
-    }
+		:root {
+			scroll-timeline: --tl block;
+		}
 
-    #progress {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 1em;
-      background: red;
+		#progress {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 1em;
+			background: red;
 
-      transform-origin: 0 50%;
-      animation: grow-progress auto linear;
-      animation-timeline: --tl;
-    }
-  }
+			transform-origin: 0 50%;
+			animation: grow-progress auto linear;
+			animation-timeline: --tl;
+		}
+	}
 }
 ```
 
@@ -130,17 +130,17 @@ For this use-case specifically, the following script applies the fallback for br
 
 ```html
 <script>
-  if (!CSS.supports("animation-timeline", "scroll()")) {
-    const progress = document.querySelector("#progress");
+	if (!CSS.supports('animation-timeline', 'scroll()')) {
+		const progress = document.querySelector('#progress');
 
-    window.addEventListener("scroll", () => {
-      const scrollable =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
-      const progressPercentage = scrolled / scrollable;
+		window.addEventListener('scroll', () => {
+			const scrollable =
+				document.documentElement.scrollHeight - window.innerHeight;
+			const scrolled = window.scrollY;
+			const progressPercentage = scrolled / scrollable;
 
-      progress.style.transform = `scaleX(${progressPercentage})`;
-    });
-  }
+			progress.style.transform = `scaleX(${progressPercentage})`;
+		});
+	}
 </script>
 ```

@@ -16,16 +16,16 @@ The following example uses `:autofill` to set a custom border and background, al
 ```css
 input:autofill,
 input:-webkit-autofill {
-  /* Multiple indicators: use both a distinct border and background color via box-shadow to avoid color-only state */
-  border: 2px solid #2e7d32;
-  box-shadow: 0 0 0 100vmax #e8f5e9 inset;
+	/* Multiple indicators: use both a distinct border and background color via box-shadow to avoid color-only state */
+	border: 2px solid #2e7d32;
+	box-shadow: 0 0 0 100vmax #e8f5e9 inset;
 }
 
 /* MANDATORY: Always provide an explicit focus indicator when styling autofilled states */
 input:autofill:focus-visible,
 input:-webkit-autofill:focus-visible {
-  outline: 3px solid #000;
-  outline-offset: 2px;
+	outline: 3px solid #000;
+	outline-offset: 2px;
 }
 ```
 

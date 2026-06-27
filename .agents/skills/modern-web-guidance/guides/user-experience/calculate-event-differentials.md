@@ -21,10 +21,10 @@ const now = Temporal.Now.zonedDateTimeISO();
 const tz = now.timeZoneId;
 
 // 2. Parse inputs (assuming ISO strings from form inputs)
-const startDateStr = "2025-01-01";
-const startTimeStr = "12:00:00";
-const endDateStr = "2025-01-31";
-const endTimeStr = "12:00:00";
+const startDateStr = '2025-01-01';
+const startTimeStr = '12:00:00';
+const endDateStr = '2025-01-31';
+const endTimeStr = '12:00:00';
 
 const startDate = Temporal.PlainDate.from(startDateStr);
 const startTime = Temporal.PlainTime.from(startTimeStr);
@@ -37,18 +37,18 @@ const end = endDate.toPlainDateTime(endTime).toZonedDateTime(tz);
 // 3. Calculate difference using .since() and .until()
 // By default, units larger than hours might not wrap automatically.
 // Use largestUnit to ensure differences are expressed in larger units if applicable.
-const timeActive = now.since(start, { largestUnit: "year" });
-const timeRemaining = now.until(end, { largestUnit: "year" });
+const timeActive = now.since(start, { largestUnit: 'year' });
+const timeRemaining = now.until(end, { largestUnit: 'year' });
 
 console.log(`Active: ${timeActive.days} days, ${timeActive.hours} hours`);
 console.log(
-  `Remaining: ${timeRemaining.days} days, ${timeRemaining.hours} hours`,
+	`Remaining: ${timeRemaining.days} days, ${timeRemaining.hours} hours`
 );
 
 // 4. Compare dates
 const isExpired = Temporal.ZonedDateTime.compare(now, end) > 0;
 if (isExpired) {
-  console.log("Subscription is expired.");
+	console.log('Subscription is expired.');
 }
 ```
 
@@ -75,13 +75,13 @@ Note that the polyfill does not automatically assign the `Temporal` object to th
 ```javascript
 // Check if Temporal is supported natively
 (async () => {
-  if (typeof Temporal === "undefined") {
-    // Load the polyfill conditionally
-    const module = await import("https://esm.sh/@js-temporal/polyfill");
-    globalThis.Temporal = module.Temporal;
-    // Extend Date.prototype if needed
-    Date.prototype.toTemporalInstant = module.toTemporalInstant;
-    initializeApp();
-  }
+	if (typeof Temporal === 'undefined') {
+		// Load the polyfill conditionally
+		const module = await import('https://esm.sh/@js-temporal/polyfill');
+		globalThis.Temporal = module.Temporal;
+		// Extend Date.prototype if needed
+		Date.prototype.toTemporalInstant = module.toTemporalInstant;
+		initializeApp();
+	}
 })();
 ```
