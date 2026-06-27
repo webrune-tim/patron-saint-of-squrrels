@@ -4,8 +4,9 @@
   import SquirrelProgress from "$lib/components/SquirrelProgress.svelte";
 
   import intro from "$lib/assets/images/intro.png?enhanced";
-  import scene1 from "$lib/assets/images/scene-1-b.png?enhanced";
-  import scene2 from "$lib/assets/images/scene-2-a.png?enhanced";
+  import scene1 from "$lib/assets/images/scene-1.png?enhanced";
+  import scene2 from "$lib/assets/images/scene-2.png?enhanced";
+  import scene2b from "$lib/assets/images/scene-2-c.png?enhanced";
   import scene3 from "$lib/assets/images/scene-3.png?enhanced";
   import scene4 from "$lib/assets/images/scene-4.png?enhanced";
   import music from "$lib/assets/audio/music.mp3";
@@ -241,6 +242,21 @@
             of shade, the tiny squirrel remained, its strength nearly spent. It
             hadn't given up, because it was waiting for her.
           </p>
+        </div>
+
+        <div class="step">
+          <p class="story-paragraph">
+            At first, it was hesitant, and ran for cover under Helen's car. But
+            the little creature was too weak to escape, and it soon realized
+            that Helen was not a threat. With a trembling paw, it reached out to
+            her.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="story-image-wrapper">
+            <enhanced:img src={scene2b} alt="Below the Sub-Basement" />
+          </div>
         </div>
 
         <div class="step">
