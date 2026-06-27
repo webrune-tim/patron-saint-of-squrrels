@@ -1,0 +1,115 @@
+@layer reset, base, typography, components, utilities;
+
+@import './reset.css' layer(reset);
+@import './typography.css' layer(typography);
+
+@layer base {
+	:root {
+		color-scheme: dark; /* Force a native dark context */
+
+		/* Core Palette Design Tokens - High Contrast OKLCH */
+		--dg-raw: 0.2191 0.0814 146.65;
+		--lt-raw: 0.9515 0.0493 96.88;
+		--br-raw: 0.3691 0.0839 83.12;
+
+		--dark-green: oklch(from oklch(var(--dg-raw)) l c h);
+		--light-tan: oklch(from oklch(var(--lt-raw)) l c h);
+		--brown: oklch(from oklch(var(--br-raw)) l c h);
+
+		/* Dark Theme Fallbacks & Semantic Assignments */
+		--color-background: var(--dark-green);
+		--color-text-primary: var(--light-tan);
+		--color-text-secondary: oklch(from var(--light-tan) 0.9 c h);
+
+		/* Layout Mechanics */
+		--fluid-max-width: 60rem;
+		--gap-xs: clamp(0.25rem, 1vw, 0.75rem);
+		--gap-sm: clamp(0.5rem, 2vw, 1.5rem);
+		--gap-md: clamp(1rem, 3vw, 2rem);
+		--gap-lg: clamp(2rem, 4vw, 3rem);
+	}
+
+	body {
+		min-height: 100svh;
+		padding: var(--gap-sm);
+		background-color: var(--color-background);
+		color: var(--color-text-primary);
+	}
+
+	.container {
+		max-width: var(--fluid-max-width);
+		margin: 0 auto 1.5em;
+	}
+}
+
+@layer components {
+	.scene {
+		position: relative;
+		min-height: calc(var(--step-count, 1) * 100svh);
+		overflow: visible;
+	}
+
+	.sticky-content {
+		position: sticky;
+		top: 0;
+		height: 100svh;
+		display: grid;
+		place-items: center;
+		overflow: hidden;
+	}
+
+	.step {
+		position: absolute;
+		width: 100%;
+		max-width: var(--fluid-max-width);
+		padding: var(--gap-md);
+		opacity: 0;
+		transform: scale(0.98);
+		visibility: hidden;
+		transition:
+			opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+			transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+			visibility 0.8s;
+	}
+
+	.step.active {
+		opacity: 1;
+		transform: scale(1);
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	/* Micro-interactions & Core Component Keyframes */
+	@keyframes bounce {
+		0%,
+		20%,
+		50%,
+		80%,
+		100% {
+			transform: translateY(0);
+		}
+		40% {
+			transform: translateY(-8px);
+		}
+		60% {
+			transform: translateY(-4px);
+		}
+	}
+
+	@keyframes spinX {
+		0%,
+		100% {
+			transform: scaleX(1);
+		}
+		50% {
+			transform: scaleX(-1);
+		}
+	}
+}
+
+@layer utilities {
+	.center-content {
+		display: flex;
+		place-content: center;
+	}
+}

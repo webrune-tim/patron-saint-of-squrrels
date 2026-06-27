@@ -5,7 +5,7 @@
   import faviconIco from "$lib/assets/favicon/favicon.ico";
 
   import ogImage from "$lib/assets/images/intro.png";
-  import "./styles.css";
+  import "./css/styles.css";
 
   let { children } = $props();
 </script>

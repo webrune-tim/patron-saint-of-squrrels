@@ -1,0 +1,59 @@
+:root {
+	--font-story: 'Fraunces', serif;
+	--font-ui: 'Inter', sans-serif;
+	--tracking-tight: -0.02em;
+	--tracking-wide: 0.05em;
+
+	--text-base: clamp(1.25rem, 1rem + 1.25vw, 2rem);
+	--text-md: clamp(1.56rem, 1.14rem + 2.1vw, 2.83rem);
+	--text-lg: clamp(1.95rem, 1.27rem + 3.41vw, 4rem);
+	--text-xl: clamp(2.44rem, 1.37rem + 5.35vw, 5.65rem);
+}
+
+h1,
+h2,
+h3 {
+	text-align: center;
+	color: var(--color-text-secondary);
+	font-family: var(--font-story);
+	font-weight: 600;
+}
+
+h1 {
+	font-size: var(--text-xl);
+	margin-bottom: 0.5em;
+}
+h2 {
+	font-size: var(--text-lg);
+	margin-bottom: 0.5em;
+}
+h3 {
+	font-size: var(--text-md);
+	margin: 1rem 0;
+	display: block;
+}
+
+.story-heading {
+	font-weight: 700;
+	font-style: italic;
+	letter-spacing: var(--tracking-tight);
+}
+
+.story-paragraph {
+	display: block;
+	font-family: var(--font-story);
+	font-weight: 400;
+	text-align: justify;
+	font-size: var(--text-base);
+	line-height: 1.7;
+	padding-bottom: var(--gap-sm);
+}
+
+.ui-element {
+	font-family: var(--font-ui);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-wide);
+	font-size: 0.75rem;
+	color: oklch(from var(--color-text-primary) 0.65 c h);
+}

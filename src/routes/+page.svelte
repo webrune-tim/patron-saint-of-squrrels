@@ -354,9 +354,6 @@
 </div>
 
 <style>
-  :global(:root) {
-    --isVisible: 0;
-  }
   .scene-content {
     display: flex;
     flex-direction: column;
@@ -370,16 +367,46 @@
     margin-top: var(--gap-md);
   }
 
+  /* Scoped Image Layout & Dynamic Vignette Bounds */
+  .story-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 70svh;
+    position: relative;
+  }
+
   .story-image-wrapper :global(picture) {
     display: block;
+    position: relative;
     max-height: 60vh;
+    width: fit-content;
   }
 
   .story-image-wrapper :global(img) {
     width: auto;
     max-height: 60vh;
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
   }
 
+  .story-image-wrapper :global(picture::after) {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(
+      circle,
+      transparent 60%,
+      var(--color-background) 100%
+    );
+    border-radius: 4px;
+  }
+
+  /* Interactive Elements & Animations */
   .start-btn {
     display: block;
     width: fit-content;
@@ -390,7 +417,7 @@
     border: 2px solid var(--color-text-primary);
     background-color: rgb(from var(--color-text-primary) r g b / 0.1);
     cursor:
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">🌰</text></svg>')
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">🐿️</text></svg>')
         12 12,
       pointer;
   }
@@ -401,40 +428,12 @@
     animation: bounce 2s infinite;
   }
 
-  @keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-8px);
-    }
-    60% {
-      transform: translateY(-4px);
-    }
-  }
-
   .spinX {
-    /* 1. Allows the transform calculation matrix to target the container */
     display: inline-block;
-    /* 2. Uses an alternate direction or a 3-way keyframe loop for smoothness */
     animation: spinX 2s ease-in-out infinite;
   }
 
-  @keyframes spinX {
-    0%,
-    100% {
-      transform: scaleX(1);
-    }
-    50% {
-      transform: scaleX(-1);
-    }
-  }
-
-  /* --- Global Ambient Scrolling Cue --- */
+  /* Fixed Global UI Elements */
   .global-scroll-prompt {
     position: fixed;
     bottom: var(--gap-md);
@@ -465,14 +464,14 @@
   .closing {
     display: grid;
     place-content: center;
+  }
 
-    .closing-content {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-sm);
-      font-size: var(--text-md);
-      text-align: center;
-    }
+  .closing-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    font-size: var(--text-md);
+    text-align: center;
   }
 
   footer {
