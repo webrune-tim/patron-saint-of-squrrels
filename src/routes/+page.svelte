@@ -11,7 +11,7 @@
   import music from "$lib/assets/audio/music.mp3";
 
   // State
-  let audioComponent = $state();
+  let audioComponent = $state() as HTMLAudioElement | undefined;
   let isAutoplayBlocked = $state(false);
 
   // Separate states: one for interaction, one for visibility
@@ -19,7 +19,7 @@
   let isInView = $state(false);
 
   // Reference for the viewport observer
-  let scenesElement = $state();
+  let scenesElement = $state() as HTMLElement | undefined;
 
   onMount(() => {
     if (audioComponent) {
@@ -31,7 +31,7 @@
   $effect(() => {
     if (!scenesElement) return;
 
-    let scrollTimeout;
+    let scrollTimeout: number | undefined;
 
     const handleScrollState = () => {
       isScrolling = true;
