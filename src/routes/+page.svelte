@@ -97,7 +97,10 @@
       <h1 class="story-heading">The Patron Saint of the Squirrels</h1>
 
       <div class="story-image-wrapper">
-        <enhanced:img src={intro} alt="Introduction Scene" />
+        <enhanced:img
+          src={intro}
+          alt="A realistic photograph of a smiling woman with dark curly hair lying down on a parking lot asphalt, wearing an elegant teal velvet robe with gold embroidery, gently feeding a red squirrel from her open hands."
+        />
       </div>
     </div>
 
@@ -163,7 +166,10 @@
 
         <div class="step">
           <div class="story-image-wrapper">
-            <enhanced:img src={scene1} alt="The Gray Labyrinth" />
+            <enhanced:img
+              src={scene1}
+              alt="A comic-style illustration of a smiling woman with dark curly hair standing in a parking lot. She is wearing a long blue and gold embroidered dress under a grey winter parka, with a single red squirrel perched nearby on a parking line."
+            />
           </div>
         </div>
       </div>
@@ -204,7 +210,10 @@
 
         <div class="step">
           <div class="story-image-wrapper">
-            <enhanced:img src={scene2} alt="Neon and Stone" />
+            <enhanced:img
+              src={scene2}
+              alt="A comic-style illustration from a low angle under a car, showing a small red squirrel crouching cautiously on the dark asphalt next to a tire, surrounded by scattered oak leaves and acorns."
+            />
           </div>
         </div>
       </div>
@@ -254,7 +263,10 @@
 
         <div class="step">
           <div class="story-image-wrapper">
-            <enhanced:img src={scene2b} alt="Below the Sub-Basement" />
+            <enhanced:img
+              src={scene2b}
+              alt="An illustration of a smiling woman standing centered in a parking lot, wearing a flowing, long teal velvet robe with ornate gold trim. She is holding a tiny baby squirrel in her cupped hands, surrounded by several other red squirrels on the ground and parked cars."
+            />
           </div>
         </div>
 
@@ -269,17 +281,20 @@
 
         <div class="step">
           <p class="story-paragraph">
-            Once home safe on Ellinwood Drive, Helen began searching for a
-            secure place to keep the little soldier for the night, away from a
-            menacing cat. A spot under her backyard deck, with a dog gate to
-            separate the squirrel from the cat and other outdoor dangers, would
-            do nicely until the morning.
+            Once home safe on Westwood, Helen began searching for a secure place
+            to keep the little soldier for the night, away from a menacing cat.
+            A spot under her backyard deck, with a dog gate to separate the
+            squirrel from the cat and other outdoor dangers, would do nicely
+            until the morning.
           </p>
         </div>
 
         <div class="step">
           <div class="story-image-wrapper">
-            <enhanced:img src={scene3} alt="Below the Sub-Basement" />
+            <enhanced:img
+              src={scene3}
+              alt="A vibrant digital illustration of a smiling woman depicted as a saint in a forest setting. She has a circular halo made of oak leaves and acorns, with numerous red squirrels perched on her head, shoulders, and hands while wearing a decorated blue robe."
+            />
           </div>
         </div>
       </div>
@@ -323,7 +338,10 @@
 
         <div class="step">
           <div class="story-image-wrapper">
-            <enhanced:img src={scene4} alt="Recompiling the World" />
+            <enhanced:img
+              src={scene4}
+              alt="A comic-style illustration of a smiling woman standing outside a building labeled 'HOSPITAL' at twilight. She features a glowing neon green oak leaf halo over her head, framed by an archway of trees filled with fireflies and squirrels."
+            />
           </div>
         </div>
       </div>
