@@ -396,13 +396,15 @@
   .story-image-wrapper :global(picture) {
     display: block;
     position: relative;
-    max-height: 60vh;
+    width: 68svw;
+    aspect-ratio: 3 / 4;
     width: fit-content;
   }
 
   .story-image-wrapper :global(img) {
     width: auto;
-    max-height: 60vh;
+    width: 68svw;
+    aspect-ratio: 3 / 4;
     border-radius: 4px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     position: relative;
