@@ -404,7 +404,7 @@
     width: auto;
     max-height: 60vh;
     border-radius: 4px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     position: relative;
     z-index: 1;
   }
@@ -417,7 +417,7 @@
     pointer-events: none;
     background: radial-gradient(
       circle,
-      transparent 60%,
+      transparent 55%,
       var(--color-background) 100%
     );
     border-radius: 4px;
@@ -425,6 +425,8 @@
 
   /* Interactive Elements & Animations */
   .start-btn {
+    position: relative;
+    z-index: 10;
     display: block;
     width: fit-content;
     text-align: center;
@@ -433,10 +435,15 @@
     margin: var(--gap-md) auto;
     border: 2px solid var(--color-text-primary);
     background-color: rgb(from var(--color-text-primary) r g b / 0.1);
+    box-shadow: 0 15px 17px rgba(0, 0, 0, 0.5);
     cursor:
       url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">🐿️</text></svg>')
         12 12,
       pointer;
+  }
+
+  .start-btn:hover {
+    box-shadow: 0 7px 8px rgba(0, 0, 0, 0.5);
   }
 
   .bounce-arrow {
