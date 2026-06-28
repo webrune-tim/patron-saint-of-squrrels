@@ -23,7 +23,7 @@
 
   onMount(() => {
     if (audioComponent) {
-      audioComponent.volume = 0.5;
+      audioComponent.volume = 0.35;
     }
   });
 
