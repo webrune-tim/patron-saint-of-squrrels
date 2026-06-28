@@ -4,8 +4,8 @@
 
   import intro from "$lib/assets/images/intro.png?enhanced";
   import scene1 from "$lib/assets/images/scene-1.png?enhanced";
-  import scene2 from "$lib/assets/images/scene-2.png?enhanced";
-  import scene2b from "$lib/assets/images/scene-2-c.png?enhanced";
+  import scene2a from "$lib/assets/images/scene-2-a.png?enhanced";
+  import scene2b from "$lib/assets/images/scene-2-b.png?enhanced";
   import scene3 from "$lib/assets/images/scene-3.png?enhanced";
   import scene4 from "$lib/assets/images/scene-4.png?enhanced";
   import music from "$lib/assets/audio/music.mp3";
@@ -211,7 +211,7 @@
         <div class="step">
           <div class="story-image-wrapper">
             <enhanced:img
-              src={scene2}
+              src={scene2b}
               alt="A comic-style illustration from a low angle under a car, showing a small red squirrel crouching cautiously on the dark asphalt next to a tire, surrounded by scattered oak leaves and acorns."
             />
           </div>
@@ -264,7 +264,7 @@
         <div class="step">
           <div class="story-image-wrapper">
             <enhanced:img
-              src={scene2b}
+              src={scene2a}
               alt="An illustration of a smiling woman standing centered in a parking lot, wearing a flowing, long teal velvet robe with ornate gold trim. She is holding a tiny baby squirrel in her cupped hands, surrounded by several other red squirrels on the ground and parked cars."
             />
           </div>
@@ -293,7 +293,7 @@
           <div class="story-image-wrapper">
             <enhanced:img
               src={scene3}
-              alt="A vibrant digital illustration of a smiling woman depicted as a saint in a forest setting. She has a circular halo made of oak leaves and acorns, with numerous red squirrels perched on her head, shoulders, and hands while wearing a decorated blue robe."
+              alt="A vertical, comic-style illustration looking straight down through the thick metal bars of a closed animal crate. Inside, huddled safely on bundles of dark cloth, a small cluster of baby red squirrels rests together amidst a couple of scattered oak leaves and a soft, magical green glow with floating fireflies."
             />
           </div>
         </div>
