@@ -352,9 +352,11 @@
     <div class="closing-content">
       <span>
         Happy Birthday Helen!!<br />
+        <span class="spinX">🐿️</span>
         <span class="spinX">😘</span>
         <span class="spinX">🎉</span>
         <span class="spinX">🎂</span>
+        <span class="spinX">🐿️</span>
       </span>
 
       <span
