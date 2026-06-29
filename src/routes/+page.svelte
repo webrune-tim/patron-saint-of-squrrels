@@ -397,13 +397,14 @@
     display: block;
     position: relative;
     width: 68svw;
+    max-height: 60vh;
     aspect-ratio: 3 / 4;
     width: fit-content;
   }
 
   .story-image-wrapper :global(img) {
-    width: auto;
     width: 68svw;
+    max-height: 60vh;
     aspect-ratio: 3 / 4;
     border-radius: 4px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
