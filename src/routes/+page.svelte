@@ -4,7 +4,7 @@
 
   import intro from "$lib/assets/images/intro.png?enhanced";
   import scene1 from "$lib/assets/images/scene-1.png?enhanced";
-  import scene2a from "$lib/assets/images/scene-2-a.PNG?enhanced";
+  import scene2a from "$lib/assets/images/scene-2-a.png?enhanced";
   import scene2b from "$lib/assets/images/scene-2-b.png?enhanced";
   import scene3 from "$lib/assets/images/scene-3.png?enhanced";
   import scene4 from "$lib/assets/images/scene-4.png?enhanced";
