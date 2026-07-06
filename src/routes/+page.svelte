@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { browser } from "$app/environment";
   import { scrollStory, SquirrelProgress } from "$lib";
 
   import intro from "$lib/assets/images/intro.png?enhanced";
@@ -13,13 +14,12 @@
   // State
   let audioComponent = $state() as HTMLAudioElement | undefined;
   let isAutoplayBlocked = $state(false);
-
-  // Separate states: one for interaction, one for visibility
   let isScrolling = $state(false);
   let isInView = $state(false);
 
-  // Reference for the viewport observer
   let scenesElement = $state() as HTMLElement | undefined;
+  let footerElement = $state() as HTMLElement | undefined; 
+  let hasFiredConfetti = $state(false);
 
   onMount(() => {
     if (audioComponent) {
@@ -29,7 +29,7 @@
 
   // Manage observer and scroll listener
   $effect(() => {
-    if (!scenesElement) return;
+    if (!browser || !scenesElement) return; 
 
     let scrollTimeout: number | undefined;
 
@@ -43,7 +43,6 @@
 
     const observer = new IntersectionObserver(([entry]) => {
       isInView = entry.isIntersecting;
-
       if (entry.isIntersecting) {
         window.addEventListener("scroll", handleScrollState, { passive: true });
       } else {
@@ -57,6 +56,39 @@
       observer.disconnect();
       window.removeEventListener("scroll", handleScrollState);
       clearTimeout(scrollTimeout);
+    };
+  });
+
+  // Confetti intersection observer
+  $effect(() => {
+    if (!browser || !footerElement) return; 
+
+    const footerObserver = new IntersectionObserver(
+      async ([entry]) => { // Added async here
+        if (entry.isIntersecting && !hasFiredConfetti) {
+          
+          // 1. Dynamically import the module safely inside the browser context
+          const module = await import("@hiseb/confetti");
+          const confetti = module.default;
+
+          // 2. Fire the confetti effect safely
+          confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.8 }
+          });
+          hasFiredConfetti = true; 
+        } else if (!entry.isIntersecting) {
+          hasFiredConfetti = false;
+        }
+      },
+      { threshold: 0.9 } 
+    );
+
+    footerObserver.observe(footerElement);
+
+    return () => {
+      footerObserver.disconnect();
     };
   });
 
@@ -92,7 +124,7 @@
 {/if}
 
 <div class="container">
-  <header class="scene">
+  <header class="scene bg-green">
     <div class="scene-content center-content">
       <h1 class="story-heading">The Patron Saint of the Squirrels</h1>
 
@@ -109,7 +141,7 @@
     </a>
   </header>
 
-  <section id="intro" class="scene center-content">
+  <section id="intro" class="scene center-content bg-grey">
     <div class="scene-content">
       <div class="story-text-group">
         <h2 class="story-heading">Introduction</h2>
@@ -125,8 +157,9 @@
       </div>
     </div>
   </section>
+
   <section bind:this={scenesElement}>
-    <section id="scene-1" class="scene" use:scrollStory>
+    <section id="scene-1" class="scene bg-green" use:scrollStory>
       <div class="sticky-content">
         <SquirrelProgress sceneId="scene-1" />
 
@@ -175,7 +208,7 @@
       </div>
     </section>
 
-    <section id="scene-2" class="scene" use:scrollStory>
+    <section id="scene-2" class="scene bg-grey" use:scrollStory>
       <div class="sticky-content">
         <SquirrelProgress sceneId="scene-2" />
 
@@ -219,7 +252,7 @@
       </div>
     </section>
 
-    <section id="scene-3" class="scene" use:scrollStory>
+    <section id="scene-3" class="scene bg-green" use:scrollStory>
       <div class="sticky-content">
         <SquirrelProgress sceneId="scene-3" />
 
@@ -300,7 +333,7 @@
       </div>
     </section>
 
-    <section id="scene-4" class="scene" use:scrollStory>
+    <section id="scene-4" class="scene  bg-grey" use:scrollStory>
       <div class="sticky-content">
         <SquirrelProgress sceneId="scene-4" />
 
@@ -348,7 +381,7 @@
     </section>
   </section>
 
-  <footer class="scene closing">
+  <footer bind:this={footerElement} class="scene closing">
     <div class="closing-content">
       <span>
         Happy Birthday Helen!!<br />
@@ -384,6 +417,10 @@
   .story-text-group {
     width: 100%;
     margin-top: var(--gap-md);
+  }
+
+  .story-paragraph {
+		color: var(--color-text-primary);
   }
 
   /* Scoped Image Layout & Dynamic Vignette Bounds */
@@ -436,10 +473,12 @@
     width: fit-content;
     text-align: center;
     text-decoration: none;
+    color: var(--color-text-primary);
     padding: var(--gap-xs) var(--gap-sm);
     margin: var(--gap-md) auto;
+    border-radius: 1000px;
     border: 2px solid var(--color-text-primary);
-    background-color: rgb(from var(--color-text-primary) r g b / 0.1);
+    background-color: rgb(from var(--color-text-primary) r g b / 0.4);
     box-shadow: 0 15px 17px rgba(0, 0, 0, 0.5);
     cursor:
       url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">🐿️</text></svg>')

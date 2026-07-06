@@ -5,16 +5,18 @@
 
 @layer base {
 	:root {
-		color-scheme: dark; /* Force a native dark context */
+		/* color-scheme: dark; Force a native dark context */
 
 		/* Core Palette Design Tokens - High Contrast OKLCH */
-		--dg-raw: 0.2191 0.0814 146.65;
-		--lt-raw: 0.9515 0.0493 96.88;
-		--br-raw: 0.3691 0.0839 83.12;
+		--dark-green-raw: 0.2191 0.0814 146.65;
+		--light-tan-raw: 0.9515 0.0493 96.88;
+		--brown-raw: 0.3691 0.0839 83.12;
+		--dark-grey-raw: 0.4644 0 292;
 
-		--dark-green: oklch(from oklch(var(--dg-raw)) l c h);
-		--light-tan: oklch(from oklch(var(--lt-raw)) l c h);
-		--brown: oklch(from oklch(var(--br-raw)) l c h);
+		--dark-green: oklch(from oklch(var(--dark-green-raw)) l c h);
+		--light-tan: oklch(from oklch(var(--light-tan-raw)) l c h);
+		--brown: oklch(from oklch(var(--brown-raw)) l c h);
+		--dark-grey: oklch(from oklch(var(--dark-grey-raw)) l c h);
 
 		/* Dark Theme Fallbacks & Semantic Assignments */
 		--color-background: var(--dark-green);
@@ -31,7 +33,6 @@
 
 	body {
 		min-height: 100svh;
-		padding: var(--gap-sm);
 		background-color: var(--color-background);
 		color: var(--color-text-primary);
 	}
@@ -47,6 +48,7 @@
 		position: relative;
 		min-height: calc(var(--step-count, 1) * 100svh);
 		overflow: visible;
+		padding: var(--gap-md);
 	}
 
 	.sticky-content {
@@ -107,9 +109,32 @@
 	}
 }
 
+/* Replace the bottom utility layer in styles.css with this: */
 @layer utilities {
 	.center-content {
 		display: flex;
 		place-content: center;
+	}
+
+	.bg-green {
+		/* Paint the background base color */
+		background-color: oklch(from var(--dark-green) l c h / 0.9);
+		
+		/* Hardcoded URL-encoded hex (#f7f4eb becomes %23f7f4eb) for perfect stroke rendering */
+		background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='currentColor' fill-opacity='0.8' stroke='%23f7f4eb40' fill-rule='evenodd'/%3E%3C/svg%3E");
+		
+		/* Use currentColor to control the fill dynamically */
+		color: var(--dark-green); 
+	}
+
+	.bg-grey {
+		/* Paint the background base color */
+		background-color: oklch(from var(--dark-grey) l c h / 0.7);
+		
+		/* Hardcoded URL-encoded hex (#f7f4eb becomes %23f7f4eb) for perfect stroke rendering */
+		background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='currentColor' fill-opacity='0.8' stroke='%23f7f4eb40' fill-rule='evenodd'/%3E%3C/svg%3E");
+		
+		/* Use currentColor to control the fill dynamically */
+		color: var(--dark-grey);
 	}
 }
