@@ -4,10 +4,10 @@
 	--tracking-tight: -0.02em;
 	--tracking-wide: 0.05em;
 
-	--text-base: clamp(1.25rem, 1rem + 1.25vw, 2rem);
-	--text-md: clamp(1.56rem, 1.14rem + 2.1vw, 2.83rem);
-	--text-lg: clamp(1.95rem, 1.27rem + 3.41vw, 4rem);
-	--text-xl: clamp(2.44rem, 1.37rem + 5.35vw, 5.65rem);
+	--text-base: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+	--text-md: clamp(1.944rem, 1.7405rem + 0.9044vw, 2.4414rem);
+	--text-lg: clamp(2.3328rem, 2.0387rem + 1.3072vw, 3.0518rem);
+	--text-xl: clamp(2.7994rem, 2.384rem + 1.8461vw, 3.8147rem);
 }
 
 h1,
@@ -17,6 +17,7 @@ h3 {
 	color: var(--color-text-secondary);
 	font-family: var(--font-story);
 	font-weight: 600;
+	text-shadow: 2px 2px 5px rgba(0, 0, 0);
 }
 
 h1 {

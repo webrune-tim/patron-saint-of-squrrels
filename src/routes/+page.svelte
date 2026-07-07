@@ -75,7 +75,7 @@
           confetti({
             particleCount: 150,
             spread: 80,
-            origin: { y: 0.8 }
+            origin: { y: 0 }
           });
           hasFiredConfetti = true; 
         } else if (!entry.isIntersecting) {
@@ -124,8 +124,8 @@
 {/if}
 
 <div class="container">
-  <header class="scene bg-green">
-    <div class="scene-content center-content">
+  <header class="scene center-content">
+    <div class="scene-content">
       <h1 class="story-heading">The Patron Saint of the Squirrels</h1>
 
       <div class="story-image-wrapper">
@@ -141,7 +141,7 @@
     </a>
   </header>
 
-  <section id="intro" class="scene center-content bg-grey">
+  <section id="intro" class="scene center-content bg-green">
     <div class="scene-content">
       <div class="story-text-group">
         <h2 class="story-heading">Introduction</h2>
@@ -159,7 +159,7 @@
   </section>
 
   <section bind:this={scenesElement}>
-    <section id="scene-1" class="scene bg-green" use:scrollStory>
+    <section id="scene-1" class="scene bg-grey" use:scrollStory>
       <div class="sticky-content">
         <SquirrelProgress sceneId="scene-1" />
 
@@ -208,7 +208,7 @@
       </div>
     </section>
 
-    <section id="scene-2" class="scene bg-grey" use:scrollStory>
+    <section id="scene-2" class="scene bg-green" use:scrollStory>
       <div class="sticky-content">
         <SquirrelProgress sceneId="scene-2" />
 
@@ -252,7 +252,7 @@
       </div>
     </section>
 
-    <section id="scene-3" class="scene bg-green" use:scrollStory>
+    <section id="scene-3" class="scene bg-grey" use:scrollStory>
       <div class="sticky-content">
         <SquirrelProgress sceneId="scene-3" />
 
@@ -333,7 +333,7 @@
       </div>
     </section>
 
-    <section id="scene-4" class="scene  bg-grey" use:scrollStory>
+    <section id="scene-4" class="scene  bg-green" use:scrollStory>
       <div class="sticky-content">
         <SquirrelProgress sceneId="scene-4" />
 
@@ -421,6 +421,7 @@
 
   .story-paragraph {
 		color: var(--color-text-primary);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0);
   }
 
   /* Scoped Image Layout & Dynamic Vignette Bounds */
@@ -474,12 +475,13 @@
     text-align: center;
     text-decoration: none;
     color: var(--color-text-primary);
-    padding: var(--gap-xs) var(--gap-sm);
+    padding: var(--gap-sm) var(--gap-md);
     margin: var(--gap-md) auto;
     border-radius: 1000px;
     border: 2px solid var(--color-text-primary);
     background-color: rgb(from var(--color-text-primary) r g b / 0.4);
     box-shadow: 0 15px 17px rgba(0, 0, 0, 0.5);
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
     cursor:
       url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">🐿️</text></svg>')
         12 12,
