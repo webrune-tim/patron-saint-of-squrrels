@@ -36,11 +36,11 @@
 	"devEngines": {
 		"packageManager": {
 			"name": "pnpm",
-			"version": "11.9.0",
+			"version": "11.10.0",
 			"onFail": "download"
 		}
 	},
-	"packageManager": "pnpm@10.10.0",
+	"packageManager": "pnpm@11.10.0",
 	"dependencies": {
 		"@hiseb/confetti": "^2.1.0",
 		"turbo": "^2.10.0"
