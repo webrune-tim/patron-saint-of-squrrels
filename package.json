@@ -19,18 +19,18 @@
 		"@sveltejs/adapter-vercel": "next",
 		"@sveltejs/enhanced-img": "^0.11.0",
 		"@sveltejs/kit": "next",
-		"@sveltejs/vite-plugin-svelte": "^7.1.2",
+		"@sveltejs/vite-plugin-svelte": "^7.2.0",
 		"@types/node": "^24.13.2",
-		"eslint-plugin-svelte": "^3.19.0",
+		"eslint-plugin-svelte": "^3.20.0",
 		"globals": "^17.7.0",
-		"node-addon-api": "^8.8.0",
-		"prettier": "^3.8.4",
+		"node-addon-api": "^8.9.0",
+		"prettier": "^3.9.4",
 		"prettier-plugin-svelte": "^4.1.1",
 		"svelte": "^5.56.4",
-		"svelte-check": "^4.7.1",
+		"svelte-check": "^4.7.2",
 		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.62.0",
-		"vite": "catalog:",
+		"typescript-eslint": "^8.63.0",
+		"vite": "npm:@voidzero-dev/vite-plus-core@^0.2.3",
 		"vite-plus": "catalog:"
 	},
 	"devEngines": {
@@ -43,6 +43,6 @@
 	"packageManager": "pnpm@11.10.0",
 	"dependencies": {
 		"@hiseb/confetti": "^2.1.0",
-		"turbo": "^2.10.0"
+		"turbo": "^2.10.4"
 	}
 }
