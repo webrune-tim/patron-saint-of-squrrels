@@ -437,13 +437,8 @@
 
 <style>
   /* --- Layout & Typography Core --- */
-  .container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
+  .container { display: flex; flex-direction: column; width: 100%; margin: 0 auto; box-sizing: border-box; }
+  /* .scene { min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: var(--gap-xl) var(--gap-md); } */
 
   .scene-content {
     display: flex;
@@ -473,7 +468,10 @@
   }
 
   /* --- Advanced Image Layout & Parallax Engine --- */
-  .story-image-wrapper {
+  .bg-green .story-image-wrapper { --vignette-color: var(--dark-green); }
+  .bg-grey .story-image-wrapper { --vignette-color: var(--dark-grey); }
+
+  /* .story-image-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -487,7 +485,7 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65);
     background-color: #0b0b0b;
     --scroll-ratio: 0.5;
-  }
+  } */
 
   .story-image-wrapper :global(picture) {
     display: block;
@@ -515,21 +513,15 @@
   }
 
   /* Deeply Blended Radial Vignette Mask */
+  .story-image-wrapper {
+    display: flex; justify-content: center; align-items: center; width: 100%; max-width: 500px; margin: var(--gap-md) auto;
+    position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65);
+    background-color: var(--vignette-color, #0b0b0b); --scroll-ratio: 0.5;
+  }
+
   .story-image-wrapper::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    border-radius: 12px;
-    
-    /* Multi-stop soft feathering that melts cleanly into dark scene backgrounds */
-    background: radial-gradient(
-      circle,
-      transparent calc(42% + (var(--scroll-ratio) * 15%)),
-      rgba(15, 15, 15, 0.5) 75%,
-      var(--color-background, #0a0a0a) 100%
-    );
+    content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: 12px;
+    background: radial-gradient(circle, transparent calc(42% + (var(--scroll-ratio) * 15%)), oklch(from var(--vignette-color, #0b0b0b) l c h / 0.5) 75%, var(--vignette-color, #0b0b0b) 100%);
     transition: background 0.1s linear;
   }
 
