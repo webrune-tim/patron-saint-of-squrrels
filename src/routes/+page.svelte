@@ -421,7 +421,7 @@
 
   .story-paragraph {
 		color: var(--color-text-primary);
-    text-shadow: 2px 2px 5px rgba(0, 0, 0);
+    text-shadow: var(--text-shadow);
   }
 
   /* Scoped Image Layout & Dynamic Vignette Bounds */

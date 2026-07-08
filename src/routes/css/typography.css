@@ -8,6 +8,10 @@
 	--text-md: clamp(1.944rem, 1.7405rem + 0.9044vw, 2.4414rem);
 	--text-lg: clamp(2.3328rem, 2.0387rem + 1.3072vw, 3.0518rem);
 	--text-xl: clamp(2.7994rem, 2.384rem + 1.8461vw, 3.8147rem);
+
+	--text-shadow:
+		2px 2px 2px rgba(0, 0, 0, 0.7), -2px 2px 2px rgba(0, 0, 0, 0.7),
+		2px -2px 2px rgba(0, 0, 0, 0.7), -2px -2px 2px rgba(0, 0, 0, 0.7);
 }
 
 h1,
@@ -17,7 +21,7 @@ h3 {
 	color: var(--color-text-secondary);
 	font-family: var(--font-story);
 	font-weight: 600;
-	text-shadow: 2px 2px 5px rgba(0, 0, 0);
+	text-shadow: var(--text-shadow);
 }
 
 h1 {
@@ -56,5 +60,6 @@ h3 {
 	text-transform: uppercase;
 	letter-spacing: var(--tracking-wide);
 	font-size: 0.75rem;
-	color: oklch(from var(--color-text-primary) 0.65 c h);
+	text-shadow: var(--text-shadow);
+	/* color: oklch(from var(--color-text-primary) 0.65 c h); */
 }
