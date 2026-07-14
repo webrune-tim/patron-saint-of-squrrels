@@ -158,7 +158,7 @@
     </div>
   </section>
 
-  <section bind:this={scenesElement}>
+  <section class="scroll-snap" bind:this={scenesElement}>
     <section id="scene-1" class="scene bg-grey" use:scrollStory>
       <div class="sticky-content">
         <SquirrelProgress sceneId="scene-1" />

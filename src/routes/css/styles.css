@@ -41,6 +41,17 @@
 		max-width: var(--fluid-max-width);
 		margin: 0 auto 1.5em;
 	}
+
+	@media (max-width: 600px) {
+		html {
+			scroll-snap-type: y mandatory;
+			scroll-behavior: smooth;
+		}
+		.container {
+			width: 100%;
+			margin: 0; /* Remove the bottom margin to avoid clipping snap boundaries */
+		}
+	}
 }
 
 @layer components {
@@ -49,6 +60,14 @@
 		min-height: calc(var(--step-count, 1) * 100vh);
 		overflow: visible;
 		padding: var(--gap-md);
+
+		@media (max-width: 600px) {
+			/* Only snap standalone sections that represent exactly 1 viewport height */
+			&:not([id^='scene-']) {
+				scroll-snap-align: start;
+				scroll-snap-stop: always;
+			}
+		}
 	}
 
 	.sticky-content {
@@ -111,6 +130,13 @@
 
 /* Replace the bottom utility layer in styles.css with this: */
 @layer utilities {
+	.scroll-snap {
+		scroll-snap-type: y mandatory;
+
+		.scene {
+			scroll-snap-align: start;
+		}
+	}
 	.center-content {
 		display: grid;
 		place-content: center;

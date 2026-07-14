@@ -20,17 +20,17 @@
 		"@sveltejs/enhanced-img": "^0.11.0",
 		"@sveltejs/kit": "next",
 		"@sveltejs/vite-plugin-svelte": "^7.2.0",
-		"@types/node": "^24.13.2",
+		"@types/node": "^24.13.3",
 		"eslint-plugin-svelte": "^3.20.0",
 		"globals": "^17.7.0",
 		"node-addon-api": "^8.9.0",
-		"prettier": "^3.9.4",
+		"prettier": "^3.9.5",
 		"prettier-plugin-svelte": "^4.1.1",
-		"svelte": "^5.56.4",
+		"svelte": "^5.56.5",
 		"svelte-check": "^4.7.2",
 		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.63.0",
-		"vite": "npm:@voidzero-dev/vite-plus-core@^0.2.3",
+		"typescript-eslint": "^8.64.0",
+		"vite": "npm:@voidzero-dev/vite-plus-core@^0.2.4",
 		"vite-plus": "catalog:"
 	},
 	"devEngines": {
@@ -43,6 +43,6 @@
 	"packageManager": "pnpm@10.34.4+sha512.8768be55200ae3f2226b6527fcca2687e14bc4e5f12d7721a0f25da3df47915177058648db4177baf348120fa0ba2752d8d8d93f6beaf1fe64ae18da8de961af",
 	"dependencies": {
 		"@hiseb/confetti": "^2.1.0",
-		"turbo": "^2.10.4"
+		"turbo": "^2.10.5"
 	}
 }
