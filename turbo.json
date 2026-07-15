@@ -2,10 +2,16 @@
 	"$schema": "https://turborepo.dev/schema.json",
 	"tasks": {
 		"build": {
-			"outputs": ["dist/**"]
+			"outputs": [".svelte-kit/**", ".vercel/output/**"]
 		},
-		"check-types": {
-			"dependsOn": ["^check-types"]
+		"check": {
+			"cache": true
+		},
+		"lint": {
+			"cache": true
+		},
+		"format": {
+			"cache": true
 		},
 		"dev": {
 			"persistent": true,
