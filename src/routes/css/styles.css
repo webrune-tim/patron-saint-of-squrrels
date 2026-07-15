@@ -5,8 +5,6 @@
 
 @layer base {
 	:root {
-		/* color-scheme: dark; Force a native dark context */
-
 		/* Core Palette Design Tokens - High Contrast OKLCH */
 		--dark-green-raw: 0.2191 0.0814 146.65;
 		--light-tan-raw: 0.9515 0.0493 96.88;
@@ -18,7 +16,7 @@
 		--brown: oklch(from oklch(var(--brown-raw)) l c h);
 		--dark-grey: oklch(from oklch(var(--dark-grey-raw)) l c h);
 
-		/* Dark Theme Fallbacks & Semantic Assignments */
+		/* Dark Theme Assignments */
 		--color-background: var(--dark-green);
 		--color-text-primary: var(--light-tan);
 		--color-text-secondary: oklch(from var(--light-tan) 0.9 c h);
@@ -39,17 +37,19 @@
 
 	.container {
 		max-width: var(--fluid-max-width);
-		margin: 0 auto 1.5em;
+		margin: 0 auto;
+		padding-bottom: 1.5em; /* Padding instead of margin preserves snap lines */
 	}
 
 	@media (max-width: 600px) {
 		html {
+			/* MANDATORY snaps the top of each scene container flawlessly */
 			scroll-snap-type: y mandatory;
 			scroll-behavior: smooth;
 		}
 		.container {
 			width: 100%;
-			margin: 0; /* Remove the bottom margin to avoid clipping snap boundaries */
+			padding-bottom: 0;
 		}
 	}
 }
@@ -62,26 +62,26 @@
 		padding: var(--gap-md);
 
 		@media (max-width: 600px) {
-			/* Only snap standalone sections that represent exactly 1 viewport height */
-			&:not([id^='scene-']) {
-				scroll-snap-align: start;
-				scroll-snap-stop: always;
-			}
+			/* Snap the scene container boundary */
+			scroll-snap-align: start;
+			scroll-snap-stop: always;
 		}
 	}
 
+	/* CSS Grid Single-Cell Stack: Overlaps steps cleanly on mobile WebKit */
 	.sticky-content {
 		position: sticky;
 		top: 0;
 		height: 100svh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+		place-items: center;
 		overflow: hidden;
 	}
 
 	.step {
-		position: absolute;
+		grid-area: 1 / 1 / 2 / 2; /* Forces overlapping without absolute breakages */
 		width: 100%;
 		max-width: var(--fluid-max-width);
 		padding: var(--gap-md);
@@ -100,68 +100,23 @@
 		visibility: visible;
 		pointer-events: auto;
 	}
-
-	/* Micro-interactions & Core Component Keyframes */
-	@keyframes bounce {
-		0%,
-		20%,
-		50%,
-		80%,
-		100% {
-			transform: translateY(0);
-		}
-		40% {
-			transform: translateY(-8px);
-		}
-		60% {
-			transform: translateY(-4px);
-		}
-	}
-
-	@keyframes spinX {
-		0%,
-		100% {
-			transform: scaleX(1);
-		}
-		50% {
-			transform: scaleX(-1);
-		}
-	}
 }
 
-/* Replace the bottom utility layer in styles.css with this: */
 @layer utilities {
-	.scroll-snap {
-		scroll-snap-type: y mandatory;
-
-		.scene {
-			scroll-snap-align: start;
-		}
-	}
 	.center-content {
 		display: grid;
 		place-content: center;
 	}
 
 	.bg-green {
-		/* Paint the background base color */
 		background-color: oklch(from var(--dark-green) l c h / 0.9);
-
-		/* Hardcoded URL-encoded hex (#f7f4eb becomes %23f7f4eb) for perfect stroke rendering */
 		background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='currentColor' fill-opacity='0.8' stroke='%23f7f4eb40' fill-rule='evenodd'/%3E%3C/svg%3E");
-
-		/* Use currentColor to control the fill dynamically */
 		color: var(--dark-green);
 	}
 
 	.bg-grey {
-		/* Paint the background base color */
 		background-color: oklch(from var(--dark-grey) l c h / 0.9);
-
-		/* Hardcoded URL-encoded hex (#f7f4eb becomes %23f7f4eb) for perfect stroke rendering */
 		background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='currentColor' fill-opacity='0.8' stroke='%23f7f4eb40' fill-rule='evenodd'/%3E%3C/svg%3E");
-
-		/* Use currentColor to control the fill dynamically */
 		color: var(--dark-grey);
 	}
 }

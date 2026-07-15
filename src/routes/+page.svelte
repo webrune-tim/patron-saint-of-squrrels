@@ -195,7 +195,7 @@
     </section>
 
     <div bind:this={scenesElement}>
-      <section id="scene-1" class="scene bg-grey" use:scrollStory>
+      <section id="scene-1" class="scene bg-grey" style="--step-count: 5" use:scrollStory>
         <div class="sticky-content">
           <SquirrelProgress sceneId="scene-1" />
 
@@ -244,7 +244,7 @@
         </div>
       </section>
 
-      <section id="scene-2" class="scene bg-green" use:scrollStory>
+      <section id="scene-2" class="scene bg-green" style="--step-count: 4" use:scrollStory>
         <div class="sticky-content">
           <SquirrelProgress sceneId="scene-2" />
 
@@ -288,7 +288,7 @@
         </div>
       </section>
 
-      <section id="scene-3" class="scene bg-grey" use:scrollStory>
+      <section id="scene-3" class="scene bg-grey" style="--step-count: 8" use:scrollStory>
         <div class="sticky-content">
           <SquirrelProgress sceneId="scene-3" />
 
@@ -369,7 +369,7 @@
         </div>
       </section>
 
-      <section id="scene-4" class="scene bg-green" use:scrollStory>
+      <section id="scene-4" class="scene bg-green" style="--step-count: 4" use:scrollStory>
         <div class="sticky-content">
           <SquirrelProgress sceneId="scene-4" />
 
