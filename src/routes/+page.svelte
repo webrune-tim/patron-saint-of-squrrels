@@ -44,6 +44,7 @@
         isScrolling = false;
       }, 100);
 
+
       // --- iOS Safari Smooth Viewport Progress Engine ---
       imageWrappers.forEach((wrapper) => {
         const rect = wrapper.getBoundingClientRect();
