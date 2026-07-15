@@ -9,6 +9,9 @@ node_modules
 /build
 .turbo
 
+# Github Codespaces
+.devcontainer
+
 # OS
 .DS_Store
 Thumbs.db

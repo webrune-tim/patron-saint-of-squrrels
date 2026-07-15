@@ -74,8 +74,9 @@
 		position: sticky;
 		top: 0;
 		height: 100svh;
-		display: grid;
-		place-items: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		overflow: hidden;
 	}
 

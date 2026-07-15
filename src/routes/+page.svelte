@@ -465,6 +465,7 @@
     max-width: 38ch;
     text-align: center;
     line-height: 1.6;
+    margin: 0 auto;
   }
 
   /* --- Advanced Image Layout & Parallax Engine --- */
