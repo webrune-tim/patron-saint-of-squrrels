@@ -98,7 +98,7 @@
               spread: 80,
               origin: { y: 0.8 },
               colors: ['#f7f4eb', '#3d5a45', '#8b5a2b', '#a2b997']
-            });
+            } as any);
             hasFiredConfetti = true;
           } catch (err) {
             console.error("Confetti dynamic initialization failure:", err);
