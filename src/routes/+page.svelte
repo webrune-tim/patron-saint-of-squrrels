@@ -165,7 +165,7 @@
       <div class="scene-content">
         <h1 class="story-heading">The Patron Saint of the Squirrels</h1>
 
-        <div class="story-image-wrapper">
+        <div class="story-image-wrapper intro-pic">
           <enhanced:img
             src={intro}
             alt="A realistic photograph of a smiling woman with dark curly hair lying down on a parking lot asphalt, wearing an elegant teal velvet robe with gold embroidery, gently feeding a red squirrel from her open hands."
@@ -489,11 +489,16 @@
     --scroll-ratio: 0.5;
   } */
 
+  .story-image-wrapper.intro-pic {
+    height: 60dvh;
+    width: auto;
+    aspect-ratio: 3 / 4;
+  }
+
   .story-image-wrapper :global(picture) {
     display: block;
     width: 100%;
     height: 100%;
-    aspect-ratio: 3 / 4;
   }
 
   .story-image-wrapper :global(img) {
