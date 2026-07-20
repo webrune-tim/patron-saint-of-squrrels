@@ -490,7 +490,7 @@
   } */
 
   .story-image-wrapper.intro-pic {
-    height: 60dvh;
+    height: 55dvh;
     width: auto;
     aspect-ratio: 3 / 4;
   }
