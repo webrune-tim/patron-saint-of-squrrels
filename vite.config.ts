@@ -2,8 +2,14 @@ import adapter from '@sveltejs/adapter-vercel';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { defineConfig, lazyPlugins } from 'vite-plus';
+import path from 'path';
 
 export default defineConfig({
+	resolve: {
+		alias: {
+			$lib: path.resolve(__dirname, './src/lib')
+		}
+	},
 	staged: {
 		'*': 'vp check --fix'
 	},

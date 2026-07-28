@@ -1,10 +1,4 @@
 <script lang="ts">
-  import favicon from "$lib/assets/favicon/favicon.svg";
-  import favicon96 from "$lib/assets/favicon/favicon-96x96.png";
-  import favicon180 from "$lib/assets/favicon/apple-touch-icon.png";
-  import faviconIco from "$lib/assets/favicon/favicon.ico";
-
-  import ogImage from "$lib/assets/images/intro.png";
   import "./css/styles.css";
 
   let { children } = $props();
@@ -13,7 +7,7 @@
 <svelte:head>
   <meta property="og:title" content="Patron Saint of the Squirrels" />
   <meta property="og:description" content="Happy birthday Helen!" />
-  <meta property="og:image" content={ogImage} />
+  <meta property="og:image" content="https://patron-saint-of-squrrels.vercel.app/intro.png" />
   <meta
     property="og:url"
     content="https://patron-saint-of-squrrels.vercel.app/"
@@ -24,11 +18,11 @@
 
   <title>Patron Saint of the Squirrels</title>
 
-  <link rel="icon" type="image/png" href={favicon96} sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href={favicon} />
-  <link rel="shortcut icon" href={faviconIco} />
-  <link rel="apple-touch-icon" sizes="180x180" href={favicon180} />
-  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
 </svelte:head>
 
 {@render children()}
