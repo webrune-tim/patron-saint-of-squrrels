@@ -5,6 +5,8 @@
 	import AudioPlayer from '$lib/components/AudioPlayer.svelte';
 	import HeroHeader from '$lib/components/HeroHeader.svelte';
 	import ClosingFooter from '$lib/components/ClosingFooter.svelte';
+	import ParticleCanvas from '$lib/components/ParticleCanvas.svelte';
+	import { playSoftPop, playSaintHaloSound, playChime } from '$lib/utils/soundEffects';
 
 	import scene1 from '$lib/assets/images/scene-1.png?enhanced';
 	import scene2a from '$lib/assets/images/scene-2-a.png?enhanced';
@@ -17,9 +19,16 @@
 	let isScrolling = $state(false);
 	let isInView = $state(false);
 	let isStoryStarted = $state(false);
+	let activeSceneId = $state<string>('intro');
 	let scenesElement = $state<HTMLElement>();
 
-	// Parallax scroll ratio calculation throttled with requestAnimationFrame
+	// Interactive Micro-Moments State
+	let scene1Found = $state(false);
+	let scene2Comforted = $state(false);
+	let scene3LanternOn = $state(false);
+	let scene4HaloActive = $state(false);
+
+	// Parallax scroll ratio calculation & Scene tracking
 	$effect(() => {
 		if (!browser || !scenesElement) return;
 
@@ -27,6 +36,7 @@
 		let ticking = false;
 
 		const imageWrappers = scenesElement.querySelectorAll<HTMLElement>('.story-image-wrapper');
+		const sceneSections = document.querySelectorAll<HTMLElement>('section.scene');
 
 		const updateParallax = () => {
 			const windowHeight = window.innerHeight;
@@ -37,6 +47,17 @@
 				const ratio = Math.max(0, Math.min(1, currentProgress / totalRange));
 				wrapper.style.setProperty('--scroll-ratio', ratio.toFixed(3));
 			});
+
+			// Detect active section for particle canvas
+			sceneSections.forEach((section) => {
+				const rect = section.getBoundingClientRect();
+				if (rect.top <= windowHeight * 0.5 && rect.bottom >= windowHeight * 0.2) {
+					if (activeSceneId !== section.id) {
+						activeSceneId = section.id;
+					}
+				}
+			});
+
 			ticking = false;
 		};
 
@@ -77,7 +98,33 @@
 		audioPlayerRef?.startMusic();
 		document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' });
 	};
+
+	function handleScene1Click() {
+		scene1Found = !scene1Found;
+		playSoftPop();
+	}
+
+	function handleScene2Click() {
+		scene2Comforted = !scene2Comforted;
+		playChime();
+	}
+
+	function handleScene3Click() {
+		scene3LanternOn = !scene3LanternOn;
+		playSoftPop();
+	}
+
+	function handleScene4Click() {
+		scene4HaloActive = !scene4HaloActive;
+		if (scene4HaloActive) {
+			playSaintHaloSound();
+		} else {
+			playSoftPop();
+		}
+	}
 </script>
+
+<ParticleCanvas activeScene={activeSceneId} />
 
 <AudioPlayer bind:this={audioPlayerRef} bind:isStoryStarted />
 
@@ -159,6 +206,15 @@
 							against the heat of the sun-baked asphalt, dragging a useless,
 							broken back leg behind it.
 						</p>
+
+						<button
+							type="button"
+							class="micro-action-btn"
+							class:active={scene1Found}
+							onclick={handleScene1Click}
+						>
+							{scene1Found ? '❤️ Helen notices the little creature...' : '🔍 Look closely near the barrier'}
+						</button>
 					</div>
 
 					<div class="step">
@@ -187,6 +243,15 @@
 							audio, fading into a quiet, heavy stillness. She knelt, her shadow
 							falling over the tiny creature like a cooling canopy.
 						</p>
+
+						<button
+							type="button"
+							class="micro-action-btn"
+							class:active={scene2Comforted}
+							onclick={handleScene2Click}
+						>
+							{scene2Comforted ? '✨ Warm canopy of comfort offered' : '🤲 Reach down gently to comfort him'}
+						</button>
 					</div>
 
 					<div class="step">
@@ -286,10 +351,19 @@
 							squirrel from the cat and other outdoor dangers, would do nicely
 							until the morning.
 						</p>
+
+						<button
+							type="button"
+							class="micro-action-btn"
+							class:active={scene3LanternOn}
+							onclick={handleScene3Click}
+						>
+							{scene3LanternOn ? '🕯️ Warm Sanctuary Lantern lit under the deck' : '💡 Light the Westwood Sanctuary Lantern'}
+						</button>
 					</div>
 
 					<div class="step">
-						<div class="story-image-wrapper">
+						<div class="story-image-wrapper" class:lantern-glow={scene3LanternOn}>
 							<enhanced:img
 								src={scene3}
 								alt="A vertical, comic-style illustration looking straight down through the thick metal bars of a closed animal crate. Inside, huddled safely on bundles of dark cloth, a small cluster of baby red squirrels rests together amidst a couple of scattered oak leaves and a soft, magical green glow with floating fireflies."
@@ -334,10 +408,23 @@
 							the trees seemed to lean down, their leaves rustling a new title
 							into the wind: Helen, <em>The Patron Saint of Squirrels</em>.
 						</p>
+
+						<button
+							type="button"
+							class="micro-action-btn halo-btn"
+							class:active={scene4HaloActive}
+							onclick={handleScene4Click}
+						>
+							{scene4HaloActive ? '👑 The Acorn Crown Shines Bright!' : '✨ Bestow the Acorn Crown on Helen'}
+						</button>
 					</div>
 
 					<div class="step">
-						<div class="story-image-wrapper" id="scene-4-wrapper">
+						<div
+							class="story-image-wrapper"
+							id="scene-4-wrapper"
+							class:saint-halo={scene4HaloActive}
+						>
 							<enhanced:img
 								src={scene4}
 								alt="A comic-style illustration of a smiling woman standing outside a building labeled 'HOSPITAL' at twilight. She features a glowing neon green oak leaf halo over her head, framed by an archway of trees filled with fireflies and squirrels."
@@ -390,6 +477,46 @@
 		margin: 0 auto;
 	}
 
+	/* --- Micro Action Buttons --- */
+	.micro-action-btn {
+		display: block;
+		margin: 0.8rem auto 0;
+		padding: 0.5rem 1.1rem;
+		min-height: 44px;
+		background: rgba(15, 23, 18, 0.78);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border: 1px solid rgba(247, 244, 235, 0.3);
+		border-radius: 9999px;
+		color: var(--color-text-primary);
+		font-family: var(--font-ui);
+		font-size: 0.82rem;
+		letter-spacing: 0.04em;
+		cursor: pointer;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+		transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.micro-action-btn:hover,
+	.micro-action-btn:active {
+		transform: translateY(-2px) scale(1.03);
+		border-color: rgba(247, 244, 235, 0.6);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+	}
+
+	.micro-action-btn.active {
+		background: rgba(45, 68, 50, 0.9);
+		border-color: rgba(240, 200, 120, 0.8);
+		box-shadow: 0 0 20px rgba(240, 200, 120, 0.4);
+	}
+
+	.micro-action-btn.halo-btn.active {
+		background: linear-gradient(135deg, rgba(80, 140, 90, 0.95), rgba(240, 200, 120, 0.9));
+		color: #0b150d;
+		font-weight: 700;
+	}
+
 	/* --- Dynamic Vignettes & Image Wrappers --- */
 	.bg-green :global(.story-image-wrapper) {
 		--vignette-color: var(--dark-green);
@@ -407,10 +534,21 @@
 		margin: var(--gap-md) auto;
 		position: relative;
 		overflow: hidden;
-		border-radius: 12px;
-		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65);
+		border-radius: 16px;
+		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
 		background-color: var(--vignette-color, #0b0b0b);
 		--scroll-ratio: 0.5;
+		transition: border-color 0.5s ease, box-shadow 0.5s ease;
+	}
+
+	:global(.story-image-wrapper.lantern-glow) {
+		box-shadow: 0 0 40px rgba(240, 200, 120, 0.6), 0 20px 45px rgba(0, 0, 0, 0.65);
+		border: 1px solid rgba(240, 200, 120, 0.7);
+	}
+
+	:global(.story-image-wrapper.saint-halo) {
+		box-shadow: 0 0 50px rgba(180, 230, 160, 0.8), 0 0 100px rgba(255, 223, 130, 0.5);
+		border: 2px solid rgba(255, 223, 130, 0.9);
 	}
 
 	:global(.story-image-wrapper picture) {
@@ -440,7 +578,7 @@
 		inset: 0;
 		z-index: 2;
 		pointer-events: none;
-		border-radius: 12px;
+		border-radius: 16px;
 		background: radial-gradient(
 			circle,
 			transparent calc(42% + (var(--scroll-ratio, 0.5) * 15%)),
@@ -472,7 +610,7 @@
 	/* --- Global Floating Prompts --- */
 	.global-scroll-prompt {
 		position: fixed;
-		bottom: var(--gap-md);
+		bottom: calc(var(--gap-md) + env(safe-area-inset-bottom, 0px));
 		left: 50%;
 		transform: translateX(-50%);
 		z-index: 10;
@@ -506,6 +644,20 @@
 		}
 		60% {
 			transform: translateY(-5px);
+		}
+	}
+
+	@media (max-width: 600px) {
+		:global(.story-image-wrapper) {
+			height: min(44dvh, 320px);
+			width: auto;
+			aspect-ratio: 4 / 3;
+			margin: var(--gap-sm) auto;
+		}
+
+		.micro-action-btn {
+			font-size: 0.78rem;
+			padding: 0.45rem 0.9rem;
 		}
 	}
 </style>
