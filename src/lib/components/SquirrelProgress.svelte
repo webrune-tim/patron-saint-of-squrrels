@@ -11,7 +11,6 @@
 	let containerWidth = $state(0);
 	const BASELINE_Y = 80;
 
-	const chapterTitle = $derived(SCENE_CONFIG[sceneId]?.chapterName ?? '');
 	const hasPeaks = $derived(SCENE_CONFIG[sceneId]?.peakHeight > 0);
 
 	const generatedPathString = $derived.by(() => {
@@ -44,8 +43,6 @@
 	bind:clientWidth={containerWidth}
 	data-has-peaks={hasPeaks}
 >
-	<div class="chapter-badge ui-element">{chapterTitle}</div>
-
 	<div class="squirrel-mover" style="--dynamic-path: {generatedPathString};">
 		<div class="squirrel-flipper">🐿️</div>
 		<div class="dust-cloud"></div>
@@ -64,23 +61,6 @@
 		z-index: 10;
 		display: flex;
 		justify-content: center;
-	}
-
-	.chapter-badge {
-		position: absolute;
-		top: calc(10px + env(safe-area-inset-top, 0px));
-		background: rgba(15, 23, 18, 0.8);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		border: 1px solid rgba(247, 244, 235, 0.25);
-		padding: 0.35rem 0.85rem;
-		border-radius: 9999px;
-		color: var(--color-text-primary);
-		font-size: 0.75rem;
-		letter-spacing: 0.06em;
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-		pointer-events: none;
-		z-index: 4;
 	}
 
 	.squirrel-mover {
@@ -112,7 +92,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 2.4rem;
+		font-size: 2.2rem;
 		transform: scaleX(-1);
 		transform-origin: center center;
 		z-index: 2;
@@ -157,13 +137,6 @@
 		100% {
 			transform: scale(1.5) translate(-10px, 5px);
 			opacity: 0;
-		}
-	}
-
-	@media (max-width: 600px) {
-		.chapter-badge {
-			font-size: 0.7rem;
-			padding: 0.28rem 0.7rem;
 		}
 	}
 </style>

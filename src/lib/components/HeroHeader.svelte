@@ -88,7 +88,8 @@
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		max-width: 500px;
+		max-width: 360px;
+		aspect-ratio: 3 / 4;
 		margin: var(--gap-md) auto;
 		position: relative;
 		overflow: hidden;
@@ -100,9 +101,10 @@
 	}
 
 	.story-image-wrapper.intro-pic {
-		height: 55dvh;
-		width: auto;
+		width: 82vw;
+		max-width: 290px;
 		aspect-ratio: 3 / 4;
+		height: auto;
 	}
 
 	.story-image-wrapper :global(picture) {
@@ -119,9 +121,9 @@
 		position: relative;
 		z-index: 1;
 		will-change: transform, filter;
-		transform: scale(calc(1.18 - (var(--scroll-ratio, 0.5) * 0.12)))
-			translateY(calc(-30px + (var(--scroll-ratio, 0.5) * 60px)));
-		filter: saturate(calc(0.8 + (var(--scroll-ratio, 0.5) * 0.3)));
+		transform: scale(calc(1.05 - (var(--scroll-ratio, 0.5) * 0.05)))
+			translateY(calc(-10px + (var(--scroll-ratio, 0.5) * 20px)));
+		filter: saturate(calc(0.85 + (var(--scroll-ratio, 0.5) * 0.25)));
 		transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1), filter 0.1s linear;
 	}
 
@@ -202,7 +204,10 @@
 		}
 
 		.story-image-wrapper.intro-pic {
-			height: min(44dvh, 320px);
+			width: 82vw;
+			max-width: 290px;
+			aspect-ratio: 3 / 4;
+			height: auto;
 		}
 	}
 </style>

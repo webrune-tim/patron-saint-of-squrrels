@@ -47,8 +47,8 @@
 
 	@media (max-width: 600px) {
 		html {
-			/* MANDATORY snaps the top of each scene container flawlessly */
-			scroll-snap-type: y mandatory;
+			/* Proximity snap prevents forcing user away from footer */
+			scroll-snap-type: y proximity;
 			scroll-behavior: smooth;
 		}
 		.container {
@@ -66,9 +66,17 @@
 		padding: var(--gap-md);
 
 		@media (max-width: 600px) {
-			/* Snap the scene container boundary */
+			/* Snap the story scene container boundary */
 			scroll-snap-align: start;
-			scroll-snap-stop: always;
+		}
+	}
+
+	.closing {
+		@media (max-width: 600px) {
+			/* Disable mandatory snap on footer so user can rest at the bottom of the page */
+			scroll-snap-align: none !important;
+			scroll-snap-stop: normal !important;
+			min-height: auto !important;
 		}
 	}
 
