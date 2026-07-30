@@ -1,38 +1,48 @@
 <script lang="ts">
-	import { SCENE_CONFIG } from '$lib/utils/scenes'
+	import { SCENE_CONFIG, type SceneId } from '$lib/utils/scenes';
 
-	let { sceneId, stepCount = 5 } = $props()
+	interface Props {
+		sceneId: SceneId;
+		stepCount?: number;
+	}
 
-	let containerWidth = $state(0)
-	const BASELINE_Y = 120
+	let { sceneId, stepCount = 5 }: Props = $props();
+
+	let containerWidth = $state(0);
+	const BASELINE_Y = 120;
+
+	const hasPeaks = $derived(SCENE_CONFIG[sceneId]?.peakHeight > 0);
 
 	const generatedPathString = $derived.by(() => {
-		if (!containerWidth) return `path('M 0 ${BASELINE_Y} L 100 ${BASELINE_Y}')`
+		if (!containerWidth) return `path('M 0 ${BASELINE_Y} L 100 ${BASELINE_Y}')`;
 
-		const peakHeight = SCENE_CONFIG[sceneId].peakHeight
+		const peakHeight = SCENE_CONFIG[sceneId]?.peakHeight ?? 0;
 
 		if (peakHeight === 0) {
-			return `path('M 0 ${BASELINE_Y} L ${containerWidth} ${BASELINE_Y}')`
+			return `path('M 0 ${BASELINE_Y} L ${containerWidth} ${BASELINE_Y}')`;
 		}
 
-		let pathStr = `M 0 ${BASELINE_Y}`
-		const actualStepCount = stepCount ?? SCENE_CONFIG[sceneId].defaultSteps
-		const stepWidth = containerWidth / actualStepCount
+		let pathStr = `M 0 ${BASELINE_Y}`;
+		const actualStepCount = stepCount ?? SCENE_CONFIG[sceneId]?.defaultSteps ?? 5;
+		const stepWidth = containerWidth / actualStepCount;
 
 		for (let i = 0; i < actualStepCount; i++) {
-			const startX = i * stepWidth
-			const endX = (i + 1) * stepWidth
-			const controlX = startX + stepWidth / 2
-			const controlY = BASELINE_Y - peakHeight
+			const endX = (i + 1) * stepWidth;
+			const controlX = i * stepWidth + stepWidth / 2;
+			const controlY = BASELINE_Y - peakHeight;
 
-			pathStr += ` Q ${controlX} ${controlY}, ${endX} ${BASELINE_Y}`
+			pathStr += ` Q ${controlX} ${controlY}, ${endX} ${BASELINE_Y}`;
 		}
 
-		return `path('${pathStr}')`
-	})
+		return `path('${pathStr}')`;
+	});
 </script>
 
-<div class="squirrel-track-wrapper" bind:clientWidth={containerWidth}>
+<div
+	class="squirrel-track-wrapper"
+	bind:clientWidth={containerWidth}
+	data-has-peaks={hasPeaks}
+>
 	<div class="squirrel-mover" style="--dynamic-path: {generatedPathString};">
 		<div class="squirrel-flipper">🐿️</div>
 		<div class="dust-cloud"></div>
@@ -56,12 +66,15 @@
 		top: -55px;
 		left: 0;
 
-		/* Aggressive WebKit prefixes pointing to the inline variable */
 		-webkit-offset-path: var(--dynamic-path);
 		offset-path: var(--dynamic-path);
 
-		-webkit-offset-distance: calc((var(--active-step-index, 0) + 1) / var(--step-count, 1) * 100%);
-		offset-distance: calc((var(--active-step-index, 0) + 1) / var(--step-count, 1) * 100%);
+		-webkit-offset-distance: calc(
+			(var(--active-step-index, 0) + 1) / var(--step-count, 1) * 100%
+		);
+		offset-distance: calc(
+			(var(--active-step-index, 0) + 1) / var(--step-count, 1) * 100%
+		);
 
 		-webkit-offset-rotate: 0deg;
 		offset-rotate: 0deg;
@@ -78,8 +91,6 @@
 		align-items: center;
 		justify-content: center;
 		font-size: 2.2rem;
-
-		/* Isolated hardware transform matrix */
 		transform: scaleX(-1);
 		transform-origin: center center;
 		z-index: 2;
@@ -98,14 +109,19 @@
 		z-index: 1;
 	}
 
-	/* Tie dust to scenes that have a peak height > 0 */
-	/* Since scene-1 is the only one with peakHeight 0, we target others */
-	div[style*="path('M 0 120 Q"] .dust-cloud {
+	/* Trigger dust animation cleanly when scene has peaks */
+	.squirrel-track-wrapper[data-has-peaks='true'] .dust-cloud {
 		animation: dust-puff 0.4s ease-out infinite;
 	}
 
 	@keyframes dust-puff {
-		0% { transform: scale(0.5) translate(0, 0); opacity: 0.4; }
-		100% { transform: scale(1.5) translate(-10px, 5px); opacity: 0; }
+		0% {
+			transform: scale(0.5) translate(0, 0);
+			opacity: 0.4;
+		}
+		100% {
+			transform: scale(1.5) translate(-10px, 5px);
+			opacity: 0;
+		}
 	}
 </style>

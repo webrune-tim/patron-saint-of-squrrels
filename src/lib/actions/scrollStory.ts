@@ -6,6 +6,7 @@ export default function scrollStory(node: HTMLElement) {
 	node.style.setProperty('--step-count', String(stepCount));
 
 	let ticking = false;
+	let lastActiveIndex = -1;
 
 	function handleScroll() {
 		const rect = node.getBoundingClientRect();
@@ -25,15 +26,15 @@ export default function scrollStory(node: HTMLElement) {
 			stepCount - 1
 		);
 
-		node.style.setProperty('--active-step-index', String(activeIndex));
+		// Only mutate DOM when the active step changes
+		if (activeIndex !== lastActiveIndex) {
+			lastActiveIndex = activeIndex;
+			node.style.setProperty('--active-step-index', String(activeIndex));
 
-		steps.forEach((step, index) => {
-			if (index === activeIndex) {
-				step.classList.add('active');
-			} else {
-				step.classList.remove('active');
-			}
-		});
+			steps.forEach((step, index) => {
+				step.classList.toggle('active', index === activeIndex);
+			});
+		}
 	}
 
 	function requestTick() {

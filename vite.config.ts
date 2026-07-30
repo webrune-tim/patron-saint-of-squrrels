@@ -7,6 +7,7 @@ import path from 'path';
 export default defineConfig({
 	resolve: {
 		alias: {
+			'$app/environment': '$app/env',
 			$lib: path.resolve(__dirname, './src/lib')
 		}
 	},

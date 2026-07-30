@@ -11,3 +11,4 @@ export const SCENE_CONFIG = {
 } as const;
 
 export type SceneConfig = typeof SCENE_CONFIG;
+export type SceneId = keyof typeof SCENE_CONFIG;
